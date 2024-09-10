@@ -53,7 +53,9 @@ def mostrar_inst():
     print("Una vez iniciado el plan, es muy importante que se reciba un feedback por parte del usuario para analizar la eficiencia de los metodos sugeridos por nuestro sistema. De esta manera podremos ")
     print("Dentro de la App podras encontrar un inventario digital que nos permitira brindar sugerencias")
 
-    return
+    
+    
+    print("hola")
 
 def ejecutar():
     return
