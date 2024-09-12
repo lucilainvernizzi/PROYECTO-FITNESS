@@ -51,11 +51,7 @@ def mostrar_inst():
    
     print("5. Seguimiento del plan!")
     print("Una vez iniciado el plan, es muy importante que se reciba un feedback por parte del usuario para analizar la eficiencia de los metodos sugeridos por nuestro sistema. De esta manera podremos ")
-    print("Dentro de la App podras encontrar un inventario digital que nos permitira brindar sugerencias")
-
-    
-    
-    print("hola")
+    print("Dentro de la App podras encontrar un inventario digital de tu propio hogar que nos permitira crear recetas en base a los alimentos con los que cuentas. Tambien contamos con una funcion -Lista de supermercado- donde te sugeriremos productos que podrias agregar a tu almacen para las recetas que conforman tu plan.")
 
 def ejecutar():
     return
