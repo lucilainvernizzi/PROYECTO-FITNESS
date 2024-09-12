@@ -70,6 +70,14 @@ def dieta() :
         return texto_definicion
 
 
+
+
+
+
+
+
+
+
 if __name__ == "__main__":
     main()
 
