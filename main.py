@@ -37,7 +37,7 @@ def metabolismo_basal(sexo, altura, peso, edad):
         return (10 * peso) + (6.25 * altura) - (5 * edad) - 161
 
 def main():
-    print("Hola, bienvenido al programa de ")
+    print("exelente , sigamos con el programa ...")
     alturas = altura_usuario()
     pesousu = peso_usuario()
     años = edad_usuario()
