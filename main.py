@@ -1,6 +1,5 @@
 import modulo_funciones.core as f
 
-#Funciones
 def main():
     f.menu()
 
@@ -72,6 +71,3 @@ def dieta() :
 
 if __name__ == "__main__":
     main()
-
-#Programa principal
-    
