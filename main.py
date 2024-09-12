@@ -46,11 +46,11 @@ def main():
     print("Sus calorias ingeridas para un dia serian :", calculo, "kcal")
     dieta_seleccionada = dieta()
     if dieta_seleccionada == "volumen":
-        pass
+        return #texto_volumen#
     elif dieta_seleccionada == "bajar de peso":
         return texto_dieta
     elif dieta_seleccionada == "definicion":
-        pass
+        return texto_definicion
 
 def dieta() :
     print("¿te gustaria hacer algun tipo de dieta? ")
@@ -67,6 +67,7 @@ def dieta() :
         elif volumen == "definicion :" :
          print(texto_definicion)
         return texto_definicion
+
 
 
 
