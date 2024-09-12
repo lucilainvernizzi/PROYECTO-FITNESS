@@ -1,6 +1,6 @@
-import modulo_funciones.core as f
+import core as f
 
-def main():
+def interfaz():
     f.menu()
 
 texto_dieta ="""Para bajar de peso, es importante seguir una dieta hipocalórica, equilibrada y rica en nutrientes para asegurarte de perder grasa corporal mientras mantienes la masa muscular. Aquí tienes un plan de alimentación general que puedes adaptar según tus necesidades."""
@@ -78,4 +78,6 @@ def dieta() :
 
 
 if __name__ == "__main__":
+    interfaz()
     main()
+
