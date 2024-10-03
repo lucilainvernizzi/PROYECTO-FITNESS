@@ -51,3 +51,95 @@ def mostrar_inst():
 
 def ejecutar():
     return
+
+#Funcion para recetas: Importa del archivo json el diccionario de recetas.
+#Esta incompleto el algoritmo para ver si las comidas del usuario coinciden con las recetas y decirle que recetas puede hacecr
+
+def busqueda_secuencial(lista, dato):
+    i = 0
+    while i < len(lista) and lista[i] != dato:
+        i+=1
+    if i < len(lista):
+        return i
+    else:
+        return -1
+    
+
+#funciones sugerencia dieta y rutinas para formar plam y cumplimiento de objetivos
+
+def sugerir_recetas():
+    import json
+    with open('recetas.json') as f:
+        recetas = json.load(f)
+
+    comidas = []
+    n = str(input("Ingrese un ingrediente o -1 para terminar: "))
+
+
+    while n != "-1":
+        n = str(input("Ingrese un ingrediente o -1 para terminar: "))
+
+    i = 0
+    s = True
+    while i < len(comidas) and s == True:
+
+        encontrado = busqueda_secuencial(recetas, comidas[i])
+        if encontrado != -1:
+
+
+            i = i + 1
+        else:
+            s = False
+    
+     
+    print(recetas['1'])
+    print(recetas['2'])
+    print(recetas['3'])
+
+def sugerir_rutinas():
+    obj= ingresar_objetivo()
+    cant_dias= ingresar_dias_entrenamiento ()
+    
+    print("Su rutina de entrenamiento ideal es:")
+    try:
+        if obj==1:
+            print("Para tonificar no hay nada mejor que el entrenamiento de fuerza con intervalos de cardio.") 
+            print ()
+            print ("Dia Lunes: ")
+            rutina_lunes= ["8 Kettlebell desde sentadilla frontal", "10 burpees", "8 kettlebell balanceo Ruso", "10 burpees", "8 kettlebell press de hombro", "10 burpees"]
+            for i in range (len(rutina_lunes)+1):
+                print(rutina_lunes[i], sep= "-")
+        elif obj==2:
+            print("Si tu objetivo es bajar de peso,") 
+            print ()
+            print ("Dia Lunes: ")
+
+        elif obj==3:
+            print("Aumentar masa muscular, el entrenamiento de fuerza musculatoria es el mas indicado para ti.")
+            
+        elif obj==4:
+            print("Dado que tu objetivo no esta definido")
+        else:
+            print("Error")
+    except:
+        print("Error")
+
+
+#ingreso objetivos usuario
+def ingresar_objetivo():
+            
+    print("1. Tonificar sus musculos.")
+    print("2. Bajar de peso.")
+    print("3. Aumentar masa muscular.")
+    print("4. No tengo un objetivo definido.")
+
+    objetivo= int(input("Ingrese su numero de objetivo: "))
+    return objetivo
+
+def ingresar_dias_entrenamiento():
+   dias = int(input("Ingrese cuantos dias desea entrenar por semana: "))
+   while dias<1 or dias>7:
+       print("Error. La cantidad de dias no es valida")
+       dias = int(input("Ingrese cuantos dias desea entrenar por semana: "))           
+           
+   return dias
