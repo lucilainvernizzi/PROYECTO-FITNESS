@@ -63,38 +63,7 @@ def busqueda_secuencial(lista, dato):
         return i
     else:
         return -1
-    
 
-#funciones sugerencia dieta y rutinas para formar plam y cumplimiento de objetivos
-
-def sugerir_recetas():
-    import json
-    with open('recetas.json') as f:
-        recetas = json.load(f)
-
-    comidas = []
-    n = str(input("Ingrese un ingrediente o -1 para terminar: "))
-
-
-    while n != "-1":
-        n = str(input("Ingrese un ingrediente o -1 para terminar: "))
-
-    i = 0
-    s = True
-    while i < len(comidas) and s == True:
-
-        encontrado = busqueda_secuencial(recetas, comidas[i])
-        if encontrado != -1:
-
-
-            i = i + 1
-        else:
-            s = False
-    
-     
-    print(recetas['1'])
-    print(recetas['2'])
-    print(recetas['3'])
 
 def sugerir_rutinas():
     obj= ingresar_objetivo()
@@ -143,3 +112,31 @@ def ingresar_dias_entrenamiento():
        dias = int(input("Ingrese cuantos dias desea entrenar por semana: "))           
            
    return dias
+
+
+
+#NO tocar
+import json
+
+errores= []
+
+def sugerir_comidas():
+    with open('comidas.json') as f:
+        comidas = json.load(f)
+    print ("\n".join(comidas.keys()))
+    
+
+def seleccion_comidas():
+    with open('comidas.json') as f:
+        comidas = json.load(f)
+    comida_seleccionada= input("¿Cuales de estas comidas posees? Lea con detenimiento por favor y si quiere salir escribar, SALIR ;)")
+    while comida_seleccionada != "SALIR":    
+        if comida_seleccionada in comidas:
+            tuheladera.append()
+        else:    
+            print("esta comida no se enceuentra en nuestro sistems, lo sentimos mucho intentaremos agregarlo mas tarde")
+            errores.append()
+
+
+
+sugerir_comidas()
