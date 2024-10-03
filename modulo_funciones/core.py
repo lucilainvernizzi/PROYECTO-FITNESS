@@ -93,3 +93,46 @@ def recetas():
     print(recetas['1'])
     print(recetas['2'])
     print(recetas['3'])
+
+def sugerir_rutinas():
+    obj= ingresar_objetivo()
+    cant_dias= ingresar_dias_entrenamiento ()
+    
+    print("Su rutina de entrenamiento ideal es:")
+    try:
+        if obj==1:
+            print("Para tonificar no hay nada mejor que el entrenamiento de fuerza con intervalos de cardio.") 
+            print ()
+            print ("Dia Lunes: ")
+            rutina_lunes= ["8 Kettlebell desde sentadilla frontal", "10 burpees", "8 kettlebell balanceo Ruso", "10 burpees", "8 kettlebell press de hombro", "10 burpees"]
+            for i in range (len(rutina_lunes)+1):
+                print(rutina_lunes[i], sep= "-")
+        elif obj==2:
+            obj= "Bajar de peso"
+        elif obj==3:
+            obj= "Aumentar masa muscular"
+        elif obj==4:
+            obj= "Objetivo no definido"
+        else:
+            print("Error")
+    except:
+        print("Error")
+
+
+def ingresar_objetivo():
+            
+    print("1. Tonificar sus musculos.")
+    print("2. Bajar de peso.")
+    print("3. Aumentar masa muscular.")
+    print("4. No tengo un objetivo definido.")
+
+    objetivo= int(input("Ingrese su numero de objetivo: "))
+    return objetivo
+
+def ingresar_dias_entrenamiento():
+   dias = int(input("Ingrese cuantos dias desea entrenar por semana: "))
+   while dias<1 or dias>7:
+       print("Error. La cantidad de dias no es valida")
+       dias = int(input("Ingrese cuantos dias desea entrenar por semana: "))           
+           
+   return dias
