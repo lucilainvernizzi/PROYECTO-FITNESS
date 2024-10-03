@@ -51,3 +51,45 @@ def mostrar_inst():
 
 def ejecutar():
     return
+
+#Funcion para recetas: Importa del archivo json el diccionario de recetas.
+#Esta incompleto el algoritmo para ver si las comidas del usuario coinciden con las recetas y decirle que recetas puede hacecr
+
+def busqueda_secuencial(lista, dato):
+    i = 0
+    while i < len(lista) and lista[i] != dato:
+        i+=1
+    if i < len(lista):
+        return i
+    else:
+        return -1
+    
+
+def recetas():
+    import json
+    with open('recetas.json') as f:
+        recetas = json.load(f)
+
+    comidas = []
+    n = str(input("Ingrese un ingrediente o -1 para terminar: "))
+
+
+    while n != "-1":
+        n = str(input("Ingrese un ingrediente o -1 para terminar: "))
+
+    i = 0
+    s = True
+    while i < len(comidas) and s == True:
+
+        encontrado = busqueda_secuencial(recetas, comidas[i])
+        if encontrado != -1:
+
+
+            i = i + 1
+        else:
+            s = False
+    
+     
+    print(recetas['1'])
+    print(recetas['2'])
+    print(recetas['3'])
