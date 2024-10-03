@@ -1,6 +1,6 @@
-import modulo_funciones.core as f
+import core as f
 
-def main():
+def interfaz():
     f.menu()
 
 texto_dieta ="""Para bajar de peso, es importante seguir una dieta hipocalórica, equilibrada y rica en nutrientes para asegurarte de perder grasa corporal mientras mantienes la masa muscular. Aquí tienes un plan de alimentación general que puedes adaptar según tus necesidades."""
@@ -37,7 +37,7 @@ def metabolismo_basal(sexo, altura, peso, edad):
         return (10 * peso) + (6.25 * altura) - (5 * edad) - 161
 
 def main():
-    print("Hola, bienvenido al programa de ")
+    print("exelente , sigamos con el programa ...")
     alturas = altura_usuario()
     pesousu = peso_usuario()
     años = edad_usuario()
@@ -46,11 +46,11 @@ def main():
     print("Sus calorias ingeridas para un dia serian :", calculo, "kcal")
     dieta_seleccionada = dieta()
     if dieta_seleccionada == "volumen":
-        pass
+        return #texto_volumen#
     elif dieta_seleccionada == "bajar de peso":
         return texto_dieta
     elif dieta_seleccionada == "definicion":
-        pass
+        return texto_definicion
 
 def dieta() :
     print("¿te gustaria hacer algun tipo de dieta? ")
@@ -69,5 +69,16 @@ def dieta() :
         return texto_definicion
 
 
+
+
+
+
+
+
+
+
+
 if __name__ == "__main__":
+    interfaz()
     main()
+
