@@ -1,4 +1,4 @@
-import core as f
+import modulo_funciones.core as f
 
 def interfaz():
     f.menu()
