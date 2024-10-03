@@ -119,6 +119,7 @@ def ingresar_dias_entrenamiento():
 import json
 
 errores= []
+tuheladera= []
 
 def sugerir_comidas():
     with open('comidas.json') as f:
