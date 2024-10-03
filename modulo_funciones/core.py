@@ -65,7 +65,9 @@ def busqueda_secuencial(lista, dato):
         return -1
     
 
-def recetas():
+#funciones sugerencia dieta y rutinas para formar plam y cumplimiento de objetivos
+
+def sugerir_recetas():
     import json
     with open('recetas.json') as f:
         recetas = json.load(f)
@@ -108,17 +110,22 @@ def sugerir_rutinas():
             for i in range (len(rutina_lunes)+1):
                 print(rutina_lunes[i], sep= "-")
         elif obj==2:
-            obj= "Bajar de peso"
+            print("Si tu objetivo es bajar de peso,") 
+            print ()
+            print ("Dia Lunes: ")
+
         elif obj==3:
-            obj= "Aumentar masa muscular"
+            print("Aumentar masa muscular, el entrenamiento de fuerza musculatoria es el mas indicado para ti.")
+            
         elif obj==4:
-            obj= "Objetivo no definido"
+            print("Dado que tu objetivo no esta definido")
         else:
             print("Error")
     except:
         print("Error")
 
 
+#ingreso objetivos usuario
 def ingresar_objetivo():
             
     print("1. Tonificar sus musculos.")
