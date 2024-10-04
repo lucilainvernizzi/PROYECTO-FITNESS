@@ -17,10 +17,9 @@ def menu():
             elif op==2:
                 mostrar_inst()
             elif op==3:
-                 repetir=False   
-            
-            elif op==4:
                 ejecutar()
+            elif op==4:
+                repetir=False 
             else:
                 print("Error")
         except:
@@ -32,10 +31,10 @@ def mostrar_equipo():
     print("Bienvenido! Esta App fue creada por el equipo compuesto por Lucila Invernizzi, Juan Ignacio Fernández Noceda, Mateo Castellanos y Matías Scoccia.")
 
 def mostrar_inst():
-    print("""Bienvenido a la App de recetas Fitness y nutritivas! Este programa te permitira encontrar el plan de alimentacion y entrenamiento adecuado para cada usuario. Con la carga de datos personales del usuario, sera evaluada la mejor ruta para alcanzar las metas determinadas por el usuario, hallando dietas y rutinas de ejercitacion personalizadas.")
-    Un nuevo estilo de vida saludable esta ahora en tus manos Para utilizar el programa, solo debes seguir las instrucciones que se te presenan a continuacion:""")
+    print("""Bienvenido a la App VSFit, donde encontraras recetas fitness y nutritivas! Este programa te permitira hallar el plan de alimentacion y entrenamiento adecuado. Con la carga de datos personales, sera evaluada la mejor ruta para alcanzar las metas determinadas por el usuario, hallando dietas y rutinas de ejercitacion personalizadas.")
+    Un nuevo estilo de vida saludable esta ahora en tus manos. Para utilizar el programa, solo debes seguir las instrucciones que se te presentan a continuacion:""")
 
-    print("""1. Registro e Ingreso de datos personales.Deberas crear una cuenta con tu nombre de usuario, correo electronico y contrasena. Luego se solictara que ingreses datos personales como tu altura, peso, edad, genero y nivel de actividad fisica""")
+    print("""1. Registro e Ingreso de datos personales. Deberas crear una cuenta con tu nombre de usuario, correo electronico y contrasena. Luego se solictara que ingreses datos personales como tu altura, peso, edad, genero y nivel de actividad fisica""")
     
     print("2. Determinar tus objetivos. ")
     print("Tendras la oportunidad de realizar un pequeno cuestionario que te permita clarificar tus objetivos nutricionales, como bajar de peso o ganar masa mucualar.")
@@ -96,29 +95,79 @@ def sugerir_recetas():
     print(recetas['2'])
     print(recetas['3'])
 
+
+
+
+
 def sugerir_rutinas():
     obj= ingresar_objetivo()
     cant_dias= ingresar_dias_entrenamiento ()
+    musculo= input("Que quieres entrenar hoy?")
+
+    rutina_piernas= []
+    rutina_brazos= []
+    rutina_gluteos= []
+
     
     print("Su rutina de entrenamiento ideal es:")
     try:
         if obj==1:
             print("Para tonificar no hay nada mejor que el entrenamiento de fuerza con intervalos de cardio.") 
             print ()
-            print ("Dia Lunes: ")
-            rutina_lunes= ["8 Kettlebell desde sentadilla frontal", "10 burpees", "8 kettlebell balanceo Ruso", "10 burpees", "8 kettlebell press de hombro", "10 burpees"]
-            for i in range (len(rutina_lunes)+1):
-                print(rutina_lunes[i], sep= "-")
+            if musculo=="piernas":
+                print ("Dia Lunes: ")
+                for i in range (len(rutina_piernas)+1):
+                    print(rutina_piernas[i], sep= "-")
+            elif musculo=="brazos":
+                for i in range (len(rutina_brazos)+1):
+                    print(rutina_brazos[i], sep= "-")
+            elif musculo=="gluteos":
+                for i in range (len(rutina_gluteos)+1):
+                    print(rutina_gluteos[i], sep= "-")
+
+
+            
         elif obj==2:
             print("Si tu objetivo es bajar de peso,") 
             print ()
-            print ("Dia Lunes: ")
+            if musculo=="piernas":
+                print ("Dia Lunes: ")
+                for i in range (len(rutina_piernas)+1):
+                    print(rutina_piernas[i], sep= "-")
+            elif musculo=="brazos":
+                for i in range (len(rutina_brazos)+1):
+                    print(rutina_brazos[i], sep= "-")
+            elif musculo=="gluteos":
+                for i in range (len(rutina_gluteos)+1):
+                    print(rutina_gluteos[i], sep= "-")
 
         elif obj==3:
             print("Aumentar masa muscular, el entrenamiento de fuerza musculatoria es el mas indicado para ti.")
-            
+            print ()
+            if musculo=="piernas":
+                print ("Dia Lunes: ")
+                for i in range (len(rutina_piernas)+1):
+                    print(rutina_piernas[i], sep= "-")
+            elif musculo=="brazos":
+                for i in range (len(rutina_brazos)+1):
+                    print(rutina_brazos[i], sep= "-")
+            elif musculo=="gluteos":
+                for i in range (len(rutina_gluteos)+1):
+                    print(rutina_gluteos[i], sep= "-")
+
         elif obj==4:
-            print("Dado que tu objetivo no esta definido")
+            print("Dado que tu objetivo no esta definido, te sugerimos algunas rutinas de ejrciios generales que pueden ser utiles para mantener tu cuerpo em forma sin buscar un objetivo especifico.")
+            print()
+            if musculo=="piernas":
+                print ("Dia Lunes: ")
+                for i in range (len(rutina_piernas)+1):
+                    print(rutina_piernas[i], sep= "-")
+            elif musculo=="brazos":
+                for i in range (len(rutina_brazos)+1):
+                    print(rutina_brazos[i], sep= "-")
+            elif musculo=="gluteos":
+                for i in range (len(rutina_gluteos)+1):
+                    print(rutina_gluteos[i], sep= "-")
         else:
             print("Error")
     except:
@@ -140,6 +189,4 @@ def ingresar_dias_entrenamiento():
    dias = int(input("Ingrese cuantos dias desea entrenar por semana: "))
    while dias<1 or dias>7:
        print("Error. La cantidad de dias no es valida")
-       dias = int(input("Ingrese cuantos dias desea entrenar por semana: "))           
-           
-   return dias
+       dias = int(input("Ingrese cuantos dias desea entrenar por semana: "))
