@@ -7,19 +7,14 @@ texto_dieta ="""Para bajar de peso, es importante seguir una dieta hipocalórica
 texto_definicion = """Una dieta de definición se centra en reducir el porcentaje de grasa corporal mientras se mantiene la masa muscular. Es similar a una dieta de pérdida de peso, pero con un enfoque especial en preservar el músculo. Aquí tienes un plan de alimentación para ayudarte a lograrlo."""
 
 
-def altura_usuario():
-    alturas = int(input("Por favor, ingrese su altura en cm: "))
-    return alturas
+#ingreso de datos
+def cargar_datos():
+    altura= int(input("Por favor, ingrese su altura en cm: "))
 
-def peso_usuario():
-    pesousu = int(input("Ingrese su peso en KG: "))
-    return pesousu
+    peso = int(input("Ingrese su peso en KG: "))
 
-def edad_usuario():
-    años = int(input("Ingrese su edad: "))
-    return años
+    edad = int(input("Ingrese su edad: "))
 
-def sexo_usuario():
     sexo = input("¿Cuál es su sexo? (H/M): ")
     if sexo.upper() == "H":
         return "H"
@@ -27,22 +22,22 @@ def sexo_usuario():
         return "M"
     else:
         print("Sexo no válido. Por favor, ingrese H o M.")
-        return sexo_usuario()
+
+    return altura, peso, edad, sexo
 
 
-def metabolismo_basal(sexo, altura, peso, edad):
+def calcular_metabolismo_basal(sexo, altura, peso, edad):
     if sexo == "H":
         return (10 * peso) + (6.25 * altura) - (5 * edad) + 5
     elif sexo == "M":
         return (10 * peso) + (6.25 * altura) - (5 * edad) - 161
 
+
+
 def main():
-    print("exelente , sigamos con el programa ...")
-    alturas = altura_usuario()
-    pesousu = peso_usuario()
-    años = edad_usuario()
-    sexos = sexo_usuario()
-    calculo = metabolismo_basal(sexos, alturas, pesousu, años)
+    print("Excelente , sigamos con el programa ...")
+    alturas, pesousu, años, sexos = cargar_datos()
+    calculo = calcular_metabolismo_basal(sexos, alturas, pesousu, años)
     print("Sus calorias ingeridas para un dia serian :", calculo, "kcal")
     dieta_seleccionada = dieta()
     if dieta_seleccionada == "volumen":
@@ -67,15 +62,6 @@ def dieta() :
         elif volumen == "definicion :" :
          print(texto_definicion)
         return texto_definicion
-
-
-
-
-
-
-
-
-
 
 
 if __name__ == "__main__":
