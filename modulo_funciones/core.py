@@ -1,4 +1,9 @@
 import os
+import core as f 
+def pantalla1 () :
+    f.menu()
+
+    
 
 texto_dieta ="""Para bajar de peso, es importante seguir una dieta hipocalórica, equilibrada y rica en nutrientes para asegurarte de perder grasa corporal mientras mantienes la masa muscular. Aquí tienes un plan de alimentación general que puedes adaptar según tus necesidades."""
 texto_definicion = """Una dieta de definición se centra en reducir el porcentaje de grasa corporal mientras se mantiene la masa muscular. Es similar a una dieta de pérdida de peso, pero con un enfoque especial en preservar el músculo. Aquí tienes un plan de alimentación para ayudarte a lograrlo."""
@@ -281,7 +286,7 @@ def busqueda_secuencial(lista, dato):
 
 def sugerir_recetas():
     import json
-    with open('recetas.json') as f:
+    with open('comidas.json') as f:
         recetas = json.load(f)
 
     comidas = []
@@ -308,3 +313,15 @@ def sugerir_recetas():
     print(recetas['2'])
     print(recetas['3'])
 
+
+
+
+
+
+pantalla1()
+cargar_datos()
+dieta()
+ingresar_objetivo()
+ingresar_dias_entrenamiento()
+sugerir_recetas()
+sugerir_rutinas()
