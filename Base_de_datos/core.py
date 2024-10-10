@@ -212,32 +212,6 @@ def ingresar_dias_entrenamiento():
        dias = int(input("Ingrese cuantos dias desea entrenar por semana: "))
 
 
-def menu():
-    repetir = True
-    while repetir:
-        
-        print("1. Equipo")
-        print("2. Instrucciones del programa")
-        print("3. Ejecutar")
-        print("4. Salir")
-
-        try:
-            op= int(input("Ingrese un valor del menu."))
-
-            if op==1:
-                mostrar_equipo()
-            elif op==2:
-                mostrar_inst()
-            elif op==3:
-                ejecutar()
-            elif op==4:
-                repetir=False 
-            else:
-                print("Error")
-        except:
-            print("Error")
-            input()
-
 #Opcion 1
 def mostrar_equipo():
     print("Bienvenido! Esta App fue creada por el equipo compuesto por Lucila Invernizzi, Juan Ignacio Fernández Noceda, Mateo Castellanos y Matías Scoccia.")
@@ -273,5 +247,33 @@ def ejecutar():
     #Paso 3- Creacion de rutina de ejercicio
 
     return
+
+def menu():
+    repetir = True
+    while repetir:
+        
+        print("1. Equipo")
+        print("2. Instrucciones del programa")
+        print("3. Ejecutar")
+        print("4. Salir")
+
+        try:
+            op= int(input("Ingrese un valor del menu."))
+
+            if op==1:
+                mostrar_equipo()
+            elif op==2:
+                mostrar_inst()
+            elif op==3:
+                ejecutar()
+            elif op==4:
+                repetir=False 
+            else:
+                print("Error")
+        except:
+            print("Error")
+            input()
+
+
 
 
