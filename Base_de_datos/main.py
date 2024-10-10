@@ -1,4 +1,18 @@
-import core as f
+#1ER PANTALLA: MENU PRINCIPAL
+
+# 2DA PANTALLA: iNICIO SESION
+
+#3ERA PANTALLA: mENU SECUNDARIO
+ 
+# 4TA PANTALLA: INGRESO DATOS PERSONALES/ CALCULO CALORIAS 
+
+# 5TA PANTALLA: CALENDARIO  
+
+# 6TA PANTALLA: INVENTARIO
+
+
+
+import modulo_funciones.core as f
 
 def interfaz():
     f.menu()
