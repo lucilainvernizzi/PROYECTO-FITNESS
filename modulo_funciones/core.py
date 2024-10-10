@@ -1,8 +1,8 @@
 import os
 
-
 texto_dieta ="""Para bajar de peso, es importante seguir una dieta hipocalórica, equilibrada y rica en nutrientes para asegurarte de perder grasa corporal mientras mantienes la masa muscular. Aquí tienes un plan de alimentación general que puedes adaptar según tus necesidades."""
 texto_definicion = """Una dieta de definición se centra en reducir el porcentaje de grasa corporal mientras se mantiene la masa muscular. Es similar a una dieta de pérdida de peso, pero con un enfoque especial en preservar el músculo. Aquí tienes un plan de alimentación para ayudarte a lograrlo."""
+texto_volumen= """Para aumentar el volumen muscular, es fundamental seguir una dieta hipercalórica, rica en proteínas, carbohidratos y grasas saludables, junto con un entrenamiento adecuado. Aquí tienes un plan general de dieta que puedes adaptar según tus necesidades y preferencias."""
 
 #Paso 1: ingreso de datos
 
@@ -15,15 +15,13 @@ def cargar_datos():
 
     sexo = input("¿Cuál es su sexo? (H/M): ")
     if sexo.upper() == "H":
-        return "H"
+        sexo= "H"
     elif sexo.upper() == "M":
-        return "M"
+        sexo= "M"
     else:
         print("Sexo no válido. Por favor, ingrese H o M.")
 
     return altura, peso, edad, sexo
-
-
 
 
 def calcular_metabolismo_basal(sexo, altura, peso, edad):
@@ -48,20 +46,18 @@ def main():
         return texto_definicion
 
 def dieta() :
-    print("¿te gustaria hacer algun tipo de dieta? ")
-    dieta = input("si o no ")
+    print("¿Te gustaria hacer algun tipo de dieta? ")
+    dieta = str(input("si o no "))
     if dieta == "si":
         print("¿que quieres conseguir con tu dieta? ")
-        volumen = input("volumen,bajar de peso,definicion.")
-        if volumen == "volumen" :
-         print ("""Para aumentar el volumen muscular, es fundamental seguir una dieta hipercalórica, rica en proteínas, carbohidratos y grasas saludables, junto con un entrenamiento adecuado. Aquí tienes un plan general de dieta que puedes adaptar según tus necesidades y preferencias.""")
-         return volumen
-        elif volumen == "bajar de peso :":
-          print(texto_dieta)
-          return texto_dieta   
-        elif volumen == "definicion :" :
-         print(texto_definicion)
-        return texto_definicion
+        objetivo = input("volumen, bajar de peso, definicion.")
+        if objetivo == "volumen":
+            print (texto_volumen)
+        elif objetivo == "bajar de peso":
+            print(texto_dieta)  
+        elif objetivo== "definicion":
+            print(texto_definicion)
+        return objetivo
 
 
 if __name__ == "__main__":
