@@ -26,10 +26,11 @@ def menu():
             print("Error")
             input()
 
-
+#Opcion 1
 def mostrar_equipo():
     print("Bienvenido! Esta App fue creada por el equipo compuesto por Lucila Invernizzi, Juan Ignacio Fernández Noceda, Mateo Castellanos y Matías Scoccia.")
 
+#Opcion 2
 def mostrar_inst():
     print("""Bienvenido a la App VSFit, donde encontraras recetas fitness y nutritivas! Este programa te permitira hallar el plan de alimentacion y entrenamiento adecuado. Con la carga de datos personales, sera evaluada la mejor ruta para alcanzar las metas determinadas por el usuario, hallando dietas y rutinas de ejercitacion personalizadas.")
     Un nuevo estilo de vida saludable esta ahora en tus manos. Para utilizar el programa, solo debes seguir las instrucciones que se te presentan a continuacion:""")
@@ -48,8 +49,81 @@ def mostrar_inst():
     print("Una vez iniciado el plan, es muy importante que se reciba un feedback por parte del usuario para analizar la eficiencia de los metodos sugeridos por nuestro sistema. De esta manera podremos ")
     print("Dentro de la App podras encontrar un inventario digital de tu propio hogar que nos permitira crear recetas en base a los alimentos con los que cuentas. Tambien contamos con una funcion -Lista de supermercado- donde te sugeriremos productos que podrias agregar a tu almacen para las recetas que conforman tu plan.")
 
+#Opcion 3
 def ejecutar():
     return
+
+
+texto_dieta ="""Para bajar de peso, es importante seguir una dieta hipocalórica, equilibrada y rica en nutrientes para asegurarte de perder grasa corporal mientras mantienes la masa muscular. Aquí tienes un plan de alimentación general que puedes adaptar según tus necesidades."""
+texto_definicion = """Una dieta de definición se centra en reducir el porcentaje de grasa corporal mientras se mantiene la masa muscular. Es similar a una dieta de pérdida de peso, pero con un enfoque especial en preservar el músculo. Aquí tienes un plan de alimentación para ayudarte a lograrlo."""
+
+#ingreso de datos
+
+def cargar_datos():
+    altura= int(input("Por favor, ingrese su altura en cm: "))
+
+    peso = int(input("Ingrese su peso en KG: "))
+
+    edad = int(input("Ingrese su edad: "))
+
+    sexo = input("¿Cuál es su sexo? (H/M): ")
+    if sexo.upper() == "H":
+        return "H"
+    elif sexo.upper() == "M":
+        return "M"
+    else:
+        print("Sexo no válido. Por favor, ingrese H o M.")
+
+    return altura, peso, edad, sexo
+
+
+
+
+def calcular_metabolismo_basal(sexo, altura, peso, edad):
+    if sexo == "H":
+        return (10 * peso) + (6.25 * altura) - (5 * edad) + 5
+    elif sexo == "M":
+        return (10 * peso) + (6.25 * altura) - (5 * edad) - 161
+
+
+
+def main():
+    print("Excelente , sigamos con el programa ...")
+    alturas, pesousu, años, sexos = cargar_datos()
+    calculo = calcular_metabolismo_basal(sexos, alturas, pesousu, años)
+    print("Sus calorias ingeridas para un dia serian :", calculo, "kcal")
+    dieta_seleccionada = dieta()
+    if dieta_seleccionada == "volumen":
+        return #texto_volumen
+    elif dieta_seleccionada == "bajar de peso":
+        return texto_dieta
+    elif dieta_seleccionada == "definicion":
+        return texto_definicion
+
+def dieta() :
+    print("¿te gustaria hacer algun tipo de dieta? ")
+    dieta = input("si o no ")
+    if dieta == "si":
+        print("¿que quieres conseguir con tu dieta? ")
+        volumen = input("volumen,bajar de peso,definicion.")
+        if volumen == "volumen" :
+         print ("""Para aumentar el volumen muscular, es fundamental seguir una dieta hipercalórica, rica en proteínas, carbohidratos y grasas saludables, junto con un entrenamiento adecuado. Aquí tienes un plan general de dieta que puedes adaptar según tus necesidades y preferencias.""")
+         return volumen
+        elif volumen == "bajar de peso :":
+          print(texto_dieta)
+          return texto_dieta   
+        elif volumen == "definicion :" :
+         print(texto_definicion)
+        return texto_definicion
+
+
+if __name__ == "__main__":
+    interfaz()
+    main()
+
+
+
+
 
 #Funcion para recetas: Importa del archivo json el diccionario de recetas.
 #Esta incompleto el algoritmo para ver si las comidas del usuario coinciden con las recetas y decirle que recetas puede hacecr
@@ -177,9 +251,9 @@ def sugerir_rutinas():
 #ingreso objetivos usuario
 def ingresar_objetivo():
             
-    print("1. Tonificar sus musculos.")
-    print("2. Bajar de peso.")
-    print("3. Aumentar masa muscular.")
+    print("1. Ganar musculo.")
+    print("2. Perder grasa")
+    print("3. Ambas")
     print("4. No tengo un objetivo definido.")
 
     objetivo= int(input("Ingrese su numero de objetivo: "))
