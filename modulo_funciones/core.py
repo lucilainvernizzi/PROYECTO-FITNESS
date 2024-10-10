@@ -62,7 +62,7 @@ def busqueda_secuencial(lista, dato):
         return i
     else:
         return -1
-    
+
 
 #funciones sugerencia dieta y rutinas para formar plam y cumplimiento de objetivos
 
@@ -94,10 +94,6 @@ def sugerir_recetas():
     print(recetas['1'])
     print(recetas['2'])
     print(recetas['3'])
-
-
-
-
 
 def sugerir_rutinas():
     obj= ingresar_objetivo()
@@ -189,4 +185,6 @@ def ingresar_dias_entrenamiento():
    dias = int(input("Ingrese cuantos dias desea entrenar por semana: "))
    while dias<1 or dias>7:
        print("Error. La cantidad de dias no es valida")
-       dias = int(input("Ingrese cuantos dias desea entrenar por semana: "))
+       dias = int(input("Ingrese cuantos dias desea entrenar por semana: "))           
+           
+   return dias
