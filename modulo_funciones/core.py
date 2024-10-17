@@ -1,33 +1,37 @@
 #FUNCIONES MENU PRINCIPAL
-
 import os
-import core as f 
-def pantalla1 () :
-    f.menu()
+import json
 
-    
 
-def menu():
+def intro():
+    os.system("cls")
+    print("\033[0;36m]")
+    print("\033[4;15HBienvenidos a la App Fitness")
+    print("\033[5;15HProgramacion I")
+
+    print("\033[0;37m]")
+    input ()
+
+def menu_principal():
     repetir = True
     while repetir:
-        
         print("1. Equipo")
         print("2. Instrucciones del programa")
         print("3. Ejecutar")
         print("4. Salir")
 
         try:
+            os.system("cls")
             op= int(input("Ingrese un valor del menu."))
-
+            
             if op==1:
                 mostrar_equipo()
             elif op==2:
                 mostrar_inst()
             elif op==3:
-                 repetir=False   
-            
-            elif op==4:
                 ejecutar()
+            elif op==4:
+                repetir= False
             else:
                 print("Error")
         except:
@@ -36,81 +40,108 @@ def menu():
 
 
 def mostrar_equipo():
-    print("Bienvenido! Esta App fue creada por el equipo compuesto por uesto por Lucila Invernizzi, Juan Ignacio Fernández Noceda, Mateo Castellanos y Matías Scoccia. Somos estudiantes de la materia Programacion I, de la carrera Ingeniería Informática en UADE.")
+    print("Bienvenido! Esta App fue creada por el equipo de:")
+    print("Lucila Invernizzi, LU: 1201347")
+    print("Juan Ignacio Fernández Noceda, LU: ")
+    print("Mateo Castellanos, LU:")
+    print("Matías Scoccia, LU: ")
+    print("")
+    print("Somos estudiantes de la materia Programacion I, de la carrera Ingeniería Informática en UADE.")
+    print("")
 
 def mostrar_inst():
-    print("""Bienvenido a la App de recetas Fitness y nutritivas! Este programa te permitira encontrar el plan de alimentacion y entrenamiento adecuado para cada usuario. Con la carga de datos personales del usuario, sera evaluada la mejor ruta para alcanzar las metas determinadas por el usuario, hallando dietas y rutinas de ejercitacion personalizadas.")
-    Un nuevo estilo de vida saludable esta ahora en tus manos Para utilizar el programa, solo debes seguir las instrucciones que se te presenan a continuacion:""")
+    print("""Bienvenido a la App de recetas Fitness y nutritivas! Este programa te permitira encontrar el mejor plan de alimentacion y entrenamiento. Con la carga de datos personales del usuario, sera evaluada la mejor ruta para alcanzar sus metas.")
+    Un nuevo estilo de vida saludable esta ahora en tus manos! Para utilizar el programa, solo debes seguir las siguientes instrucciones""")
 
-    print("""1. Registro e Ingreso de datos personales.Deberas crear una cuenta con tu nombre de usuario, correo electronico y contrasena. Luego se solictara que ingreses datos personales como tu altura, peso, edad, genero y nivel de actividad fisica""")
+    print("""1. Registro e Ingreso de datos personales. Deberas crear una cuenta con tu nombre de usuario y contrasena. Luego se solictara que ingreses datos personales como tu altura, peso, edad, genero y nivel de actividad fisica""")
     
     print("2. Determinar tus objetivos. ")
-    print("Tendras la oportunidad de realizar un pequeno cuestionario que te permita clarificar tus objetivos nutricionales, como bajar de peso o ganar masa mucualar.")
+    print("Determinar tus objetivos nutricionales, como bajar de peso o ganar masa mucualar.")
     
     print("3. Recibir tu plan de alimentacion y entrenamiento personalizado.")
     print("El programa ")
 
-    print("""4. Comenzar tu plan!. La constancia y disciplina son elementos clave para que tus objetivos se vuelvan realidad. Por este motivo, recibiras una serie de notificaciones semanales que te permitan seguir dia a dia tu plan personalizado. Tambien podras visualizar los pasos que debes seguir en nuestra ventana de calendario. Si no estas conmforme con las sugerencias realizadas por la App, siempre existe la posibilidad de modificar el plan a tu gusto.""")
+    print("""4. Comenzar tu plan!. La constancia y disciplina son elementos clave para que tus objetivos se vuelvan realidad. Podras visualizar los pasos que debes seguir en nuestra ventana de calendario. """)
    
-    print("5. Seguimiento del plan!")
-    print("Una vez iniciado el plan, es muy importante que se reciba un feedback por parte del usuario para analizar la eficiencia de los metodos sugeridos por nuestro sistema. De esta manera podremos ")
-    print("Dentro de la App podras encontrar un inventario digital de tu propio hogar que nos permitira crear recetas en base a los alimentos con los que cuentas. Tambien contamos con una funcion -Lista de supermercado- donde te sugeriremos productos que podrias agregar a tu almacen para las recetas que conforman tu plan.")
+    print("5. !")
+    print("Dentro de la App podras encontrar un inventario digital de tu propio hogar que nos permitira crear recetas en base a los alimentos con los que cuentas. ")
+
 
 def ejecutar():
-    return
-
-
+    ingresar_cuenta()
+    menu_secundario()
+    definir_calorias()
+    sugerir_recetas()
+    sugerir_rutinas()
 
 #FUNCIONES LOGIN
 
-import json
-
-def menu_principal():
+def ingresar_cuenta():
     menu = True
-    while menu == True:
-        print("\n1. Registrarse")
+    while menu:
+        print("1. Registrarse")
         print("2. Iniciar sesión")
         print("3. Salir")
-        opcion = input("Seleccione una opción |1 o 2 o 3|: ")
 
-        if opcion == '1':
+    try:
+        opcion = int(input("Seleccione una opción del menu: "))
+
+        if opcion == 1:
             crear_usuario()
-            menu=False #aca se pone lo que sigue y sus datos y cosas guardadas
-        elif opcion == '2':
-            if iniciar_sesion():
-                print("Acceso concedido.")
-                menu=False #aca se pone lo que sigue y sus datos y cosas guardadas
-            else:
-                print("Acceso denegado. Intente de otra forma")
-        elif opcion == '3':
-            print("Saliendo.")
+        elif opcion == 2:
+            iniciar_sesion()
+        elif opcion == 3:
+            print("Cerrando sesion.")
             menu = False
         else:
             print("Opción no válida. Inténtelo de nuevo.")
+            opcion = input("Seleccione una opción del menu: ")
+    except:
+        print("Error")
+        print()
+        
 
+def verificar_datos(nombre_usu):
+    with open('usuarios.json', 'r') as f:
+        datos_usu = json.load(f) 
+
+    for usuario in datos_usu.get('usuarios', []):
+        if usuario['nombre'] == nombre_usu:
+            usuario_existente= True 
+        else:
+            usuario_existente= False
+    return usuario_existente, datos_usu
 
 def crear_usuario():
     print("Registro de nuevo usuario")
     nombre = input("Ingrese su nombre de usuario: ")
     contraseña = input("Ingrese su contraseña: ")
-    
-    datos_de_usuario = {'usuarios': []}
-    
-    with open('usuarios.json', 'r') as f:
-        datos_de_usuario = json.load(f) 
+        
+    usuario, datos_de_usuario= verificar_datos(nombre)
 
-    for usuario in datos_de_usuario['usuarios']:
-        if usuario['nombre'] == nombre:
-            print("El nombre de usuario ya existe. Intente con otro.")
-            return
-    
+    while usuario:
+        print("El nombre de usuario ya existe. Intente con otro nombre de usuario(1) o inicie sesion(2).")
+        opcion= int(input())
+        if opcion==1:
+            nombre = input("Ingrese su nombre de usuario: ")
+            contraseña = input("Ingrese su contraseña: ")
+            usuario, datos_de_usuario= verificar_datos(nombre)
+        elif opcion==2:
+            iniciar_sesion()
+            return #para salir de la funcion una vez que se inicia sesion
+        else:
+            print("Error")
+
+    #si el usuario no existe, se procede a crear uno nuevo
     nuevo_usuario = {'nombre': nombre, 'contraseña': contraseña}
     datos_de_usuario['usuarios'].append(nuevo_usuario)
 
+    #guardar nuevo usuario en JSON
     with open('usuarios.json', 'w') as f:
         json.dump(datos_de_usuario, f, indent=4)
     
     print("¡Usuario registrado con éxito!")
+    
 
 
 def iniciar_sesion():
@@ -125,22 +156,20 @@ def iniciar_sesion():
         print("No hay usuarios registrados o el archivo está corrupto.")
         return False
 
-    
     for usuario in datos_de_usuario.get('usuarios', []):
         if usuario['nombre'] == nombre and usuario['contraseña'] == contraseña:
             print("Bienvenido", nombre, "nuevamente")
             return True
 
     print("Nombre de usuario o contraseña incorrectos.")
+    registrarse = input("¿Desea registrarse? (s/n): ")
+    if registrarse.lower() == 's':
+        crear_usuario()
     return False
 
 
-menu_principal()
 
-
-
-
-#FUNCIONES MENU SECUNDARIO
+#FUNCION MENU SECUNDARIO
 
 def menu_secundario():
     repetir = True
@@ -167,109 +196,37 @@ def menu_secundario():
         except:
             print("Error")
             input()
-
-
-
+    
+    menu_principal()
 
 
 #FUNCIONES INGRESO DATOS
 def cargar_info_personal():
-   pass
+    nombre = input("Ingrese su nombre: ")
+    print("Hola", nombre, "!")
+    print("Necesitamos que cargues los siguientes datos para calcular tu metabolismo basal.")
 
-# FUNCIONES CALENDARIO
-#Funcion rutinas
+    edad = input("Ingrese su edad: ")
 
-
-def rutinas():
-    import json
-
-    try:
-        contenido = open("archivos/rutinas.json", "r")
-        lineas = contenido.read()
-        contenido.close()
-
-        rutinas = json.loads(lineas)
-
-    except:
-        print("error")
-
-    a = int(input("Cuantos dias quiere entrenar por semana entre 3 y 6?: "))
-    while a > 6 or a < 3:
-            a = int(input("ERROR, Cuantos dias quiere entrenar por semana entre 3 y 6?: "))
-
-    if a == 6:
-        print(rutinas[0])
-    elif a == 4:
-         print(rutinas[2])
-    elif a == 5:
-         print(rutinas[3])
-    elif a == 3:
-        print(rutinas[1])
-
-
-
-
-# FUNCIONES INVENTARIO
-def  sugerir_recetas():
-    pass
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-texto_dieta ="""Para bajar de peso, es importante seguir una dieta hipocalórica, equilibrada y rica en nutrientes para asegurarte de perder grasa corporal mientras mantienes la masa muscular. Aquí tienes un plan de alimentación general que puedes adaptar según tus necesidades."""
-texto_definicion = """Una dieta de definición se centra en reducir el porcentaje de grasa corporal mientras se mantiene la masa muscular. Es similar a una dieta de pérdida de peso, pero con un enfoque especial en preservar el músculo. Aquí tienes un plan de alimentación para ayudarte a lograrlo."""
-texto_volumen= """Para aumentar el volumen muscular, es fundamental seguir una dieta hipercalórica, rica en proteínas, carbohidratos y grasas saludables, junto con un entrenamiento adecuado. Aquí tienes un plan general de dieta que puedes adaptar según tus necesidades y preferencias."""
-
-#Paso 1: ingreso de datos
-
-def cargar_datos():
     altura= int(input("Por favor, ingrese su altura en cm: "))
 
     peso = int(input("Ingrese su peso en KG: "))
 
     edad = int(input("Ingrese su edad: "))
 
-    sexo = input("¿Cuál es su sexo? (H/M): ")
-    if sexo.upper() == "H":
-        sexo= "H"
-    elif sexo.upper() == "M":
-        sexo= "M"
-    else:
-        print("Sexo no válido. Por favor, ingrese H o M.")
 
-    return altura, peso, edad, sexo
+    sexo= True
+    while sexo:
+        sexo = input("¿Cuál es su sexo? (H/M): ")
+        if sexo.upper() == "H":
+            sexo= "H"
+        elif sexo.upper() == "M":
+            sexo= "M"
+        else:
+            print("Sexo no válido. Por favor, ingrese H o M.")
+            sexo = input("¿Cuál es su sexo? (H/M): ")
+
+    return altura, peso, edad, sexo, nombre
 
 
 def calcular_metabolismo_basal(sexo, altura, peso, edad):
@@ -280,89 +237,54 @@ def calcular_metabolismo_basal(sexo, altura, peso, edad):
 
 
 
-def main():
-    print("Excelente , sigamos con el programa ...")
-    alturas, pesousu, años, sexos = cargar_datos()
-    calculo = calcular_metabolismo_basal(sexos, alturas, pesousu, años)
-    print("Sus calorias ingeridas para un dia serian :", calculo, "kcal")
-    dieta_seleccionada = dieta()
-    if dieta_seleccionada == "volumen":
-        return #texto_volumen
-    elif dieta_seleccionada == "bajar de peso":
-        return texto_dieta
-    elif dieta_seleccionada == "definicion":
-        return texto_definicion
+def definir_calorias():
+    nombre_usu= "hola"
 
-def dieta() :
-    print("¿Te gustaria hacer algun tipo de dieta? ")
-    dieta = str(input("si o no "))
-    if dieta == "si":
-        print("¿que quieres conseguir con tu dieta? ")
-        objetivo = input("volumen, bajar de peso, definicion.")
-        if objetivo == "volumen":
-            print (texto_volumen)
-        elif objetivo == "bajar de peso":
-            print(texto_dieta)  
-        elif objetivo== "definicion":
-            print(texto_definicion)
-        return objetivo
+    usuario_existente=verificar_datos(nombre_usu)
 
-
-if __name__ == "__main__":
-    main()
-
-
-
-
-#Paso 2
-#Funcion para recetas: Importa del archivo json el diccionario de recetas.
-#Esta incompleto el algoritmo para ver si las comidas del usuario coinciden con las recetas y decirle que recetas puede hacecr
-
-def busqueda_secuencial(lista, dato):
-    i = 0
-    while i < len(lista) and lista[i] != dato:
-        i+=1
-    if i < len(lista):
-        return i
+    if usuario_existente:
+        print("Bienvenido", "!")
+        #si ya esta registrados mostrar datos en pantalla y dar la opcion de actualizarlos
     else:
-        return -1
+    #si es usuario nuevo:
+        altura_usuario, peso_usuario, edad_usuario, sexo_usuario = cargar_info_personal()
+        calculo_calorias = calcular_metabolismo_basal(altura_usuario, peso_usuario, edad_usuario, sexo_usuario)
+        objetivo_usuario= definir_objetivo()
+    #cargar datos en el archivo json usuarios
+        print("El numero de calorias que debe ingerir por dia son:", calculo_calorias, "kcal")
+        print("Ahora que conocemos su metabolismo basal y su objetivo... Podemos comenzar a formular su plan!")
+
+    return calculo_calorias, objetivo_usuario
 
 
-#funciones sugerencia dieta y rutinas para formar plam y cumplimiento de objetivos
-
-def sugerir_recetas():
-    import json
-    with open('recetas.json') as f:
-        recetas = json.load(f)
-
-    comidas = []
-    n = str(input("Ingrese un ingrediente o -1 para terminar: "))
-
-
-    while n != "-1":
-        n = str(input("Ingrese un ingrediente o -1 para terminar: "))
-
-    i = 0
-    s = True
-    while i < len(comidas) and s == True:
-
-        encontrado = busqueda_secuencial(recetas, comidas[i])
-        if encontrado != -1:
-
-
-            i = i + 1
-        else:
-            s = False
+def definir_objetivo() :
+    print("¿Cual es tu objetivo? ")
+    print("1. Volumen")
+    print("2. Bajar de peso")
+    print("3. Definicion")
+    print("4. No tengo un objetivo definido")
     
-     
-    print(recetas['1'])
-    print(recetas['2'])
-    print(recetas['3'])
+    try:
+        objetivo = int(input("Seleccione del menu"))
+        if objetivo ==1:
+            print (texto_volumen)
+        elif objetivo == 2:
+            print(texto_dieta)  
+        elif objetivo== 3:
+            print(texto_definicion)
+        elif objetivo==4:
+            print("No hay problema, solo sigue comiendo saludable y haciendo ejercicio.")
+        else: 
+            print("El valor ingresado es inválido, por favor intentelo de nuevo")
+            objetivo = int(input("Seleccione del menu"))
+    except: 
+        print("Error")
+        input()    
+    return objetivo
 
 
 
-#Paso 3
-
+# FUNCIONES CALENDARIO
 def sugerir_rutinas():
     obj= ingresar_objetivo()
     cant_dias= ingresar_dias_entrenamiento ()
@@ -437,8 +359,6 @@ def sugerir_rutinas():
     except:
         print("Error")
 
-
-#ingreso objetivos usuario
 def ingresar_objetivo():
             
     print("1. Ganar musculo.")
@@ -457,10 +377,47 @@ def ingresar_dias_entrenamiento():
            
    return dias
 
+#Funcion rutinas
+
+def rutinas():
+    import json
+
+    try:
+        contenido = open("archivos/rutinas.json", "r")
+        lineas = contenido.read()
+        contenido.close()
+
+        rutinas = json.loads(lineas)
+
+    except:
+        print("error")
+
+    a = int(input("Cuantos dias quiere entrenar por semana entre 3 y 6?: "))
+    while a > 6 or a < 3:
+            a = int(input("ERROR, Cuantos dias quiere entrenar por semana entre 3 y 6?: "))
+
+    if a == 6:
+        print(rutinas[0])
+    elif a == 4:
+         print(rutinas[2])
+    elif a == 5:
+         print(rutinas[3])
+    elif a == 3:
+        print(rutinas[1])
 
 
-#Funcion para recetas: Importa del archivo json el diccionario de recetas.
-#Esta incompleto el algoritmo para ver si las comidas del usuario coinciden con las recetas y decirle que recetas puede hacecr
+
+
+
+
+
+
+texto_dieta ="""Para bajar de peso, es importante seguir una dieta hipocalórica, equilibrada y rica en nutrientes para asegurarte de perder grasa corporal mientras mantienes la masa muscular. Aquí tienes un plan de alimentación general que puedes adaptar según tus necesidades."""
+texto_definicion = """Una dieta de definición se centra en reducir el porcentaje de grasa corporal mientras se mantiene la masa muscular. Es similar a una dieta de pérdida de peso, pero con un enfoque especial en preservar el músculo. Aquí tienes un plan de alimentación para ayudarte a lograrlo."""
+texto_volumen= """Para aumentar el volumen muscular, es fundamental seguir una dieta hipercalórica, rica en proteínas, carbohidratos y grasas saludables, junto con un entrenamiento adecuado. Aquí tienes un plan general de dieta que puedes adaptar según tus necesidades y preferencias."""
+
+
+
 
 def busqueda_secuencial(lista, dato):
     i = 0
@@ -470,48 +427,3 @@ def busqueda_secuencial(lista, dato):
         return i
     else:
         return -1
-    
-
-#funciones sugerencia dieta y rutinas para formar plam y cumplimiento de objetivos
-
-def sugerir_recetas():
-    import json
-    with open('comidas.json') as f:
-        recetas = json.load(f)
-
-    comidas = []
-    n = str(input("Ingrese un ingrediente o -1 para terminar: "))
-
-
-    while n != "-1":
-        n = str(input("Ingrese un ingrediente o -1 para terminar: "))
-
-    i = 0
-    s = True
-    while i < len(comidas) and s == True:
-
-        encontrado = busqueda_secuencial(recetas, comidas[i])
-        if encontrado != -1:
-
-
-            i = i + 1
-        else:
-            s = False
-    
-     
-    print(recetas['1'])
-    print(recetas['2'])
-    print(recetas['3'])
-
-
-
-
-
-
-pantalla1()
-cargar_datos()
-dieta()
-ingresar_objetivo()
-ingresar_dias_entrenamiento()
-sugerir_recetas()
-sugerir_rutinas()
