@@ -16,7 +16,4 @@ def main():
     f.menu_principal()
     
 
-
 main()
-
-
