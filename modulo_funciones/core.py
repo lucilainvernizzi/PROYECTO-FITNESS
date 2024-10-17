@@ -4,13 +4,12 @@ import json
 
 
 def intro():
-    os.system("cls")
+   
     print("\033[0;36m]")
     print("\033[4;15HBienvenidos a la App Fitness")
     print("\033[5;15HProgramacion I")
 
-    print("\033[0;37m]")
-    input ()
+    print("\033[0;37m")
 
 def menu_principal():
     repetir = True
@@ -21,7 +20,6 @@ def menu_principal():
         print("4. Salir")
 
         try:
-            os.system("cls")
             op= int(input("Ingrese un valor del menu."))
             
             if op==1:
@@ -33,10 +31,13 @@ def menu_principal():
             elif op==4:
                 repetir= False
             else:
-                print("Error")
+                print("error")
+            
         except:
             print("Error")
-            input()
+        
+        
+           
 
 
 def mostrar_equipo():
@@ -69,10 +70,6 @@ def mostrar_inst():
 
 def ejecutar():
     ingresar_cuenta()
-    menu_secundario()
-    definir_calorias()
-    sugerir_recetas()
-    sugerir_rutinas()
 
 #FUNCIONES LOGIN
 
@@ -83,22 +80,22 @@ def ingresar_cuenta():
         print("2. Iniciar sesión")
         print("3. Salir")
 
-    try:
-        opcion = int(input("Seleccione una opción del menu: "))
+        try:
+            opcion = int(input("Seleccione una opción del menu: "))
 
-        if opcion == 1:
-            crear_usuario()
-        elif opcion == 2:
-            iniciar_sesion()
-        elif opcion == 3:
-            print("Cerrando sesion.")
-            menu = False
-        else:
-            print("Opción no válida. Inténtelo de nuevo.")
-            opcion = input("Seleccione una opción del menu: ")
-    except:
-        print("Error")
-        print()
+            if opcion == 1:
+                crear_usuario()
+            elif opcion == 2:
+                iniciar_sesion()
+            elif opcion == 3:
+                print("Cerrando sesion.")
+                menu = False
+            else:
+                print("Opción no válida. Inténtelo de nuevo.")
+                opcion = input("Seleccione una opción del menu: ")
+        except:
+            print("Error")
+            print()
         
 
 def verificar_datos(nombre_usu):
@@ -188,7 +185,7 @@ def menu_secundario():
             elif op==2:
                 sugerir_rutinas()
             elif op==3:
-                 sugerir_recetas()   
+                 pass   
             elif op==4:
                 repetir= False
             else:
