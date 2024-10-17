@@ -177,8 +177,36 @@ def cargar_info_personal():
    pass
 
 # FUNCIONES CALENDARIO
-def sugerir_rutinas():
-    pass
+#Funcion rutinas
+
+
+def rutinas():
+    import json
+
+    try:
+        contenido = open("archivos/rutinas.json", "r")
+        lineas = contenido.read()
+        contenido.close()
+
+        rutinas = json.loads(lineas)
+
+    except:
+        print("error")
+
+    a = int(input("Cuantos dias quiere entrenar por semana entre 3 y 6?: "))
+    while a > 6 or a < 3:
+            a = int(input("ERROR, Cuantos dias quiere entrenar por semana entre 3 y 6?: "))
+
+    if a == 6:
+        print(rutinas[0])
+    elif a == 4:
+         print(rutinas[2])
+    elif a == 5:
+         print(rutinas[3])
+    elif a == 3:
+        print(rutinas[1])
+
+
 
 
 # FUNCIONES INVENTARIO

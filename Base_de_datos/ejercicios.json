@@ -1,0 +1,77 @@
+{
+    "Pecho": [
+        "pressBanca",
+        "pressInclinado",
+        "pressDeclinado",
+        "prensaDeDumbbells",
+        "pechoHorizontal",
+        "pechoInclinadoMaquina",
+        "pechoDeclinadoMaquina",
+        "dips",
+        "pushUps",
+        "cableCrossovers",
+        "pechoConResistencia",
+        "pecDeck",
+        "inclineDumbbellPress",
+        "declineDumbbellPress",
+        "chestFly",
+        "pecMinor"],
+    
+        "Biceps": [
+        "curlDeBarra",
+        "curlMancuernas",
+       "curlInclinado",
+        "curlConcentrado",
+        "hammerCurl",
+        "preacherCurl",
+        "bicepCurlMaquina"],
+
+        "Triceps": [
+        "extensionDeTriceps",
+        "extensionDeTricepsConCuerda",
+        "extensionDeTricepsConMancuernas",
+        "extensionDeTricepsInclinado",
+        "dips",
+        "tricepPushdown",
+        "tricepKickback",
+        "tricepExtensionMaquina"], 
+
+        "Espalda": [
+        "pullUps",
+        "latPulldowns",
+        "rows",
+        "deadlifts",
+        "bentOverRows",
+        "seatedRows",
+        "tBarRows",
+        "hyperextensions", 
+        "shrugsBarra"], 
+    "Quadriceps": [
+        "sentadillas",
+        "pressDePiernas",
+        "extensionesDePiernas",
+        "legPress",
+        "legExtensions",
+        "lunges",
+        "legCurl"], 
+
+        "Isquiotibiales": [
+        "sentadillas",
+        "deadlifts",
+        "legPress",
+        "legCurl",
+        "glute Bridges"], 
+
+    "Gemelos": [
+        "elevacionesDeGemelos",
+        "pressDeGemelos",
+        "extensionesDeGemelos",
+        "calfRaise",
+        "seatedCalfRaise"], 
+
+    "Hombros": [
+        "elevacionesLaterales",
+        "elevacionesFrontales",
+        "pressDeHombros",
+        "vuelosPosteriores"]
+}
