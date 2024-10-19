@@ -4,40 +4,44 @@ import json
 
 
 def intro():
-   
+    
     print("\033[0;36m]")
     print("\033[4;15HBienvenidos a la App Fitness")
     print("\033[5;15HProgramacion I")
 
-    print("\033[0;37m")
+    print("\033[0;37m]")
+    input()
 
 def menu_principal():
     repetir = True
     while repetir:
+        os.system("cls")
         print("1. Equipo")
         print("2. Instrucciones del programa")
         print("3. Ejecutar")
         print("4. Salir")
 
         try:
-            op= int(input("Ingrese un valor del menu."))
+            
+            op= int(input("Ingrese un valor del menu: "))
             
             if op==1:
                 mostrar_equipo()
+                input()
             elif op==2:
                 mostrar_inst()
+                input()
             elif op==3:
                 ejecutar()
+                input()
             elif op==4:
+                print("El programa ha finalizado.")
                 repetir= False
             else:
-                print("error")
-            
+                print("Error")
         except:
             print("Error")
-        
-        
-           
+            input()
 
 
 def mostrar_equipo():
@@ -70,39 +74,45 @@ def mostrar_inst():
 
 def ejecutar():
     ingresar_cuenta()
+    menu_secundario()
+    definir_calorias()
+    #inventario()
+    #calendario()
 
 #FUNCIONES LOGIN
 
 def ingresar_cuenta():
-    menu = True
+    menu= True
     while menu:
         print("1. Registrarse")
         print("2. Iniciar sesión")
         print("3. Salir")
 
-        try:
-            opcion = int(input("Seleccione una opción del menu: "))
+        opcion = int(input("Seleccione una opción del menu: "))
 
-            if opcion == 1:
-                crear_usuario()
-            elif opcion == 2:
-                iniciar_sesion()
-            elif opcion == 3:
-                print("Cerrando sesion.")
-                menu = False
-            else:
-                print("Opción no válida. Inténtelo de nuevo.")
-                opcion = input("Seleccione una opción del menu: ")
-        except:
-            print("Error")
-            print()
+        if opcion == 1:
+            crear_usuario()
+        elif opcion == 2:
+            iniciar_sesion()
+        elif opcion == 3:
+            print("Cerrando sesion.")
+            menu= False
+        else:
+            print("Opción no válida. Inténtelo de nuevo.")
+            opcion = input("Seleccione una opción del menu: ")
         
 
 def verificar_datos(nombre_usu):
-    with open('usuarios.json', 'r') as f:
-        datos_usu = json.load(f) 
+    try:
+        contenido = open("Base_de_datos/usuarios.json", "r")
+        lineas = contenido.read()
+        contenido.close()
 
-    for usuario in datos_usu.get('usuarios', []):
+        datos_usu = json.loads(lineas)
+    except:
+        print("error")
+
+    for usuario in datos_usu('usuarios', []):
         if usuario['nombre'] == nombre_usu:
             usuario_existente= True 
         else:
@@ -116,18 +126,19 @@ def crear_usuario():
         
     usuario, datos_de_usuario= verificar_datos(nombre)
 
+
     while usuario:
         print("El nombre de usuario ya existe. Intente con otro nombre de usuario(1) o inicie sesion(2).")
-        opcion= int(input())
-        if opcion==1:
+        opcion = int(input("Ingrese una opcion: "))
+        if opcion == 1:
             nombre = input("Ingrese su nombre de usuario: ")
             contraseña = input("Ingrese su contraseña: ")
             usuario, datos_de_usuario= verificar_datos(nombre)
-        elif opcion==2:
+        elif opcion == 2:
             iniciar_sesion()
             return #para salir de la funcion una vez que se inicia sesion
         else:
-            print("Error")
+            print("error")
 
     #si el usuario no existe, se procede a crear uno nuevo
     nuevo_usuario = {'nombre': nombre, 'contraseña': contraseña}
@@ -183,9 +194,11 @@ def menu_secundario():
             if op==1:
                 cargar_info_personal()
             elif op==2:
-                sugerir_rutinas()
+                #sugerir_rutinas()
+                pass
             elif op==3:
-                 pass   
+                #inventario() 
+                pass  
             elif op==4:
                 repetir= False
             else:
@@ -282,79 +295,6 @@ def definir_objetivo() :
 
 
 # FUNCIONES CALENDARIO
-def sugerir_rutinas():
-    obj= ingresar_objetivo()
-    cant_dias= ingresar_dias_entrenamiento ()
-    musculo= input("Que quieres entrenar hoy?")
-
-    rutina_piernas= []
-    rutina_brazos= []
-    rutina_gluteos= []
-
-    
-    print("Su rutina de entrenamiento ideal es:")
-    try:
-        if obj==1:
-            print("Para tonificar no hay nada mejor que el entrenamiento de fuerza con intervalos de cardio.") 
-            print ()
-            if musculo=="piernas":
-                print ("Dia Lunes: ")
-                for i in range (len(rutina_piernas)+1):
-                    print(rutina_piernas[i], sep= "-")
-            elif musculo=="brazos":
-                for i in range (len(rutina_brazos)+1):
-                    print(rutina_brazos[i], sep= "-")
-            elif musculo=="gluteos":
-                for i in range (len(rutina_gluteos)+1):
-                    print(rutina_gluteos[i], sep= "-")
-
-
-            
-        elif obj==2:
-            print("Si tu objetivo es bajar de peso,") 
-            print ()
-            if musculo=="piernas":
-                print ("Dia Lunes: ")
-                for i in range (len(rutina_piernas)+1):
-                    print(rutina_piernas[i], sep= "-")
-            elif musculo=="brazos":
-                for i in range (len(rutina_brazos)+1):
-                    print(rutina_brazos[i], sep= "-")
-            elif musculo=="gluteos":
-                for i in range (len(rutina_gluteos)+1):
-                    print(rutina_gluteos[i], sep= "-")
-
-        elif obj==3:
-            print("Aumentar masa muscular, el entrenamiento de fuerza musculatoria es el mas indicado para ti.")
-            print ()
-            if musculo=="piernas":
-                print ("Dia Lunes: ")
-                for i in range (len(rutina_piernas)+1):
-                    print(rutina_piernas[i], sep= "-")
-            elif musculo=="brazos":
-                for i in range (len(rutina_brazos)+1):
-                    print(rutina_brazos[i], sep= "-")
-            elif musculo=="gluteos":
-                for i in range (len(rutina_gluteos)+1):
-                    print(rutina_gluteos[i], sep= "-")
-
-        elif obj==4:
-            print("Dado que tu objetivo no esta definido, te sugerimos algunas rutinas de ejrciios generales que pueden ser utiles para mantener tu cuerpo em forma sin buscar un objetivo especifico.")
-            print()
-            if musculo=="piernas":
-                print ("Dia Lunes: ")
-                for i in range (len(rutina_piernas)+1):
-                    print(rutina_piernas[i], sep= "-")
-            elif musculo=="brazos":
-                for i in range (len(rutina_brazos)+1):
-                    print(rutina_brazos[i], sep= "-")
-            elif musculo=="gluteos":
-                for i in range (len(rutina_gluteos)+1):
-                    print(rutina_gluteos[i], sep= "-")
-        else:
-            print("Error")
-    except:
-        print("Error")
 
 def ingresar_objetivo():
             
@@ -403,7 +343,73 @@ def rutinas():
         print(rutinas[1])
 
 
+def hacerTuRutina():
+    import json
 
+    try:
+        contenido = open("archivos/ejercicios.json", "r")
+        lineas = contenido.read()
+        contenido.close()
+
+        ejercicios = json.loads(lineas)
+
+    except:
+        print("error")
+
+
+    print(ejercicios["Pecho"])
+
+    n = int(input("Ingrese el ejercicio que quiere para este musculo: "))
+
+    ejerciciosPecho = []
+    ejerciciosEspalda = []
+    ejerciciosBiceps= []
+    ejerciciosTriceps = []
+    ejerciciosQuadriceps = []
+    ejerciciosIsquiotibiales = []
+    ejerciciosGemelos = []
+
+
+    miRutina = {"Pecho" : ejerciciosPecho, 
+                "Espalda": ejerciciosEspalda,  
+                "Biceps" : ejerciciosBiceps , 
+                "Triceps" : ejerciciosTriceps, 
+                "Quadriceps" : ejerciciosQuadriceps, 
+                "Isquiotibiales" : ejerciciosIsquiotibiales, 
+                 "Gemelos" : ejerciciosGemelos }
+
+    for n_ejercicio in ejercicios:
+        if n_ejercicio["n"] in ejercicios:
+            miRutina["Pecho"].append(n)
+
+    for n_ejercicio in ejercicios:
+        if n_ejercicio["n"] in ejercicios:
+            miRutina["Pecho"].append(n)
+    
+
+    for n_ejercicio in ejercicios:
+        if n_ejercicio["n"] in ejercicios:
+            miRutina["Pecho"].append(n)
+
+    for n_ejercicio in ejercicios:
+        if n_ejercicio["n"] in ejercicios:
+            miRutina["Pecho"].append(n)
+
+    for n_ejercicio in ejercicios:
+        if n_ejercicio["n"] in ejercicios:
+            miRutina["Pecho"].append(n)
+
+    for n_ejercicio in ejercicios:
+        if n_ejercicio["n"] in ejercicios:
+            miRutina["Pecho"].append(n)
+
+    for n_ejercicio in ejercicios:
+        if n_ejercicio["n"] in ejercicios:
+            miRutina["Pecho"].append(n)
+
+# FUNCIONES INVENTARIO/RECETAS
+def inventario():
+    pass
 
 
 
@@ -424,3 +430,4 @@ def busqueda_secuencial(lista, dato):
         return i
     else:
         return -1
+    
