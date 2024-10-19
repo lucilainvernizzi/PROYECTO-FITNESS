@@ -8,7 +8,7 @@
 
 
 import modulo_funciones.core as f
-
+import os
 
 
 def main():
