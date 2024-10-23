@@ -73,81 +73,71 @@ def ejecutar():
 
 #FUNCIONES LOGIN
 
-def ingresar_cuenta():
-    menu = True
-    while menu:
-        print("1. Registrarse")
-        print("2. Iniciar sesión")
-        print("3. Salir")
+import os
+import json
 
-        try:
-            opcion = int(input("Seleccione una opción del menu: "))
 
-            if opcion == 1:
-                crear_usuario()
-            elif opcion == 2:
-                iniciar_sesion()
-            elif opcion == 3:
-                print("Cerrando sesion.")
-                menu = False
-            else:
-                print("Opción no válida. Inténtelo de nuevo.")
-                opcion = input("Seleccione una opción del menu: ")
-        except:
-            print("Error")
-            print()
-        
+def verificar_o_crear_archivo_json():
+    ruta_archivo_json = os.path.join(os.path.dirname(__file__), 'usuarios.json') #no tengo la menor idea de que hace esto, pero hizo que funcione
+    #supuestamente le da una direccion a una variable y de esa forma lo detecta en otro archivo tambien 
+
+    if not os.path.exists(ruta_archivo_json):
+        datos_iniciales = {'usuarios': []}
+        with open(ruta_archivo_json, 'w') as f:
+            json.dump(datos_iniciales, f, indent=4)
+        print(f"Archivo 'usuarios.json' creado en {ruta_archivo_json}")
+    return ruta_archivo_json
 
 def verificar_datos(nombre_usu):
-    with open('usuarios.json', 'r') as f:
-        datos_usu = json.load(f) 
+    ruta_archivo_json = verificar_o_crear_archivo_json()
+    
+    with open(ruta_archivo_json, 'r') as f:
+        datos_usu = json.load(f)
 
+    usuario_existente = False
     for usuario in datos_usu.get('usuarios', []):
         if usuario['nombre'] == nombre_usu:
-            usuario_existente= True 
-        else:
-            usuario_existente= False
+            usuario_existente = True
+
     return usuario_existente, datos_usu
 
 def crear_usuario():
     print("Registro de nuevo usuario")
     nombre = input("Ingrese su nombre de usuario: ")
     contraseña = input("Ingrese su contraseña: ")
-        
-    usuario, datos_de_usuario= verificar_datos(nombre)
+
+    usuario, datos_de_usuario = verificar_datos(nombre)
 
     while usuario:
-        print("El nombre de usuario ya existe. Intente con otro nombre de usuario(1) o inicie sesion(2).")
-        opcion= int(input())
-        if opcion==1:
+        print("El nombre de usuario ya existe. Intente con otro nombre de usuario (1) o inicie sesión (2).")
+        opcion = int(input())
+        if opcion == 1:
             nombre = input("Ingrese su nombre de usuario: ")
             contraseña = input("Ingrese su contraseña: ")
-            usuario, datos_de_usuario= verificar_datos(nombre)
-        elif opcion==2:
+            usuario, datos_de_usuario = verificar_datos(nombre)
+        elif opcion == 2:
             iniciar_sesion()
-            return #para salir de la funcion una vez que se inicia sesion
+            return  # Salir de la función una vez que se inicie sesión
         else:
             print("Error")
 
-    #si el usuario no existe, se procede a crear uno nuevo
     nuevo_usuario = {'nombre': nombre, 'contraseña': contraseña}
     datos_de_usuario['usuarios'].append(nuevo_usuario)
 
-    #guardar nuevo usuario en JSON
-    with open('usuarios.json', 'w') as f:
+    with open(verificar_o_crear_archivo_json(), 'w') as f:
         json.dump(datos_de_usuario, f, indent=4)
     
     print("¡Usuario registrado con éxito!")
-    
-
 
 def iniciar_sesion():
     print("Inicio de sesión")
     nombre = input("Ingrese su nombre de usuario: ")
     contraseña = input("Ingrese su contraseña: ")
 
+    ruta_archivo_json = verificar_o_crear_archivo_json()
+
     try:
-        with open('usuarios.json', 'r') as f:
+        with open(ruta_archivo_json, 'r') as f:
             datos_de_usuario = json.load(f)
     except (FileNotFoundError, json.JSONDecodeError):
         print("No hay usuarios registrados o el archivo está corrupto.")
@@ -155,7 +145,7 @@ def iniciar_sesion():
 
     for usuario in datos_de_usuario.get('usuarios', []):
         if usuario['nombre'] == nombre and usuario['contraseña'] == contraseña:
-            print("Bienvenido", nombre, "nuevamente")
+            print(f"Bienvenido {nombre} nuevamente")
             return True
 
     print("Nombre de usuario o contraseña incorrectos.")
@@ -163,6 +153,28 @@ def iniciar_sesion():
     if registrarse.lower() == 's':
         crear_usuario()
     return False
+
+
+def ingresar_cuenta():
+    menu=True
+    while menu==True:
+        print("1. Registrarse")
+        print("2. Iniciar sesión")
+        print("3. Salir")
+        
+        opcion = input("Seleccione una opción: ")
+        
+        if opcion == '1':
+            crear_usuario()
+        elif opcion == '2':
+            iniciar_sesion()
+        elif opcion == '3':
+            print("Cerrando el sistema...")
+            menu=False
+        else:
+            print("Opción inválida, intente de nuevo.")
+
+
 
 
 
