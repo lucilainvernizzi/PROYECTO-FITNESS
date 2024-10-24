@@ -25,38 +25,34 @@ def intro():
 def menu_principal():
     repetir = True
     while repetir:
-        os.system("cls")
         print("1. Equipo")
         print("2. Instrucciones del programa")
         print("3. Ejecutar")
         print("4. Salir")
 
-        try:
-            op= int(input("Ingrese un valor del menu."))
+        opcion_valida = False  # Variable para controlar la validez de la opción
+        while not opcion_valida:  # Mientras la opción no sea válida
+            try:
+                opcion_menu = int(input("Ingrese un valor del menu: "))
+                opcion_valida = True  # La opción es válida, salimos del bucle
             
-            if op==1:
-                os.system("cls")
-                mostrar_equipo()
-                input()
-                
-            elif op==2:
-                os.system("cls")
-                mostrar_inst()
-                
-            elif op==3:
-                os.system("cls")
-                ejecutar()
-                
-            elif op==4:
-                print("El programa ha finalizado.")
-                repetir= False
-                os.system("cls")
-            else:
-                print("error")
-            
-        except:
-            print("Error")
-        
+            except ValueError:
+                print("Por favor, ingrese un número válido.")
+
+        if opcion_menu == 1:
+            os.system("cls")
+            mostrar_equipo()
+        elif opcion_menu == 2:
+            os.system("cls")
+            mostrar_inst()
+        elif opcion_menu == 3:
+            os.system("cls")
+            ejecutar()
+        elif opcion_menu == 4:
+            os.system("cls")
+            repetir = False
+        else:
+            print("Error: opción no válida.")
     
 
 def mostrar_equipo():
