@@ -1,16 +1,26 @@
 #FUNCIONES MENU PRINCIPAL
 import os
 import json
-
+from colorama import init, Fore, Back, Style
 
 def intro():
-    
-    print("\033[0;36m]")
-    print("\033[4;15HBienvenidos a la App Fitness")
-    print("\033[5;15HProgramacion I")
 
-    print("\033[0;37m]")
+    init(autoreset=True)
+
+    texto = f"""
+    {Fore.BLUE}    ___    ____  ____     _________________   __________________
+    {Fore.BLUE}   /   |  / __ \/ __ \   / ____/  _/_  __/ | / / ____/ ___/ ___/
+    {Fore.BLUE}  / /| | / /_/ / /_/ /  / /_   / /  / / /  |/ / __/  \__ \\__ \ 
+    {Fore.BLUE} / ___ |/ ____/ ____/  / __/ _/ /  / / / /|  / /___ ___/ /__/ / 
+    {Fore.BLUE}/_/  |_/_/   /_/      /_/   /___/ /_/ /_/ |_/_____//____/____/  
+                                                            
+    """
+
+    # Imprime el texto
+    print(texto)
     input()
+
+
 
 def menu_principal():
     repetir = True
@@ -22,27 +32,32 @@ def menu_principal():
         print("4. Salir")
 
         try:
-            
-            op= int(input("Ingrese un valor del menu: "))
+            op= int(input("Ingrese un valor del menu."))
             
             if op==1:
+                os.system("cls")
                 mostrar_equipo()
                 input()
+                
             elif op==2:
+                os.system("cls")
                 mostrar_inst()
-                input()
+                
             elif op==3:
+                os.system("cls")
                 ejecutar()
-                input()
+                
             elif op==4:
                 print("El programa ha finalizado.")
                 repetir= False
+                os.system("cls")
             else:
-                print("Error")
+                print("error")
+            
         except:
             print("Error")
-            input()
-
+        
+    
 
 def mostrar_equipo():
     print("Bienvenido! Esta App fue creada por el equipo de:")
@@ -80,9 +95,6 @@ def ejecutar():
     #calendario()
 
 #FUNCIONES LOGIN
-
-import os
-import json
 
 
 def verificar_o_crear_archivo_json():
