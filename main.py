@@ -12,6 +12,8 @@ import modulo_funciones.core as f
 def main():
     f.intro()
     f.menu_principal()
+    f.mostrar_calendario()
+    f.mostrar_inventario()
 
 if __name__=="__main__":
     main()

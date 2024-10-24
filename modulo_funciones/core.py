@@ -27,15 +27,16 @@ def menu_principal():
         os.system("cls")
 
         
-        print("\033[0;36m]")
+        print("\033[0;36m")
         print("\033[4;15HBienvenidos a la App Fitness")
         print("\033[5;15HProgramacion I")
-        print("\033[0;37m]")
+        print("\033[0;37m")
         
         print("1. Equipo")
         print("2. Instrucciones del programa")
         print("3. Ejecutar")
         print("4. Salir")
+        #print("{0:4}{1:4}{3:4}{4:4}".format(a, b, c, d))
 
         try:
             
@@ -54,7 +55,7 @@ def menu_principal():
                 print("El programa ha finalizado.")
                 repetir= False
             else:
-                print("Error")
+                print("error")
         except:
             print("Error")
             input()
@@ -75,10 +76,10 @@ def mostrar_equipo():
 
 def mostrar_inst():
     os.system('cls')
-    print("""App de recetas Fitness y nutritivas! Este programa te permitira encontrar el mejor plan de alimentacion y entrenamiento.""")
+    print("""Este programa te permitira encontrar el mejor plan de alimentacion y entrenamiento.""")
     print("")
-    print("""Con la carga de datos personales del usuario, sera evaluada la mejor ruta para alcanzar sus metas.")
-    Un nuevo estilo de vida saludable esta ahora en tus manos! Para utilizar el programa, solo debes seguir las siguientes instrucciones: """)
+    print("Con la carga de datos personales del usuario, sera evaluada la mejor ruta para alcanzar sus metas.")
+    print("Un nuevo estilo de vida saludable esta ahora en tus manos! Para utilizar el programa, solo debes seguir las siguientes instrucciones: ")
     print("")
     print("""1. Registro e Ingreso de datos personales. Deberas crear una cuenta con tu nombre de usuario y contrasena. Luego se solictara que ingreses datos personales como tu altura, peso, edad, genero y nivel de actividad fisica""")
     print("")
@@ -201,7 +202,7 @@ def iniciar_sesion():
     return False
 
 
-
+'''
 #FUNCION MENU SECUNDARIO
 
 def menu_secundario():
@@ -342,8 +343,47 @@ def ingresar_dias_entrenamiento():
 
 #Funcion rutinas
 
+def mostrar_calendario():
+
+    init(autoreset=True)
+
+    texto = f"""
+    {Fore.BLUE}   ___      _                _            _       
+    {Fore.BLUE}  / __\__ _| | ___ _ __   __| | __ _ _ __(_) ___  
+    {Fore.BLUE} / /  / _` | |/ _ \ '_ \ / _` |/ _` | '__| |/ _ \ 
+    {Fore.BLUE}/ /__| (_| | |  __/ | | | (_| | (_| | |  | | (_) |
+    {Fore.BLUE}\____/\__,_|_|\___|_| |_|\__,_|\__,_|_|  |_|\___/
+                                                            
+    """
+
+    # Imprime el texto
+    print(texto)
+    input()
+
+                                                  
+def mostrar_inventario():
+
+    init(autoreset=True)
+
+    texto = f"""
+    {Fore.BLUE}  _____                      _             _       
+    {Fore.BLUE}  \_   \_ ____   _____ _ __ | |_ __ _ _ __(_) ___  
+    {Fore.BLUE}   / /\/ '_ \ \ / / _ \ '_ \| __/ _` | '__| |/ _ \ 
+    {Fore.BLUE}/\/ /_ | | | \ V /  __/ | | | || (_| | |  | | (_) |
+    {Fore.BLUE}\____/ |_| |_|\_/ \___|_| |_|\__\__,_|_|  |_|\___/ 
+                                                   
+                                                            
+    """
+
+    # Imprime el texto
+    print(texto)
+    input()
+
+                                                  
+
+
+
 def rutinas():
-    import json
 
     try:
         contenido = open("Base_de_datos/rutinas.json", "r")
@@ -457,3 +497,4 @@ def busqueda_secuencial(lista, dato):
     else:
         return -1
     
+    '''
