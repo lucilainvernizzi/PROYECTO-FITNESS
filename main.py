@@ -8,7 +8,7 @@
 
 import os
 import modulo_funciones.core as f
-
+import os
 
 def main():
     os.system("cls")    
@@ -16,7 +16,4 @@ def main():
     f.menu_principal()
     
 
-
 main()
-
-
