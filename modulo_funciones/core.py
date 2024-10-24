@@ -1,42 +1,25 @@
 #FUNCIONES MENU PRINCIPAL
 import os
 import json
-from colorama import init, Fore, Back, Style
 
 
 def intro():
+    
+    print("\033[0;36m]")
+    print("\033[4;15HBienvenidos a la App Fitness")
+    print("\033[5;15HProgramacion I")
 
-    init(autoreset=True)
-
-    texto = f"""
-    {Fore.BLUE}    ___    ____  ____     _________________   __________________
-    {Fore.BLUE}   /   |  / __ \/ __ \   / ____/  _/_  __/ | / / ____/ ___/ ___/
-    {Fore.BLUE}  / /| | / /_/ / /_/ /  / /_   / /  / / /  |/ / __/  \__ \\__ \ 
-    {Fore.BLUE} / ___ |/ ____/ ____/  / __/ _/ /  / / / /|  / /___ ___/ /__/ / 
-    {Fore.BLUE}/_/  |_/_/   /_/      /_/   /___/ /_/ /_/ |_/_____//____/____/  
-                                                            
-    """
-
-    # Imprime el texto
-    print(texto)
+    print("\033[0;37m]")
     input()
 
 def menu_principal():
     repetir = True
     while repetir:
         os.system("cls")
-
-        
-        print("\033[0;36m")
-        print("\033[4;15HBienvenidos a la App Fitness")
-        print("\033[5;15HProgramacion I")
-        print("\033[0;37m")
-        
         print("1. Equipo")
         print("2. Instrucciones del programa")
         print("3. Ejecutar")
         print("4. Salir")
-        #print("{0:4}{1:4}{3:4}{4:4}".format(a, b, c, d))
 
         try:
             
@@ -55,17 +38,14 @@ def menu_principal():
                 print("El programa ha finalizado.")
                 repetir= False
             else:
-                print("error")
+                print("Error")
         except:
             print("Error")
             input()
 
 
 def mostrar_equipo():
-    os.system('cls')
-    print("")
     print("Bienvenido! Esta App fue creada por el equipo de:")
-    print("")
     print("Lucila Invernizzi, LU: 1201347")
     print("Juan Ignacio Fernández Noceda, LU: ")
     print("Mateo Castellanos, LU:")
@@ -75,116 +55,98 @@ def mostrar_equipo():
     print("")
 
 def mostrar_inst():
-    os.system('cls')
-    print("""Este programa te permitira encontrar el mejor plan de alimentacion y entrenamiento.""")
-    print("")
-    print("Con la carga de datos personales del usuario, sera evaluada la mejor ruta para alcanzar sus metas.")
-    print("Un nuevo estilo de vida saludable esta ahora en tus manos! Para utilizar el programa, solo debes seguir las siguientes instrucciones: ")
-    print("")
+    print("""Bienvenido a la App de recetas Fitness y nutritivas! Este programa te permitira encontrar el mejor plan de alimentacion y entrenamiento. Con la carga de datos personales del usuario, sera evaluada la mejor ruta para alcanzar sus metas.")
+    Un nuevo estilo de vida saludable esta ahora en tus manos! Para utilizar el programa, solo debes seguir las siguientes instrucciones""")
+
     print("""1. Registro e Ingreso de datos personales. Deberas crear una cuenta con tu nombre de usuario y contrasena. Luego se solictara que ingreses datos personales como tu altura, peso, edad, genero y nivel de actividad fisica""")
-    print("")
+    
     print("2. Determinar tus objetivos. ")
     print("Determinar tus objetivos nutricionales, como bajar de peso o ganar masa mucualar.")
-    print("")
+    
     print("3. Recibir tu plan de alimentacion y entrenamiento personalizado.")
     print("El programa ")
-    print("")
+
     print("""4. Comenzar tu plan!. La constancia y disciplina son elementos clave para que tus objetivos se vuelvan realidad. Podras visualizar los pasos que debes seguir en nuestra ventana de calendario. """)
-    print("")
+   
     print("5. !")
     print("Dentro de la App podras encontrar un inventario digital de tu propio hogar que nos permitira crear recetas en base a los alimentos con los que cuentas. ")
 
 
 def ejecutar():
-    os.system('cls')
     ingresar_cuenta()
-    #definir_calorias()
+    menu_secundario()
+    definir_calorias()
     #inventario()
     #calendario()
 
 #FUNCIONES LOGIN
 
-def ingresar_cuenta():
-    menu= True
-    while menu:
-        os.system('cls')
-        print("1. Registrarse")
-        print("2. Iniciar sesión")
-        print("3. Salir")
+import os
+import json
 
-        opcion = int(input("Seleccione una opción del menu: "))
 
-        if opcion == 1:
-            crear_usuario()
-            input()
-        elif opcion == 2:
-            iniciar_sesion()
-            input()
-        elif opcion == 3:
-            menu_principal()
-            input()
-        else:
-            print("Opción no válida. Inténtelo de nuevo.")
-            opcion = input("Seleccione una opción del menu: ")
+def verificar_o_crear_archivo_json():
+    ruta_archivo_json = os.path.join(os.path.dirname(__file__), 'usuarios.json') #no tengo la menor idea de que hace esto, pero hizo que funcione
+    #supuestamente le da una direccion a una variable y de esa forma lo detecta en otro archivo tambien 
 
-        
+    if not os.path.exists(ruta_archivo_json):
+        datos_iniciales = {'usuarios': []}
+        with open(ruta_archivo_json, 'w') as f:
+            json.dump(datos_iniciales, f, indent=4)
+        print(f"Archivo 'usuarios.json' creado en {ruta_archivo_json}")
+    return ruta_archivo_json
+
 def verificar_datos(nombre_usu):
-    try:
-        contenido = open("Base_de_datos/usuarios.json", "r")
-        lineas = contenido.read()
-        contenido.close()
+    ruta_archivo_json = verificar_o_crear_archivo_json()
+    
+    with open(ruta_archivo_json, 'r') as f:
+        datos_usu = json.load(f)
 
-        datos_usu = json.loads(lineas)
-    except:
-        print("error")
-
-    for usuario in datos_usu('usuarios', []):
+    usuario_existente = False
+    for usuario in datos_usu.get('usuarios', []):
         if usuario['nombre'] == nombre_usu:
-            usuario_existente= True 
-        else:
-            usuario_existente= False
+            usuario_existente = True
+
     return usuario_existente, datos_usu
 
 def crear_usuario():
     print("Registro de nuevo usuario")
     nombre = input("Ingrese su nombre de usuario: ")
     contraseña = input("Ingrese su contraseña: ")
-        
-    usuario, datos_de_usuario= verificar_datos(nombre)
+
+    usuario, datos_de_usuario = verificar_datos(nombre)
 
 
     while usuario:
-        print("El nombre de usuario ya existe. Intente con otro nombre de usuario(1) o inicie sesion(2).")
-        opcion = int(input("Ingrese una opcion: "))
+        print("El nombre de usuario ya existe. Intente con otro nombre de usuario (1) o inicie sesión (2).")
+        opcion = int(input())
         if opcion == 1:
             nombre = input("Ingrese su nombre de usuario: ")
             contraseña = input("Ingrese su contraseña: ")
-            usuario, datos_de_usuario= verificar_datos(nombre)
+            usuario, datos_de_usuario = verificar_datos(nombre)
         elif opcion == 2:
             iniciar_sesion()
-            return #para salir de la funcion una vez que se inicia sesion
+            return  # Salir de la función una vez que se inicie sesión
         else:
             print("error")
 
-    #si el usuario no existe, se procede a crear uno nuevo
     nuevo_usuario = {'nombre': nombre, 'contraseña': contraseña}
     datos_de_usuario['usuarios'].append(nuevo_usuario)
 
-    #guardar nuevo usuario en JSON
-    with open('usuarios.json', 'w') as f:
+    with open(verificar_o_crear_archivo_json(), 'w') as f:
         json.dump(datos_de_usuario, f, indent=4)
     
     print("¡Usuario registrado con éxito!")
-    
-
 
 def iniciar_sesion():
     print("Inicio de sesión")
     nombre = input("Ingrese su nombre de usuario: ")
     contraseña = input("Ingrese su contraseña: ")
 
+    ruta_archivo_json = verificar_o_crear_archivo_json()
+
     try:
-        with open('usuarios.json', 'r') as f:
+        with open(ruta_archivo_json, 'r') as f:
             datos_de_usuario = json.load(f)
     except (FileNotFoundError, json.JSONDecodeError):
         print("No hay usuarios registrados o el archivo está corrupto.")
@@ -192,7 +154,7 @@ def iniciar_sesion():
 
     for usuario in datos_de_usuario.get('usuarios', []):
         if usuario['nombre'] == nombre and usuario['contraseña'] == contraseña:
-            print("Bienvenido", nombre, "nuevamente")
+            print(f"Bienvenido {nombre} nuevamente")
             return True
 
     print("Nombre de usuario o contraseña incorrectos.")
@@ -202,7 +164,29 @@ def iniciar_sesion():
     return False
 
 
-'''
+def ingresar_cuenta():
+    menu=True
+    while menu==True:
+        print("1. Registrarse")
+        print("2. Iniciar sesión")
+        print("3. Salir")
+        
+        opcion = input("Seleccione una opción: ")
+        
+        if opcion == '1':
+            crear_usuario()
+        elif opcion == '2':
+            iniciar_sesion()
+        elif opcion == '3':
+            print("Cerrando el sistema...")
+            menu=False
+        else:
+            print("Opción inválida, intente de nuevo.")
+
+
+
+
+
 #FUNCION MENU SECUNDARIO
 
 def menu_secundario():
@@ -226,7 +210,6 @@ def menu_secundario():
                 #inventario() 
                 pass  
             elif op==4:
-                print("Cerrando sesion.")
                 repetir= False
             else:
                 print("Error")
@@ -343,50 +326,11 @@ def ingresar_dias_entrenamiento():
 
 #Funcion rutinas
 
-def mostrar_calendario():
-
-    init(autoreset=True)
-
-    texto = f"""
-    {Fore.BLUE}   ___      _                _            _       
-    {Fore.BLUE}  / __\__ _| | ___ _ __   __| | __ _ _ __(_) ___  
-    {Fore.BLUE} / /  / _` | |/ _ \ '_ \ / _` |/ _` | '__| |/ _ \ 
-    {Fore.BLUE}/ /__| (_| | |  __/ | | | (_| | (_| | |  | | (_) |
-    {Fore.BLUE}\____/\__,_|_|\___|_| |_|\__,_|\__,_|_|  |_|\___/
-                                                            
-    """
-
-    # Imprime el texto
-    print(texto)
-    input()
-
-                                                  
-def mostrar_inventario():
-
-    init(autoreset=True)
-
-    texto = f"""
-    {Fore.BLUE}  _____                      _             _       
-    {Fore.BLUE}  \_   \_ ____   _____ _ __ | |_ __ _ _ __(_) ___  
-    {Fore.BLUE}   / /\/ '_ \ \ / / _ \ '_ \| __/ _` | '__| |/ _ \ 
-    {Fore.BLUE}/\/ /_ | | | \ V /  __/ | | | || (_| | |  | | (_) |
-    {Fore.BLUE}\____/ |_| |_|\_/ \___|_| |_|\__\__,_|_|  |_|\___/ 
-                                                   
-                                                            
-    """
-
-    # Imprime el texto
-    print(texto)
-    input()
-
-                                                  
-
-
-
 def rutinas():
+    import json
 
     try:
-        contenido = open("Base_de_datos/rutinas.json", "r")
+        contenido = open("archivos/rutinas.json", "r")
         lineas = contenido.read()
         contenido.close()
 
@@ -413,7 +357,7 @@ def hacerTuRutina():
     import json
 
     try:
-        contenido = open("Base_de_datos/ejercicios.json", "r")
+        contenido = open("archivos/ejercicios.json", "r")
         lineas = contenido.read()
         contenido.close()
 
@@ -497,4 +441,3 @@ def busqueda_secuencial(lista, dato):
     else:
         return -1
     
-    '''

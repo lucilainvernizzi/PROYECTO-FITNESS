@@ -6,14 +6,14 @@
 # 5TA PANTALLA: CALENDARIO  
 # 6TA PANTALLA: INVENTARIO
 
-
+import os
 import modulo_funciones.core as f
+import os
 
 def main():
+    os.system("cls")    
     f.intro()
     f.menu_principal()
-    f.mostrar_calendario()
-    f.mostrar_inventario()
+    
 
-if __name__=="__main__":
-    main()
+main()
