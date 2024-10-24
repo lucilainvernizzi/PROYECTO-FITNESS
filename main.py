@@ -11,8 +11,10 @@ import modulo_funciones.core as f
 
 
 def main(): 
+    os.system("cls")
     f.intro()
     f.menu_principal()
     
 
-main()
+if __name__=="__main__":
+    main()
