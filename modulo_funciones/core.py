@@ -100,9 +100,7 @@ def mostrar_inst():
 def ejecutar():
     os.system('cls')
     ingresar_cuenta()
-    #definir_calorias()
-    #inventario()
-    #calendario()
+
 
 #FUNCIONES LOGIN
 
@@ -234,7 +232,7 @@ def menu_secundario():
             op= int(input("Ingrese un valor del menu."))
 
             if op==1:
-                #cargar_info_personal()
+                cargar_info_personal()
                 input()
             elif op==2:
                 mostrar_calendario()
@@ -256,14 +254,15 @@ def menu_secundario():
     
     menu_principal()
 
-'''''
+
 #FUNCIONES INGRESO DATOS
+
 def cargar_info_personal():
     nombre = input("Ingrese su nombre: ")
     print("Hola", nombre, "!")
-    print("Necesitamos que cargues los siguientes datos para calcular tu metabolismo basal.")
 
-    edad = input("Ingrese su edad: ")
+
+    print("Necesitamos que cargues los siguientes datos para calcular tu metabolismo basal.")
 
     altura= int(input("Por favor, ingrese su altura en cm: "))
 
@@ -340,7 +339,7 @@ def definir_objetivo() :
     return objetivo
 
 
-
+'''''
 # FUNCIONES CALENDARIO
 
 def ingresar_objetivo():
@@ -401,7 +400,10 @@ def mostrar_inventario():
     print(texto)
     input()
 
-                                                  
+texto_dieta ="""Para bajar de peso, es importante seguir una dieta hipocalórica, equilibrada y rica en nutrientes para asegurarte de perder grasa corporal mientras mantienes la masa muscular. Aquí tienes un plan de alimentación general que puedes adaptar según tus necesidades."""
+texto_definicion = """Una dieta de definición se centra en reducir el porcentaje de grasa corporal mientras se mantiene la masa muscular. Es similar a una dieta de pérdida de peso, pero con un enfoque especial en preservar el músculo. Aquí tienes un plan de alimentación para ayudarte a lograrlo."""
+texto_volumen= """Para aumentar el volumen muscular, es fundamental seguir una dieta hipercalórica, rica en proteínas, carbohidratos y grasas saludables, junto con un entrenamiento adecuado. Aquí tienes un plan general de dieta que puedes adaptar según tus necesidades y preferencias."""
+                                                
 
 '''''
 
@@ -499,13 +501,6 @@ def hacerTuRutina():
 def inventario():
     pass
 
-
-
-
-
-texto_dieta ="""Para bajar de peso, es importante seguir una dieta hipocalórica, equilibrada y rica en nutrientes para asegurarte de perder grasa corporal mientras mantienes la masa muscular. Aquí tienes un plan de alimentación general que puedes adaptar según tus necesidades."""
-texto_definicion = """Una dieta de definición se centra en reducir el porcentaje de grasa corporal mientras se mantiene la masa muscular. Es similar a una dieta de pérdida de peso, pero con un enfoque especial en preservar el músculo. Aquí tienes un plan de alimentación para ayudarte a lograrlo."""
-texto_volumen= """Para aumentar el volumen muscular, es fundamental seguir una dieta hipercalórica, rica en proteínas, carbohidratos y grasas saludables, junto con un entrenamiento adecuado. Aquí tienes un plan general de dieta que puedes adaptar según tus necesidades y preferencias."""
 
 
 
