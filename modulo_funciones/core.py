@@ -106,32 +106,12 @@ def ejecutar():
 
 #FUNCIONES LOGIN
 
-def ingresar_cuenta():
-    menu= True
-    while menu:
-        os.system('cls')
-        print("1. Registrarse")
-        print("2. Iniciar sesión")
-        print("3. Salir")
-
-        opcion = int(input("Seleccione una opción del menu: "))
-
-        if opcion == 1:
-            crear_usuario()
-            input()
-        elif opcion == 2:
-            iniciar_sesion()
-            input()
-        elif opcion == 3:
-            menu_principal()
-            input()
-        else:
-            print("Opción no válida. Inténtelo de nuevo.")
-            opcion = input("Seleccione una opción del menu: ")
-
-
 def verificar_o_crear_archivo_json():
-    ruta_archivo_json = os.path.join(os.path.dirname(__file__), 'usuarios.json') #supuestamente le da una direccion a una variable y de esa forma lo detecta en otro archivo tambien 
+    ruta_proyecto = os.path.join(os.path.dirname(__file__), '..') 
+    ruta_carpeta = os.path.join(ruta_proyecto, 'base_de_datos') 
+
+    # Ruta completa al archivo usuarios.json
+    ruta_archivo_json = os.path.join(ruta_carpeta, 'usuarios.json')
 
     if not os.path.exists(ruta_archivo_json):
         datos_iniciales = {'usuarios': []}
@@ -154,13 +134,12 @@ def verificar_datos(nombre_usu):
     return usuario_existente, datos_usu
 
 def crear_usuario():
-    os.system('cls')
     print("Registro de nuevo usuario")
-    print("")
     nombre = input("Ingrese su nombre de usuario: ")
     contraseña = input("Ingrese su contraseña: ")
 
     usuario, datos_de_usuario = verificar_datos(nombre)
+
 
     while usuario:
         print("El nombre de usuario ya existe. Intente con otro nombre de usuario (1) o inicie sesión (2).")
@@ -182,13 +161,9 @@ def crear_usuario():
         json.dump(datos_de_usuario, f, indent=4)
     
     print("¡Usuario registrado con éxito!")
-    menu_secundario()
-    input()
 
 def iniciar_sesion():
-    os.system('cls')
     print("Inicio de sesión")
-    print("")
     nombre = input("Ingrese su nombre de usuario: ")
     contraseña = input("Ingrese su contraseña: ")
 
@@ -204,8 +179,6 @@ def iniciar_sesion():
     for usuario in datos_de_usuario.get('usuarios', []):
         if usuario['nombre'] == nombre and usuario['contraseña'] == contraseña:
             print(f"Bienvenido {nombre} nuevamente")
-            menu_secundario()
-            input()
             return True
 
     print("Nombre de usuario o contraseña incorrectos.")
@@ -213,6 +186,26 @@ def iniciar_sesion():
     if registrarse.lower() == 's':
         crear_usuario()
     return False
+
+
+def ingresar_cuenta():
+    menu=True
+    while menu==True:
+        print("1. Registrarse")
+        print("2. Iniciar sesión")
+        print("3. Salir")
+        
+        opcion = input("Seleccione una opción: ")
+        
+        if opcion == '1':
+            crear_usuario()
+        elif opcion == '2':
+            iniciar_sesion()
+        elif opcion == '3':
+            print("Cerrando el sistema...")
+            menu=False
+        else:
+            print("Opción inválida, intente de nuevo.")
 
 
 #FUNCION MENU SECUNDARIO
