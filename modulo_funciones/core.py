@@ -25,6 +25,13 @@ def intro():
 def menu_principal():
     repetir = True
     while repetir:
+        os.system("cls")
+
+        print("\033[0;36m")
+        print("\033[4;15HBienvenidos a la App Fitness")
+        print("\033[5;15HProgramacion I")
+        print("\033[0;37m")
+
         print("1. Equipo")
         print("2. Instrucciones del programa")
         print("3. Ejecutar")
