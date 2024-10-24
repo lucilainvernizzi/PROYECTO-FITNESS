@@ -1,21 +1,37 @@
 #FUNCIONES MENU PRINCIPAL
 import os
 import json
+from colorama import init, Fore, Back, Style
 
 
 def intro():
-    
-    print("\033[0;36m]")
-    print("\033[4;15HBienvenidos a la App Fitness")
-    print("\033[5;15HProgramacion I")
 
-    print("\033[0;37m]")
+    init(autoreset=True)
+
+    texto = f"""
+    {Fore.BLUE}    ___    ____  ____     _________________   __________________
+    {Fore.BLUE}   /   |  / __ \/ __ \   / ____/  _/_  __/ | / / ____/ ___/ ___/
+    {Fore.BLUE}  / /| | / /_/ / /_/ /  / /_   / /  / / /  |/ / __/  \__ \\__ \ 
+    {Fore.BLUE} / ___ |/ ____/ ____/  / __/ _/ /  / / / /|  / /___ ___/ /__/ / 
+    {Fore.BLUE}/_/  |_/_/   /_/      /_/   /___/ /_/ /_/ |_/_____//____/____/  
+                                                            
+    """
+
+    # Imprime el texto
+    print(texto)
     input()
 
 def menu_principal():
     repetir = True
     while repetir:
         os.system("cls")
+
+        
+        print("\033[0;36m]")
+        print("\033[4;15HBienvenidos a la App Fitness")
+        print("\033[5;15HProgramacion I")
+        print("\033[0;37m]")
+        
         print("1. Equipo")
         print("2. Instrucciones del programa")
         print("3. Ejecutar")
@@ -45,7 +61,10 @@ def menu_principal():
 
 
 def mostrar_equipo():
+    os.system('cls')
+    print("")
     print("Bienvenido! Esta App fue creada por el equipo de:")
+    print("")
     print("Lucila Invernizzi, LU: 1201347")
     print("Juan Ignacio Fernández Noceda, LU: ")
     print("Mateo Castellanos, LU:")
@@ -55,27 +74,30 @@ def mostrar_equipo():
     print("")
 
 def mostrar_inst():
-    print("""Bienvenido a la App de recetas Fitness y nutritivas! Este programa te permitira encontrar el mejor plan de alimentacion y entrenamiento. Con la carga de datos personales del usuario, sera evaluada la mejor ruta para alcanzar sus metas.")
-    Un nuevo estilo de vida saludable esta ahora en tus manos! Para utilizar el programa, solo debes seguir las siguientes instrucciones""")
-
+    os.system('cls')
+    print("""App de recetas Fitness y nutritivas! Este programa te permitira encontrar el mejor plan de alimentacion y entrenamiento.""")
+    print("")
+    print("""Con la carga de datos personales del usuario, sera evaluada la mejor ruta para alcanzar sus metas.")
+    Un nuevo estilo de vida saludable esta ahora en tus manos! Para utilizar el programa, solo debes seguir las siguientes instrucciones: """)
+    print("")
     print("""1. Registro e Ingreso de datos personales. Deberas crear una cuenta con tu nombre de usuario y contrasena. Luego se solictara que ingreses datos personales como tu altura, peso, edad, genero y nivel de actividad fisica""")
-    
+    print("")
     print("2. Determinar tus objetivos. ")
     print("Determinar tus objetivos nutricionales, como bajar de peso o ganar masa mucualar.")
-    
+    print("")
     print("3. Recibir tu plan de alimentacion y entrenamiento personalizado.")
     print("El programa ")
-
+    print("")
     print("""4. Comenzar tu plan!. La constancia y disciplina son elementos clave para que tus objetivos se vuelvan realidad. Podras visualizar los pasos que debes seguir en nuestra ventana de calendario. """)
-   
+    print("")
     print("5. !")
     print("Dentro de la App podras encontrar un inventario digital de tu propio hogar que nos permitira crear recetas en base a los alimentos con los que cuentas. ")
 
 
 def ejecutar():
+    os.system('cls')
     ingresar_cuenta()
-    menu_secundario()
-    definir_calorias()
+    #definir_calorias()
     #inventario()
     #calendario()
 
@@ -84,6 +106,7 @@ def ejecutar():
 def ingresar_cuenta():
     menu= True
     while menu:
+        os.system('cls')
         print("1. Registrarse")
         print("2. Iniciar sesión")
         print("3. Salir")
@@ -92,16 +115,18 @@ def ingresar_cuenta():
 
         if opcion == 1:
             crear_usuario()
+            input()
         elif opcion == 2:
             iniciar_sesion()
+            input()
         elif opcion == 3:
-            print("Cerrando sesion.")
-            menu= False
+            menu_principal()
+            input()
         else:
             print("Opción no válida. Inténtelo de nuevo.")
             opcion = input("Seleccione una opción del menu: ")
-        
 
+        
 def verificar_datos(nombre_usu):
     try:
         contenido = open("Base_de_datos/usuarios.json", "r")
@@ -200,6 +225,7 @@ def menu_secundario():
                 #inventario() 
                 pass  
             elif op==4:
+                print("Cerrando sesion.")
                 repetir= False
             else:
                 print("Error")
@@ -320,7 +346,7 @@ def rutinas():
     import json
 
     try:
-        contenido = open("archivos/rutinas.json", "r")
+        contenido = open("Base_de_datos/rutinas.json", "r")
         lineas = contenido.read()
         contenido.close()
 
@@ -347,7 +373,7 @@ def hacerTuRutina():
     import json
 
     try:
-        contenido = open("archivos/ejercicios.json", "r")
+        contenido = open("Base_de_datos/ejercicios.json", "r")
         lineas = contenido.read()
         contenido.close()
 

@@ -8,12 +8,10 @@
 
 
 import modulo_funciones.core as f
-import os
-
 
 def main():
     f.intro()
     f.menu_principal()
-    
 
-main()
+if __name__=="__main__":
+    main()
