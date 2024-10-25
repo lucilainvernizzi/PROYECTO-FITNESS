@@ -13,3 +13,7 @@ edad = ""
 
 sexo = ""
 
+cantidad_ejercicio = ""
+
+calorias = ""
+

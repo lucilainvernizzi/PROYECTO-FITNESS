@@ -49,20 +49,26 @@ def menu_principal():
                 print("Por favor, ingrese un número válido.")
             
             if op==1:
+                os.system('cls')
                 mostrar_equipo()
                 input()
+                
             elif op==2:
+                os.system('cls')
                 mostrar_inst()
                 input()
+                
             elif op==3:
                 ejecutar()
-                input()
+                
             elif op==4:
+                os.system('cls')
                 print("El programa ha finalizado.")
                 repetir= False
             else:
+                os.system('cls')
                 print("error")
-            input()
+                input()
 
 def mostrar_equipo():
     os.system('cls')
@@ -103,6 +109,8 @@ def ejecutar():
     ingresar_cuenta()
    
 
+
+
 #FUNCIONES LOGIN
 
 def ingresar_cuenta():
@@ -117,13 +125,13 @@ def ingresar_cuenta():
 
         if opcion == 1:
             crear_usuario()
-            input()
+            
         elif opcion == 2:
             iniciar_sesion()
-            input()
+        
         elif opcion == 3:
-            menu_principal()
-            input()
+            os.system('cls')
+            menu = False
         else:
             print("Opción no válida. Inténtelo de nuevo.")
             opcion = input("Seleccione una opción del menu: ")
@@ -238,15 +246,18 @@ def menu_secundario():
 
             if op==1:
                 datos_usuario()
+                os.system("cls")
+                definir_objetivo()
                 input()
             elif op==2:
                 mostrar_calendario()
                 rutinas()
                 input()
             elif op==3:
+                os.system("cls")
                 mostrar_inventario()
-                #inventario() 
-                input()
+                os.system("cls")
+                inventario() 
             elif op==4:
                 print("Cerrando sesion.")
                 input()
@@ -263,16 +274,14 @@ def menu_secundario():
 #FUNCIONES INGRESO DATOS
 def cargar_info_personal():
 
-    print("Necesitamos que cargues los siguientes datos para calcular tu metabolismo basal.")
-    print(g.datos_de_usuario)
+    print("Necesitamos que cargues los siguientes datos para calcular tus calorias de mantenimiento.")
+    
 
     g.altura= int(input("Por favor, ingrese su altura en cm: "))
 
     g.peso = int(input("Ingrese su peso en KG: "))
 
     g.edad = int(input("Ingrese su edad: "))
-
-
     bandera = True
     while bandera:
         g.sexo = input("¿Cuál es su sexo? (H/M): ")
@@ -284,24 +293,30 @@ def cargar_info_personal():
             bandera = False
         else:
             print("Sexo no válido. Por favor, ingrese H o M.")
+            
+    g.cantidad_ejercicio = int(input("Ingrese la cantidad de ejercicio que haga durante la semana; si no hace ejercicio ponga 1, si hace 1-3 veces a la semana ingrese 2, si hace 3-5 veces a la semana ingrese 3, si hace 6-7 veces a la semana ingrese 4, si hace 2 veces al dia o mas ingrese 5: "))
+ 
 
-    return g.altura, g.peso, g.edad, g.sexo
+    return g.altura, g.peso, g.edad, g.sexo, g.cantidad_ejercicio
 
 
 def datos_usuario():
     
     if len(g.datos_de_usuario) > 1:
         print("Bienvenido!")
-        #si ya esta registrados mostrar datos en pantalla y dar la opcion de actualizarlos
         print(g.datos_de_usuario)
+        
+        #si ya esta registrados mostrar datos en pantalla y dar la opcion de actualizarlos
     else:
         #si es usuario nuevo:
-        altura_usuario, peso_usuario, edad_usuario, sexo_usuario = cargar_info_personal()
-        calculo_calorias = calcular_metabolismo_basal(altura_usuario, peso_usuario, edad_usuario, sexo_usuario)
+        
+        altura_usuario, peso_usuario, edad_usuario, sexo_usuario, cantidad_ejercicio = cargar_info_personal()
+        calculo_calorias = calcular_calorias(altura_usuario, peso_usuario, edad_usuario, sexo_usuario, cantidad_ejercicio)
         #objetivo_usuario= definir_objetivo()
         #cargar datos en el archivo json usuarios
 
         ruta_archivo_json = verificar_o_crear_archivo_json()
+        g.calorias = calculo_calorias
 
       
         with open(ruta_archivo_json, 'r') as f:
@@ -313,7 +328,8 @@ def datos_usuario():
             "peso" : peso_usuario,
             "edad" : edad_usuario, 
             "sexo" : sexo_usuario, 
-            "calorias" : calculo_calorias
+            "calorias" : calculo_calorias,
+            "cantidad_ejercicio" : cantidad_ejercicio
 
         }
         usuarios[g.nombre].update(agregar_datos)
@@ -321,70 +337,123 @@ def datos_usuario():
         with open(ruta_archivo_json, 'w') as f:
             json.dump(usuarios, f, indent=4)
 
-        print("El numero de calorias que debe ingerir por dia son:", calculo_calorias, "kcal")
-        print("Ahora que conocemos su metabolismo basal y su objetivo... Podemos comenzar a formular su plan!")
-
     return  
 
 
 
-def calcular_metabolismo_basal(altura, peso, edad, sexo):
+def calcular_calorias (altura, peso, edad, sexo, cantidad_ejercicio):
     if sexo == "H":
         calorias = (10 * peso) + (6.25 * altura) - (5 * edad) + 5
+        
+        bandera=True
+        while bandera==True:
+            if cantidad_ejercicio == 1:
+                calorias = calorias * 1.2
+                bandera=False
+            elif cantidad_ejercicio == 2:
+                calorias = calorias * 1.375
+                bandera=False
+            elif cantidad_ejercicio == 3:
+                calorias = calorias * 1.55
+                bandera=False
+            elif cantidad_ejercicio == 4:
+                calorias = calorias * 1.725
+                bandera=False
+            elif cantidad_ejercicio == 5:
+                calorias = calorias * 1.9
+                bandera=False
+            else:
+                print("")
+                cantidad_ejercicio = int(input("Por favor ingrese solo un numero del 1 al 5: "))
+                print("")
+            
+        
         return calorias
     else:
         calorias = (10 * peso) + (6.25 * altura) - (5 * edad) - 161
+
+        bandera=True
+        while bandera==True:
+            if cantidad_ejercicio == 1:
+                calorias = calorias * 1.2
+                bandera=False
+            elif cantidad_ejercicio == 2:
+                calorias = calorias * 1.375
+                bandera=False
+            elif cantidad_ejercicio == 3:
+                calorias = calorias * 1.55
+                bandera=False
+            elif cantidad_ejercicio == 4:
+                calorias = calorias * 1.725
+                bandera=False
+            elif cantidad_ejercicio == 5:
+                calorias = calorias * 1.9
+                bandera=False
+            else:
+                print("")
+                cantidad_ejercicio = int(input("Por favor ingrese solo un numero del 1 al 5: "))
+                print("")
+
         return calorias
 
+    
 
 
 
 def definir_objetivo() :
     print("¿Cual es tu objetivo? ")
-    print("1. Volumen")
-    print("2. Bajar de peso")
-    print("3. Definicion")
-    print("4. No tengo un objetivo definido")
+    print("1. Ganar musculo")
+    print("2. Quemar grasa")
+    print("3. Mantenimiento")
+    print("")
+    print(texto_aumento_musculo)
+    print("")
+    print(texto_quemar_grasa)
+    print("")
+    print(texto_mantenimiento)
+    print("")
     
-    try:
-        objetivo = int(input("Seleccione del menu"))
-        if objetivo ==1:
-            print (texto_volumen)
-        elif objetivo == 2:
-            print(texto_dieta)  
-        elif objetivo== 3:
-            print(texto_definicion)
-        elif objetivo==4:
-            print("No hay problema, solo sigue comiendo saludable y haciendo ejercicio.")
-        else: 
-            print("El valor ingresado es inválido, por favor intentelo de nuevo")
-            objetivo = int(input("Seleccione del menu"))
-    except: 
-        print("Error")
-        input()    
+    bandera=True
+    while bandera:
+        try:
+            objetivo = int(input("Seleccione del menu: "))
+            if objetivo == 1:
+                print (texto_aumento_musculo)
+                if g.sexo == "H":
+                    g.calorias += 500
+                elif g.sexo == "M":
+                    g.calorias += 250
+                print("Estas son tu calorias para tu volumen: ", g.calorias)
+                bandera=False
+
+
+            elif objetivo == 2:
+                print(texto_quemar_grasa)  
+                if g.sexo == "H":
+                    g.calorias -= 800
+                elif g.sexo == "M":
+                    g.calorias -= 400
+                print("Estas son tus calorias para tu definicion: ", g.calorias)
+                bandera=False
+            
+            elif objetivo == 3:
+                print(texto_mantenimiento)
+                print("Para mantener tu peso debes seguir comiendo las mismas calorias de mantenimiento: ", g.calorias)
+                bandera=False
+
+            else: 
+                print("El valor ingresado es inválido, por favor intentelo de nuevo")
+                objetivo = int(input("Seleccione del menu"))
+
+        except: 
+            print("Error")
+            input()    
     return objetivo
 
 
 
 # FUNCIONES CALENDARIO
 
-def ingresar_objetivo():
-            
-    print("1. Ganar musculo.")
-    print("2. Perder grasa")
-    print("3. Ambas")
-    print("4. No tengo un objetivo definido.")
-
-    objetivo= int(input("Ingrese su numero de objetivo: "))
-    return objetivo
-
-def ingresar_dias_entrenamiento():
-   dias = int(input("Ingrese cuantos dias desea entrenar por semana: "))
-   while dias<1 or dias>7:
-       print("Error. La cantidad de dias no es valida")
-       dias = int(input("Ingrese cuantos dias desea entrenar por semana: "))           
-           
-   return dias
 
    
  
@@ -520,16 +589,44 @@ def hacerTuRutina():
 
 # FUNCIONES INVENTARIO/RECETAS
 def inventario():
-    pass
+    
+    print("""Esta función nos permite almacenar las comidas que tengas a disponibilidad, para esto
+           vas a tener que buscarlas dentro de nuestro diccionario de comidas y luego escribir si alguna
+          de las comidas mostradas a continuacion esta a tu alcance""")
+    print("Comidas disponibles:")
+
+    with open('Base_de_datos/comidas.json','r') as f:
+        comidas = json.load(f)
+    
+    for comida in comidas:
+        print(comida)
+
+    
+    input()
+
+
+    
+        
+
+
+
+    
+    
+        
+    
+    
+    
 
 
 
 
 
-texto_dieta ="""Para bajar de peso, es importante seguir una dieta hipocalórica, equilibrada y rica en nutrientes para asegurarte de perder grasa corporal mientras mantienes la masa muscular. Aquí tienes un plan de alimentación general que puedes adaptar según tus necesidades."""
-texto_definicion = """Una dieta de definición se centra en reducir el porcentaje de grasa corporal mientras se mantiene la masa muscular. Es similar a una dieta de pérdida de peso, pero con un enfoque especial en preservar el músculo. Aquí tienes un plan de alimentación para ayudarte a lograrlo."""
-texto_volumen= """Para aumentar el volumen muscular, es fundamental seguir una dieta hipercalórica, rica en proteínas, carbohidratos y grasas saludables, junto con un entrenamiento adecuado. Aquí tienes un plan general de dieta que puedes adaptar según tus necesidades y preferencias."""
 
+
+
+texto_quemar_grasa = """|2_ Una dieta de definición se centra en reducir el porcentaje de grasa corporal mientras se mantiene la masa muscular. Es una dieta de pérdida de peso, pero con un enfoque especial en preservar el músculo."""
+texto_aumento_musculo= """|1_ Para aumentar el volumen muscular, es fundamental seguir una dieta hipercalórica que puede variar su riqueza en proteínas, carbohidratos y grasas saludables, junto con un entrenamiento adecuado."""
+texto_mantenimiento= """|3_ Ya sabiendo nuestras calorias de mantenimiento, podemos con esto mantener nuestro peso."""
 
 
 
