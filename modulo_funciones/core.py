@@ -2,6 +2,8 @@
 import os
 import json
 from colorama import init, Fore, Back, Style
+import modulo_funciones.GLOBAL as g
+
 
 
 def intro():
@@ -62,7 +64,6 @@ def menu_principal():
                 print("error")
             input()
 
-
 def mostrar_equipo():
     os.system('cls')
     print("")
@@ -100,7 +101,7 @@ def mostrar_inst():
 def ejecutar():
     os.system('cls')
     ingresar_cuenta()
-
+   
 
 #FUNCIONES LOGIN
 
@@ -136,9 +137,9 @@ def verificar_o_crear_archivo_json():
     ruta_archivo_json = os.path.join(ruta_carpeta, 'usuarios.json')
 
     if not os.path.exists(ruta_archivo_json):
-        datos_iniciales = {'usuarios': []}
+        
         with open(ruta_archivo_json, 'w') as f:
-            json.dump(datos_iniciales, f, indent=4)
+            json.dump({}, f, indent=4)
         print(f"Archivo 'usuarios.json' creado en {ruta_archivo_json}")
     return ruta_archivo_json
 
@@ -146,42 +147,46 @@ def verificar_datos(nombre_usu):
     ruta_archivo_json = verificar_o_crear_archivo_json()
     
     with open(ruta_archivo_json, 'r') as f:
-        datos_usu = json.load(f)
+        usuarios = json.load(f)
 
-    usuario_existente = False
-    for usuario in datos_usu.get('usuarios', []):
-        if usuario['nombre'] == nombre_usu:
-            usuario_existente = True
-
-    return usuario_existente, datos_usu
+    
+    if nombre_usu in usuarios:
+        usuario_existente =  True 
+        return usuario_existente, usuarios.get(nombre_usu)
+    else:
+        usuario_existente = False
+        return usuario_existente, {}
+    
 
 def crear_usuario():
     os.system('cls')
     print("Registro de nuevo usuario")
     print("")
-    nombre = input("Ingrese su nombre de usuario: ")
-    contraseña = input("Ingrese su contraseña: ")
+    g.nombre = input("Ingrese su nombre de usuario: ")
+    g.contraseña = input("Ingrese su contraseña: ")
 
-    usuario, datos_de_usuario = verificar_datos(nombre)
-
-    while usuario:
-        print("El nombre de usuario ya existe. Intente con otro nombre de usuario (1) o inicie sesión (2).")
-        opcion = int(input())
+    g.usuario_existente, g.datos_de_usuario = verificar_datos(g.nombre)
+    
+    while g.usuario_existente:  # Cambié g.usuario a g.usuario_existente
+        opcion = int(input("El nombre de usuario ya existe. Intente con otro nombre de usuario (1) o inicie sesión (2)."))
         if opcion == 1:
-            nombre = input("Ingrese su nombre de usuario: ")
-            contraseña = input("Ingrese su contraseña: ")
-            usuario, datos_de_usuario = verificar_datos(nombre)
+            g.nombre = input("Ingrese su nombre de usuario: ")
+            g.contraseña = input("Ingrese su contraseña: ")
+            g.usuario_existente, g.datos_de_usuario = verificar_datos(g.nombre)
         elif opcion == 2:
             iniciar_sesion()
             return  # Salir de la función una vez que se inicie sesión
         else:
-            print("error")
+            print("Error. Opción no válida.")
 
-    nuevo_usuario = {'nombre': nombre, 'contraseña': contraseña}
-    datos_de_usuario['usuarios'].append(nuevo_usuario)
-
-    with open(verificar_o_crear_archivo_json(), 'w') as f:
-        json.dump(datos_de_usuario, f, indent=4)
+    # Agregar al archivo json un diccionario de datos como valor de la clave con el nombre del usuario
+    nuevo_usuario = {'contraseña': g.contraseña}  
+   
+    with open(verificar_o_crear_archivo_json(), 'r+') as f:
+        usuarios = json.load(f)
+        usuarios[g.nombre] = nuevo_usuario  # Agregar el nuevo usuario al diccionario
+        f.seek(0)  # Mover el cursor al inicio del archivo
+        json.dump(usuarios, f, indent=4)  # Guardar el diccionario actualizado
     
     print("¡Usuario registrado con éxito!")
     menu_secundario()
@@ -191,25 +196,25 @@ def iniciar_sesion():
     os.system('cls')
     print("Inicio de sesión")
     print("")
-    nombre = input("Ingrese su nombre de usuario: ")
-    contraseña = input("Ingrese su contraseña: ")
+    g.nombre = input("Ingrese su nombre de usuario: ")
+    g.contraseña = input("Ingrese su contraseña: ")
 
     ruta_archivo_json = verificar_o_crear_archivo_json()
 
     try:
         with open(ruta_archivo_json, 'r') as f:
-            datos_de_usuario = json.load(f)
+            usuarios = json.load(f)
     except (FileNotFoundError, json.JSONDecodeError):
         print("No hay usuarios registrados o el archivo está corrupto.")
         return False
 
-    for usuario in datos_de_usuario.get('usuarios', []):
-        if usuario['nombre'] == nombre and usuario['contraseña'] == contraseña:
-            print(f"Bienvenido {nombre} nuevamente")
-            menu_secundario()
-            input()
-            return True
-
+    if g.nombre in usuarios and usuarios[g.nombre]['contraseña'] == g.contraseña:
+        print(f"Bienvenido {g.nombre} nuevamente")
+        g.usuario_existente, g.datos_de_usuario = verificar_datos(g.nombre)
+        menu_secundario()
+        input()
+        return True
+    
     print("Nombre de usuario o contraseña incorrectos.")
     registrarse = input("¿Desea registrarse? (s/n): ")
     if registrarse.lower() == 's':
@@ -232,11 +237,11 @@ def menu_secundario():
             op= int(input("Ingrese un valor del menu."))
 
             if op==1:
-                cargar_info_personal()
+                datos_usuario()
                 input()
             elif op==2:
                 mostrar_calendario()
-                #sugerir_rutinas()
+                rutinas()
                 input()
             elif op==3:
                 mostrar_inventario()
@@ -256,61 +261,82 @@ def menu_secundario():
 
 
 #FUNCIONES INGRESO DATOS
-
 def cargar_info_personal():
-    nombre = input("Ingrese su nombre: ")
-    print("Hola", nombre, "!")
-
 
     print("Necesitamos que cargues los siguientes datos para calcular tu metabolismo basal.")
+    print(g.datos_de_usuario)
 
-    altura= int(input("Por favor, ingrese su altura en cm: "))
+    g.altura= int(input("Por favor, ingrese su altura en cm: "))
 
-    peso = int(input("Ingrese su peso en KG: "))
+    g.peso = int(input("Ingrese su peso en KG: "))
 
-    edad = int(input("Ingrese su edad: "))
+    g.edad = int(input("Ingrese su edad: "))
 
 
-    sexo= True
-    while sexo:
-        sexo = input("¿Cuál es su sexo? (H/M): ")
-        if sexo.upper() == "H":
-            sexo= "H"
-        elif sexo.upper() == "M":
-            sexo= "M"
+    bandera = True
+    while bandera:
+        g.sexo = input("¿Cuál es su sexo? (H/M): ")
+        if g.sexo.upper() == "H":
+            g.sexo= "H"
+            bandera = False
+        elif g.sexo.upper() == "M":
+            g.sexo= "M"
+            bandera = False
         else:
             print("Sexo no válido. Por favor, ingrese H o M.")
-            sexo = input("¿Cuál es su sexo? (H/M): ")
 
-    return altura, peso, edad, sexo, nombre
-
-
-def calcular_metabolismo_basal(sexo, altura, peso, edad):
-    if sexo == "H":
-        return (10 * peso) + (6.25 * altura) - (5 * edad) + 5
-    elif sexo == "M":
-        return (10 * peso) + (6.25 * altura) - (5 * edad) - 161
+    return g.altura, g.peso, g.edad, g.sexo
 
 
-
-def definir_calorias():
-    nombre_usu= "hola"
-
-    usuario_existente=verificar_datos(nombre_usu)
-
-    if usuario_existente:
-        print("Bienvenido", "!")
+def datos_usuario():
+    
+    if len(g.datos_de_usuario) > 1:
+        print("Bienvenido!")
         #si ya esta registrados mostrar datos en pantalla y dar la opcion de actualizarlos
+        print(g.datos_de_usuario)
     else:
-    #si es usuario nuevo:
+        #si es usuario nuevo:
         altura_usuario, peso_usuario, edad_usuario, sexo_usuario = cargar_info_personal()
         calculo_calorias = calcular_metabolismo_basal(altura_usuario, peso_usuario, edad_usuario, sexo_usuario)
-        objetivo_usuario= definir_objetivo()
-    #cargar datos en el archivo json usuarios
+        #objetivo_usuario= definir_objetivo()
+        #cargar datos en el archivo json usuarios
+
+        ruta_archivo_json = verificar_o_crear_archivo_json()
+
+      
+        with open(ruta_archivo_json, 'r') as f:
+            usuarios = json.load(f)
+        
+
+        agregar_datos = {
+            "altura" : altura_usuario, 
+            "peso" : peso_usuario,
+            "edad" : edad_usuario, 
+            "sexo" : sexo_usuario, 
+            "calorias" : calculo_calorias
+
+        }
+        usuarios[g.nombre].update(agregar_datos)
+
+        with open(ruta_archivo_json, 'w') as f:
+            json.dump(usuarios, f, indent=4)
+
         print("El numero de calorias que debe ingerir por dia son:", calculo_calorias, "kcal")
         print("Ahora que conocemos su metabolismo basal y su objetivo... Podemos comenzar a formular su plan!")
 
-    return calculo_calorias, objetivo_usuario
+    return  
+
+
+
+def calcular_metabolismo_basal(altura, peso, edad, sexo):
+    if sexo == "H":
+        calorias = (10 * peso) + (6.25 * altura) - (5 * edad) + 5
+        return calorias
+    else:
+        calorias = (10 * peso) + (6.25 * altura) - (5 * edad) - 161
+        return calorias
+
+
 
 
 def definir_objetivo() :
@@ -339,7 +365,7 @@ def definir_objetivo() :
     return objetivo
 
 
-'''''
+
 # FUNCIONES CALENDARIO
 
 def ingresar_objetivo():
@@ -361,8 +387,7 @@ def ingresar_dias_entrenamiento():
    return dias
 
    
-''' 
-#Funcion rutinas
+ 
 
 def mostrar_calendario():
 
@@ -400,13 +425,9 @@ def mostrar_inventario():
     print(texto)
     input()
 
-texto_dieta ="""Para bajar de peso, es importante seguir una dieta hipocalórica, equilibrada y rica en nutrientes para asegurarte de perder grasa corporal mientras mantienes la masa muscular. Aquí tienes un plan de alimentación general que puedes adaptar según tus necesidades."""
-texto_definicion = """Una dieta de definición se centra en reducir el porcentaje de grasa corporal mientras se mantiene la masa muscular. Es similar a una dieta de pérdida de peso, pero con un enfoque especial en preservar el músculo. Aquí tienes un plan de alimentación para ayudarte a lograrlo."""
-texto_volumen= """Para aumentar el volumen muscular, es fundamental seguir una dieta hipercalórica, rica en proteínas, carbohidratos y grasas saludables, junto con un entrenamiento adecuado. Aquí tienes un plan general de dieta que puedes adaptar según tus necesidades y preferencias."""
-                                                
+                                                  
 
-'''''
-
+#RUTINAS
 def rutinas():
 
     try:
@@ -505,6 +526,13 @@ def inventario():
 
 
 
+texto_dieta ="""Para bajar de peso, es importante seguir una dieta hipocalórica, equilibrada y rica en nutrientes para asegurarte de perder grasa corporal mientras mantienes la masa muscular. Aquí tienes un plan de alimentación general que puedes adaptar según tus necesidades."""
+texto_definicion = """Una dieta de definición se centra en reducir el porcentaje de grasa corporal mientras se mantiene la masa muscular. Es similar a una dieta de pérdida de peso, pero con un enfoque especial en preservar el músculo. Aquí tienes un plan de alimentación para ayudarte a lograrlo."""
+texto_volumen= """Para aumentar el volumen muscular, es fundamental seguir una dieta hipercalórica, rica en proteínas, carbohidratos y grasas saludables, junto con un entrenamiento adecuado. Aquí tienes un plan general de dieta que puedes adaptar según tus necesidades y preferencias."""
+
+
+
+
 def busqueda_secuencial(lista, dato):
     i = 0
     while i < len(lista) and lista[i] != dato:
@@ -514,4 +542,4 @@ def busqueda_secuencial(lista, dato):
     else:
         return -1
     
-    '''
+
