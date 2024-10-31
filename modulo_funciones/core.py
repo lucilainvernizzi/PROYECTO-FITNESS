@@ -37,7 +37,6 @@ def menu_principal():
         print("2. Instrucciones del programa")
         print("3. Ejecutar")
         print("4. Salir")
-        #print("{0:4}{1:4}{3:4}{4:4}".format(a, b, c, d))
 
         opcion_valida = False  # Variable para controlar la validez de la opción
         while not opcion_valida:  # Mientras la opción no sea válida
@@ -48,27 +47,24 @@ def menu_principal():
             except ValueError:
                 print("Por favor, ingrese un número válido.")
             
-            if op==1:
-                os.system('cls')
-                mostrar_equipo()
-                input()
+        if op==1:
+            mostrar_equipo()
+            input()
                 
-            elif op==2:
-                os.system('cls')
-                mostrar_inst()
-                input()
+        elif op==2:
+            mostrar_inst()
+            input()
                 
-            elif op==3:
-                ejecutar()
+        elif op==3:
+            ejecutar()
+            input()
                 
-            elif op==4:
-                os.system('cls')
-                print("El programa ha finalizado.")
-                repetir= False
-            else:
-                os.system('cls')
-                print("error")
-                input()
+        elif op==4:
+            print("El programa ha finalizado.")
+            repetir= False
+        else:
+            print("error")
+            input()
 
 def mostrar_equipo():
     os.system('cls')
@@ -107,9 +103,6 @@ def mostrar_inst():
 def ejecutar():
     os.system('cls')
     ingresar_cuenta()
-   
-
-
 
 #FUNCIONES LOGIN
 
@@ -125,17 +118,15 @@ def ingresar_cuenta():
 
         if opcion == 1:
             crear_usuario()
-            
+            input()
         elif opcion == 2:
             iniciar_sesion()
-        
+            input()
         elif opcion == 3:
-            os.system('cls')
             menu = False
         else:
             print("Opción no válida. Inténtelo de nuevo.")
             opcion = input("Seleccione una opción del menu: ")
-
 
 def verificar_o_crear_archivo_json():
     ruta_proyecto = os.path.join(os.path.dirname(__file__), '..') 
@@ -165,7 +156,6 @@ def verificar_datos(nombre_usu):
         usuario_existente = False
         return usuario_existente, {}
     
-
 def crear_usuario():
     os.system('cls')
     print("Registro de nuevo usuario")
@@ -183,7 +173,6 @@ def crear_usuario():
             g.usuario_existente, g.datos_de_usuario = verificar_datos(g.nombre)
         elif opcion == 2:
             iniciar_sesion()
-            return  # Salir de la función una vez que se inicie sesión
         else:
             print("Error. Opción no válida.")
 
@@ -197,8 +186,8 @@ def crear_usuario():
         json.dump(usuarios, f, indent=4)  # Guardar el diccionario actualizado
     
     print("¡Usuario registrado con éxito!")
-    menu_secundario()
     input()
+    menu_secundario()
 
 def iniciar_sesion():
     os.system('cls')
@@ -212,17 +201,18 @@ def iniciar_sesion():
     try:
         with open(ruta_archivo_json, 'r') as f:
             usuarios = json.load(f)
-    except (FileNotFoundError, json.JSONDecodeError):
+    except (FileNotFoundError, json.JSONDecodeError): 
         print("No hay usuarios registrados o el archivo está corrupto.")
         return False
 
     if g.nombre in usuarios and usuarios[g.nombre]['contraseña'] == g.contraseña:
-        print(f"Bienvenido {g.nombre} nuevamente")
+        print(f"Bienvenido/a {g.nombre} nuevamente")
         g.usuario_existente, g.datos_de_usuario = verificar_datos(g.nombre)
-        menu_secundario()
         input()
+        menu_secundario()
         return True
     
+    os.system('cls')
     print("Nombre de usuario o contraseña incorrectos.")
     registrarse = input("¿Desea registrarse? (s/n): ")
     if registrarse.lower() == 's':
@@ -246,7 +236,6 @@ def menu_secundario():
 
             if op==1:
                 datos_usuario()
-                os.system("cls")
                 definir_objetivo()
                 input()
             elif op==2:
@@ -254,13 +243,11 @@ def menu_secundario():
                 rutinas()
                 input()
             elif op==3:
-                os.system("cls")
                 mostrar_inventario()
-                os.system("cls")
-                inventario() 
+                inventario()
+                input()
             elif op==4:
                 print("Cerrando sesion.")
-                input()
                 repetir= False
             else:
                 print("Error")
@@ -268,7 +255,6 @@ def menu_secundario():
             print("Error")
             input()
     
-    menu_principal()
 
 
 #FUNCIONES INGRESO DATOS
@@ -299,7 +285,6 @@ def cargar_info_personal():
 
     return g.altura, g.peso, g.edad, g.sexo, g.cantidad_ejercicio
 
-
 def datos_usuario():
     
     if len(g.datos_de_usuario) > 1:
@@ -322,14 +307,15 @@ def datos_usuario():
         with open(ruta_archivo_json, 'r') as f:
             usuarios = json.load(f)
         
-
+        
         agregar_datos = {
             "altura" : altura_usuario, 
             "peso" : peso_usuario,
             "edad" : edad_usuario, 
             "sexo" : sexo_usuario, 
             "calorias" : calculo_calorias,
-            "cantidad_ejercicio" : cantidad_ejercicio
+            "cantidad_ejercicio" : cantidad_ejercicio,
+             "heladera" : ''
 
         }
         usuarios[g.nombre].update(agregar_datos)
@@ -337,9 +323,7 @@ def datos_usuario():
         with open(ruta_archivo_json, 'w') as f:
             json.dump(usuarios, f, indent=4)
 
-    return  
-
-
+    return
 
 def calcular_calorias (altura, peso, edad, sexo, cantidad_ejercicio):
     if sexo == "H":
@@ -366,9 +350,6 @@ def calcular_calorias (altura, peso, edad, sexo, cantidad_ejercicio):
                 print("")
                 cantidad_ejercicio = int(input("Por favor ingrese solo un numero del 1 al 5: "))
                 print("")
-            
-        
-        return calorias
     else:
         calorias = (10 * peso) + (6.25 * altura) - (5 * edad) - 161
 
@@ -394,14 +375,14 @@ def calcular_calorias (altura, peso, edad, sexo, cantidad_ejercicio):
                 cantidad_ejercicio = int(input("Por favor ingrese solo un numero del 1 al 5: "))
                 print("")
 
-        return calorias
-
-    
+    return calorias
 
 
 
 def definir_objetivo() :
+    os.system('cls')
     print("¿Cual es tu objetivo? ")
+    print("")
     print("1. Ganar musculo")
     print("2. Quemar grasa")
     print("3. Mantenimiento")
@@ -453,10 +434,6 @@ def definir_objetivo() :
 
 
 # FUNCIONES CALENDARIO
-
-
-   
- 
 
 def mostrar_calendario():
 
@@ -607,17 +584,6 @@ def inventario():
 
     
         
-
-
-
-    
-    
-        
-    
-    
-    
-
-
 
 
 
