@@ -1,6 +1,7 @@
 #FUNCIONES MENU PRINCIPAL
 import os
 import json
+import calendar
 from colorama import init, Fore, Back, Style
 import modulo_funciones.GLOBAL as g
 
@@ -151,9 +152,11 @@ def verificar_datos(nombre_usu):
     
     if nombre_usu in usuarios:
         usuario_existente =  True 
+        g.usuario_existente_check = usuario_existente
         return usuario_existente, usuarios.get(nombre_usu)
     else:
         usuario_existente = False
+        g.usuario_existente_check = usuario_existente
         return usuario_existente, {}
     
 def crear_usuario():
@@ -259,7 +262,7 @@ def menu_secundario():
 
 #FUNCIONES INGRESO DATOS
 def cargar_info_personal():
-
+    os.system('cls')
     print("Necesitamos que cargues los siguientes datos para calcular tus calorias de mantenimiento.")
     
 
@@ -279,51 +282,54 @@ def cargar_info_personal():
             bandera = False
         else:
             print("Sexo no válido. Por favor, ingrese H o M.")
-            
+    input()
+    os.system('cls')        
     g.cantidad_ejercicio = int(input("Ingrese la cantidad de ejercicio que haga durante la semana; si no hace ejercicio ponga 1, si hace 1-3 veces a la semana ingrese 2, si hace 3-5 veces a la semana ingrese 3, si hace 6-7 veces a la semana ingrese 4, si hace 2 veces al dia o mas ingrese 5: "))
- 
-
+    g.usuario_existente=True
     return g.altura, g.peso, g.edad, g.sexo, g.cantidad_ejercicio
 
 def datos_usuario():
-    
-    if len(g.datos_de_usuario) > 1:
+    os.system('cls')
+    if g.usuario_existente:
+        print("Usuario ya existe")
         print("Bienvenido!")
         print(g.datos_de_usuario)
-        
-        #si ya esta registrados mostrar datos en pantalla y dar la opcion de actualizarlos
+
+        actualizar= input("Desea actualizar sus datos? (si/no)")
+        if actualizar=="si":
+            cargar_datos()
+        else:
+            print("Listo!")  
     else:
-        #si es usuario nuevo:
-        
-        altura_usuario, peso_usuario, edad_usuario, sexo_usuario, cantidad_ejercicio = cargar_info_personal()
-        calculo_calorias = calcular_calorias(altura_usuario, peso_usuario, edad_usuario, sexo_usuario, cantidad_ejercicio)
+        cargar_datos()
+    return
+
+def cargar_datos():
+    altura_usuario, peso_usuario, edad_usuario, sexo_usuario, cantidad_ejercicio = cargar_info_personal()
+    calculo_calorias = calcular_calorias(altura_usuario, peso_usuario, edad_usuario, sexo_usuario, cantidad_ejercicio)
         #objetivo_usuario= definir_objetivo()
         #cargar datos en el archivo json usuarios
 
-        ruta_archivo_json = verificar_o_crear_archivo_json()
-        g.calorias = calculo_calorias
-
+    ruta_archivo_json = verificar_o_crear_archivo_json()
+    g.calorias = calculo_calorias
       
-        with open(ruta_archivo_json, 'r') as f:
-            usuarios = json.load(f)
-        
-        
-        agregar_datos = {
-            "altura" : altura_usuario, 
-            "peso" : peso_usuario,
-            "edad" : edad_usuario, 
-            "sexo" : sexo_usuario, 
-            "calorias" : calculo_calorias,
-            "cantidad_ejercicio" : cantidad_ejercicio,
-             "heladera" : ''
-
+    with open(ruta_archivo_json, 'r') as f:
+        usuarios = json.load(f)
+             
+    agregar_datos = {
+        "altura" : altura_usuario, 
+        "peso" : peso_usuario,
+        "edad" : edad_usuario, 
+        "sexo" : sexo_usuario, 
+        "calorias" : calculo_calorias,
+        "cantidad_ejercicio" : cantidad_ejercicio,
+        "heladera" : ''
         }
-        usuarios[g.nombre].update(agregar_datos)
+    usuarios[g.nombre].update(agregar_datos)
 
-        with open(ruta_archivo_json, 'w') as f:
-            json.dump(usuarios, f, indent=4)
+    with open(ruta_archivo_json, 'w') as f:
+        json.dump(usuarios, f, indent=4)
 
-    return
 
 def calcular_calorias (altura, peso, edad, sexo, cantidad_ejercicio):
     if sexo == "H":
@@ -436,6 +442,7 @@ def definir_objetivo() :
 # FUNCIONES CALENDARIO
 
 def mostrar_calendario():
+    os.system ('cls')
 
     init(autoreset=True)
 
@@ -454,6 +461,7 @@ def mostrar_calendario():
 
                                                   
 def mostrar_inventario():
+    os.system ('cls')
 
     init(autoreset=True)
 
@@ -487,6 +495,7 @@ def rutinas():
         print("error")
 
     a = int(input("Cuantos dias quiere entrenar por semana entre 3 y 6?: "))
+    
     while a > 6 or a < 3:
             a = int(input("ERROR, Cuantos dias quiere entrenar por semana entre 3 y 6?: "))
 

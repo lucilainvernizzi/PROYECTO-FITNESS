@@ -1,3 +1,5 @@
+import calendar
+
 def es_bisiesto(año):
     return (año % 4 == 0 and año % 100 != 0) or (año % 400 == 0)
 
@@ -9,7 +11,7 @@ def dias_en_mes(mes, año):
     elif mes == 2:
         return 29 if es_bisiesto(año) else 28
     else:
-        return 0  # Mes no válido
+        return 0  
 
 def dia_de_la_semana(dia, mes, año):
     if mes < 3:
@@ -17,38 +19,37 @@ def dia_de_la_semana(dia, mes, año):
         año -= 1
     k = año % 100
     j = año // 100
-    # Fórmula de Zeller
+    
     return (dia + (13 * (mes + 1)) // 5 + k + (k // 4) + (j // 4) + (5 * j)) % 7
 
 def mostrar_calendario(mes, año):
-    dias = dias_en_mes(mes, año)
+    cant_dias = dias_en_mes(mes, año)
     dia_inicio = dia_de_la_semana(1, mes, año)
+    dias = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"]
 
-    # Imprimir encabezado
-    print("Lunes    Martes   Miércoles Jueves   Viernes  Sábado   Domingo")
-    print("-" * 60)
+    for dia in dias:
+        print(dia, end='       ')
+    print("\n" + "-" * 60)
 
-    # Imprimir espacios hasta el primer día
-    espacios_iniciales = "    " * dia_inicio
-    print(espacios_iniciales, end='')
+  
+    columnas = [[] for _ in range(7)] 
 
-    # Imprimir los días del mes
-    for dia in range(1, dias + 1):
-        print(f"[{dia:>2}]", end=' ')
-        if (dia + dia_inicio) % 7 == 0:
-            print()  # Nueva línea al final de la semana
+    for dia in range(1, cant_dias + 1):
+        columna_index = (dia + dia_inicio - 1) % 7
+        columnas[columna_index].append(f"[{dia:>2}]")
 
-    # Imprimir espacios vacíos para completar la tabla
-    for dia in range(dias + 1, 16):
-        print("[  ]", end=' ')
-        if (dia + dia_inicio) % 7 == 0:
-            print()  
 
-    print() 
+    max_semanas = max(len(col) for col in columnas)  
 
+    for i in range(max_semanas):
+        for j in range(7):
+            if i < len(columnas[j]):
+                print(columnas[j][i], end='    ')
+            else:
+                print("[  ]", end='    ')
+        print() 
 
 año = int(input("Introduce el año (por ejemplo, 2023): "))
 mes = int(input("Introduce el mes (1-12): "))
-
 
 mostrar_calendario(mes, año)
