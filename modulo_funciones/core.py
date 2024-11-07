@@ -20,7 +20,6 @@ def intro():
                                                             
     """
 
-    # Imprime el texto
     print(texto)
     input()
 
@@ -39,11 +38,11 @@ def menu_principal():
         print("3. Ejecutar")
         print("4. Salir")
 
-        opcion_valida = False  # Variable para controlar la validez de la opción
-        while not opcion_valida:  # Mientras la opción no sea válida
+        opcion_valida = False  
+        while not opcion_valida:  
             try:
                 op = int(input("Ingrese un valor del menu: "))
-                opcion_valida = True  # La opción es válida, salimos del bucle
+                opcion_valida = True 
             
             except ValueError:
                 print("Por favor, ingrese un número válido.")
@@ -149,14 +148,11 @@ def verificar_datos(nombre_usu):
     with open(ruta_archivo_json, 'r') as f:
         usuarios = json.load(f)
 
-    
     if nombre_usu in usuarios:
         usuario_existente =  True 
-        g.usuario_existente_check = usuario_existente
         return usuario_existente, usuarios.get(nombre_usu)
     else:
         usuario_existente = False
-        g.usuario_existente_check = usuario_existente
         return usuario_existente, {}
     
 def crear_usuario():
@@ -261,33 +257,6 @@ def menu_secundario():
 
 
 #FUNCIONES INGRESO DATOS
-def cargar_info_personal():
-    os.system('cls')
-    print("Necesitamos que cargues los siguientes datos para calcular tus calorias de mantenimiento.")
-    
-
-    g.altura= int(input("Por favor, ingrese su altura en cm: "))
-
-    g.peso = int(input("Ingrese su peso en KG: "))
-
-    g.edad = int(input("Ingrese su edad: "))
-    bandera = True
-    while bandera:
-        g.sexo = input("¿Cuál es su sexo? (H/M): ")
-        if g.sexo.upper() == "H":
-            g.sexo= "H"
-            bandera = False
-        elif g.sexo.upper() == "M":
-            g.sexo= "M"
-            bandera = False
-        else:
-            print("Sexo no válido. Por favor, ingrese H o M.")
-    input()
-    os.system('cls')        
-    g.cantidad_ejercicio = int(input("Ingrese la cantidad de ejercicio que haga durante la semana; si no hace ejercicio ponga 1, si hace 1-3 veces a la semana ingrese 2, si hace 3-5 veces a la semana ingrese 3, si hace 6-7 veces a la semana ingrese 4, si hace 2 veces al dia o mas ingrese 5: "))
-    g.usuario_existente=True
-    return g.altura, g.peso, g.edad, g.sexo, g.cantidad_ejercicio
-
 def datos_usuario():
     os.system('cls')
     if g.usuario_existente:
@@ -329,6 +298,33 @@ def cargar_datos():
 
     with open(ruta_archivo_json, 'w') as f:
         json.dump(usuarios, f, indent=4)
+
+
+def cargar_info_personal():
+    os.system('cls')
+    print("Necesitamos que cargues los siguientes datos para calcular tus calorias de mantenimiento.")
+    
+    g.altura= int(input("Por favor, ingrese su altura en cm: "))
+    g.peso = int(input("Ingrese su peso en KG: "))
+    g.edad = int(input("Ingrese su edad: "))
+
+    bandera = True
+    while bandera:
+        g.sexo = input("¿Cuál es su sexo? (H/M): ")
+        if g.sexo.upper() == "H":
+            g.sexo= "H"
+            bandera = False
+        elif g.sexo.upper() == "M":
+            g.sexo= "M"
+            bandera = False
+        else:
+            print("Sexo no válido. Por favor, ingrese H o M.")
+    input()
+    
+    os.system('cls')        
+    g.cantidad_ejercicio = int(input("Ingrese la cantidad de ejercicio que haga durante la semana; si no hace ejercicio ponga 1, si hace 1-3 veces a la semana ingrese 2, si hace 3-5 veces a la semana ingrese 3, si hace 6-7 veces a la semana ingrese 4, si hace 2 veces al dia o mas ingrese 5: "))
+    g.usuario_existente=True
+    return g.altura, g.peso, g.edad, g.sexo, g.cantidad_ejercicio
 
 
 def calcular_calorias (altura, peso, edad, sexo, cantidad_ejercicio):
