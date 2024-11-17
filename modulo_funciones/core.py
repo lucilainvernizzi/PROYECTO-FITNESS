@@ -1,12 +1,10 @@
-#FUNCIONES MENU PRINCIPAL
 import os
 import json
-import calendar
 from colorama import init, Fore, Back, Style
 import modulo_funciones.GLOBAL as g
 
 
-
+#FUNCIONES MENU PRINCIPAL
 def intro():
 
     init(autoreset=True)
@@ -99,7 +97,6 @@ def mostrar_inst():
     print("5. !")
     print("Dentro de la App podras encontrar un inventario digital de tu propio hogar que nos permitira crear recetas en base a los alimentos con los que cuentas. ")
 
-
 def ejecutar():
     os.system('cls')
     ingresar_cuenta()
@@ -184,6 +181,8 @@ def crear_usuario():
         f.seek(0)  # Mover el cursor al inicio del archivo
         json.dump(usuarios, f, indent=4)  # Guardar el diccionario actualizado
     
+    input()
+    os.system('cls') 
     print("¡Usuario registrado con éxito!")
     input()
     menu_secundario()
@@ -205,6 +204,7 @@ def iniciar_sesion():
         return False
 
     if g.nombre in usuarios and usuarios[g.nombre]['contraseña'] == g.contraseña:
+        os.system('cls') 
         print(f"Bienvenido/a {g.nombre} nuevamente")
         g.usuario_existente, g.datos_de_usuario = verificar_datos(g.nombre)
         input()
@@ -213,6 +213,7 @@ def iniciar_sesion():
     
     os.system('cls')
     print("Nombre de usuario o contraseña incorrectos.")
+    print("")
     registrarse = input("¿Desea registrarse? (s/n): ")
     if registrarse.lower() == 's':
         crear_usuario()
@@ -260,15 +261,19 @@ def menu_secundario():
 def datos_usuario():
     os.system('cls')
     if g.usuario_existente:
-        print("Usuario ya existe")
-        print("Bienvenido!")
+        print("El usuario ya existe")
+        print("")
+        print("Bienvenido", g.nombre ,"! A continuacion puede visualizar sus datos cargados.")
+        print("")
         print(g.datos_de_usuario)
+        print("")
 
         actualizar= input("Desea actualizar sus datos? (si/no)")
         if actualizar=="si":
             cargar_datos()
+            print("Listo! Ya se han actualizado sus datos") 
         else:
-            print("Listo!")  
+            print("Puede continuar utilizando el programa con normalidad ... ")  
     else:
         cargar_datos()
     return
@@ -276,8 +281,7 @@ def datos_usuario():
 def cargar_datos():
     altura_usuario, peso_usuario, edad_usuario, sexo_usuario, cantidad_ejercicio = cargar_info_personal()
     calculo_calorias = calcular_calorias(altura_usuario, peso_usuario, edad_usuario, sexo_usuario, cantidad_ejercicio)
-        #objetivo_usuario= definir_objetivo()
-        #cargar datos en el archivo json usuarios
+    #objetivo_usuario= definir_objetivo()
 
     ruta_archivo_json = verificar_o_crear_archivo_json()
     g.calorias = calculo_calorias
@@ -378,7 +382,6 @@ def calcular_calorias (altura, peso, edad, sexo, cantidad_ejercicio):
                 print("")
 
     return calorias
-
 
 
 def definir_objetivo() :
@@ -585,11 +588,6 @@ def inventario():
 
     
     input()
-
-
-    
-        
-
 
 
 
