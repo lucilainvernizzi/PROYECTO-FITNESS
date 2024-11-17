@@ -162,15 +162,18 @@ def crear_usuario():
     g.usuario_existente, g.datos_de_usuario = verificar_datos(g.nombre)
     
     while g.usuario_existente:  # Cambié g.usuario a g.usuario_existente
-        opcion = int(input("El nombre de usuario ya existe. Intente con otro nombre de usuario (1) o inicie sesión (2)."))
-        if opcion == 1:
-            g.nombre = input("Ingrese su nombre de usuario: ")
-            g.contraseña = input("Ingrese su contraseña: ")
-            g.usuario_existente, g.datos_de_usuario = verificar_datos(g.nombre)
-        elif opcion == 2:
-            iniciar_sesion()
-        else:
-            print("Error. Opción no válida.")
+        try:
+            opcion = int(input("El nombre de usuario ya existe. Intente con otro nombre de usuario (1) o inicie sesión (2)."))
+            if opcion == 1:
+                g.nombre = input("Ingrese su nombre de usuario: ")
+                g.contraseña = input("Ingrese su contraseña: ")
+                g.usuario_existente, g.datos_de_usuario = verificar_datos(g.nombre)
+            elif opcion == 2:
+                iniciar_sesion()
+            else:
+                print("Error. Opción no válida.")
+        except:
+            print("Error")
 
     # Agregar al archivo json un diccionario de datos como valor de la clave con el nombre del usuario
     nuevo_usuario = {'contraseña': g.contraseña}  
@@ -240,7 +243,16 @@ def menu_secundario():
                 input()
             elif op==2:
                 mostrar_calendario()
-                rutinas()
+                try:
+                    n = int(input("Elija 1 para elegir una rutina hecha, o 2 para hacer tu propia rutina"))
+                    if n ==1:
+                        elegir_Rutina()
+                    elif n ==2:
+                        hacerTuRutina()
+                    else:
+                        print("Error, elija el numero 1 o 2.")
+                except:
+                    print("Error, Opción no válida")
                 input()
             elif op==3:
                 mostrar_inventario()
@@ -481,35 +493,73 @@ def mostrar_inventario():
                                                   
 
 #RUTINAS
-def rutinas():
+def solicitar_dias_entrenamiento():
+    bandera = True
+    while bandera:
+        try:
+            dias = int(input("¿Cuántos días quiere entrenar por semana entre 3 y 6?: "))
+            if dias < 3 or dias > 6:
+                print("ERROR, debe ser entre 3 y 6.")
+            else:
+                bandera = False
+                return dias
+                
+        except ValueError:
+            print("ERROR, debe ingresar un número válido.")
 
+def cargar_rutinas():
     try:
-        contenido = open("Base_de_datos/rutinas.json", "r")
-        lineas = contenido.read()
-        contenido.close()
-
-        rutinas = json.loads(lineas)
-
-    except:
-        print("error")
-
-    a = int(input("Cuantos dias quiere entrenar por semana entre 3 y 6?: "))
+        with open("Base_de_datos/rutinas.json", "r") as contenido:
+            rutinas = json.load(contenido)
+        return rutinas
     
-    while a > 6 or a < 3:
-            a = int(input("ERROR, Cuantos dias quiere entrenar por semana entre 3 y 6?: "))
+    except FileNotFoundError:
+        print("Error: El archivo no se encontró.")
+        return None
 
+def elegir_Rutina():
+
+    rutinas = cargar_rutinas()
+    a = solicitar_dias_entrenamiento()
+    
     if a == 6:
-        print(rutinas[0])
-    elif a == 4:
-         print(rutinas[2])
-    elif a == 5:
-         print(rutinas[3])
-    elif a == 3:
-        print(rutinas[1])
+        g.rutinaSeleccionada = rutinas[0]
+        for clave, valor in g.rutinaSeleccionada.items():
+            print(f"**{clave}**:")  # Imprime el nombre de la categoría
+            for ejercicio, detalles in valor.items():  # Itera sobre los ejercicios en cada categoría
+                if detalles["ejercicio"]:  # Verifica que el ejercicio no esté vacío
+                    print(f"  {ejercicio}: {detalles['ejercicio']} - Series: {detalles['series']}, Repeticiones: {detalles['repeticiones']}")
+            print()
 
+
+    elif a == 4:
+        g.rutinaSeleccionada = rutinas[2] 
+        for clave, valor in g.rutinaSeleccionada.items():
+            print(f"**{clave}**:")  
+            for ejercicio, detalles in valor.items():  
+                if detalles["ejercicio"]:  
+                    print(f"  {ejercicio}: {detalles['ejercicio']} - Series: {detalles['series']}, Repeticiones: {detalles['repeticiones']}")
+            print()
+
+    elif a == 5:
+        g.rutinaSeleccionada = rutinas[3] 
+        for clave, valor in g.rutinaSeleccionada.items():
+            print(f"**{clave}**:") 
+            for ejercicio, detalles in valor.items():  
+                if detalles["ejercicio"]:  
+                    print(f"  {ejercicio}: {detalles['ejercicio']} - Series: {detalles['series']}, Repeticiones: {detalles['repeticiones']}")
+            print()
+    elif a == 3:
+        g.rutinaSeleccionada = rutinas[1] 
+        for clave, valor in g.rutinaSeleccionada.items():
+            print(f"**{clave}**:")  
+            for ejercicio, detalles in valor.items(): 
+                if detalles["ejercicio"]: 
+                    print(f"  {ejercicio}: {detalles['ejercicio']} - Series: {detalles['series']}, Repeticiones: {detalles['repeticiones']}")
+            print()
 
 def hacerTuRutina():
-    import json
+
 
     try:
         contenido = open("Base_de_datos/ejercicios.json", "r")
@@ -524,54 +574,36 @@ def hacerTuRutina():
 
     print(ejercicios["Pecho"])
 
-    n = int(input("Ingrese el ejercicio que quiere para este musculo: "))
+    n = int(input("Ingrese el ejercicio que quiere para su rutina: "))
 
-    ejerciciosPecho = []
-    ejerciciosEspalda = []
-    ejerciciosBiceps= []
-    ejerciciosTriceps = []
-    ejerciciosQuadriceps = []
-    ejerciciosIsquiotibiales = []
-    ejerciciosGemelos = []
+    g.miRutina = {
+        "Ejercicio1" : "", 
+        "Ejercicio2" : "",
+        "Ejercicio3" : "",
+        "Ejercicio4" : "",
+        "Ejercicio5" : "",
+        "Ejercicio6" : "",
+        "Ejercicio7" : "",
+    }
 
-
-    miRutina = {"Pecho" : ejerciciosPecho, 
-                "Espalda": ejerciciosEspalda,  
-                "Biceps" : ejerciciosBiceps , 
-                "Triceps" : ejerciciosTriceps, 
-                "Quadriceps" : ejerciciosQuadriceps, 
-                "Isquiotibiales" : ejerciciosIsquiotibiales, 
-                 "Gemelos" : ejerciciosGemelos }
 
     for n_ejercicio in ejercicios:
         if n_ejercicio["n"] in ejercicios:
-            miRutina["Pecho"].append(n)
-
-    for n_ejercicio in ejercicios:
+            g.miRutina["Ejercicio1"] = n
         if n_ejercicio["n"] in ejercicios:
-            miRutina["Pecho"].append(n)
-    
-
-    for n_ejercicio in ejercicios:
+            g.miRutina["Ejercicio2"] = n
         if n_ejercicio["n"] in ejercicios:
-            miRutina["Pecho"].append(n)
-
-    for n_ejercicio in ejercicios:
+            g.miRutina["Ejercicio3"] = n
         if n_ejercicio["n"] in ejercicios:
-            miRutina["Pecho"].append(n)
-
-    for n_ejercicio in ejercicios:
+            g.miRutina["Ejercicio4"] = n
         if n_ejercicio["n"] in ejercicios:
-            miRutina["Pecho"].append(n)
-
-    for n_ejercicio in ejercicios:
+            g.miRutina["Ejercicio5"] = n
         if n_ejercicio["n"] in ejercicios:
-            miRutina["Pecho"].append(n)
-
-    for n_ejercicio in ejercicios:
+            g.miRutina["Ejercicio6"] = n
         if n_ejercicio["n"] in ejercicios:
-            miRutina["Pecho"].append(n)
-
+            g.miRutina["Ejercicio7"] = n
+      
+    print(g.miRutina)
 # FUNCIONES INVENTARIO/RECETAS
 def inventario():
     

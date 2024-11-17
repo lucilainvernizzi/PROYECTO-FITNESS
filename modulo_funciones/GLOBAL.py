@@ -1,5 +1,4 @@
 
-
 nombre = ""
 contraseña = ""
 usuario_existente = ""
@@ -17,4 +16,6 @@ cantidad_ejercicio = ""
 
 calorias = ""
 
+rutinaSeleccionada = {}
 
+miRutina = {}

@@ -1,104 +1,88 @@
 [
-
     {
         "Push": {
-          "1": "pressBanca",
-          "2": "pressInclinado",
-          "3": "pressMilitar",
-          "4": "fondos",
-          "5": "extensionTricep",
-          "6": ""
+            "ejercicio1": {"ejercicio": "pressBanca", "series": "3", "repeticiones": "6-8"},
+            "ejercicio2": {"ejercicio": "pressInclinado", "series": "3", "repeticiones": "7-9"},
+            "ejercicio3": {"ejercicio": "pressMilitar", "series": "3", "repeticiones": "6-8"},
+            "ejercicio4": {"ejercicio": "fondos", "series": "3", "repeticiones": "8-10"},
+            "ejercicio5": {"ejercicio": "extensionTricep", "series": "2", "repeticiones": "10"},
+            "ejercicio6": {"ejercicio": "", "series": "", "repeticiones": ""}
         },
-      
         "Pull": {
-          "1": "dominadas",
-          "2": "remolinos",
-          "3": "curlBiceps",
-          "4": "facePull",
-          "5": "pullOver",
-          "6": ""
+            "ejercicio1": {"ejercicio": "dominadas", "series": "3", "repeticiones": "6-8"},
+            "ejercicio2": {"ejercicio": "remolinos", "series": "3", "repeticiones": "10"},
+            "ejercicio3": {"ejercicio": "curlBiceps", "series": "3", "repeticiones": "8-10"},
+            "ejercicio4": {"ejercicio": "facePull", "series": "2", "repeticiones": "12"},
+            "ejercicio5": {"ejercicio": "pullOver", "series": "3", "repeticiones": "10"},
+            "ejercicio6": {"ejercicio": "", "series": "", "repeticiones": ""}
         },
-
         "Legs": {
-          "1": "sentadillas",
-          "2": "prensa",
-          "3": "pesoMuerto",
-          "4": "elevacionTalones",
-          "5": "zancadas",
-          "6": ""
+            "ejercicio1": {"ejercicio": "sentadillas", "series": "3", "repeticiones": "8"},
+            "ejercicio2": {"ejercicio": "prensa", "series": "3", "repeticiones": "10"},
+            "ejercicio3": {"ejercicio": "pesoMuerto", "series": "3", "repeticiones": "8"},
+            "ejercicio4": {"ejercicio": "elevacionTalones", "series": "3", "repeticiones": "12"},
+            "ejercicio5": {"ejercicio": "zancadas", "series": "3", "repeticiones": "10"},
+            "ejercicio6": {"ejercicio": "", "series": "", "repeticiones": ""}
         }
-      }, 
-
-      {
-        "Full Body": {
-          "1": "sentadillas",
-          "2": "pressBanca",
-          "3": "dominadas",
-          "4": "curlBiceps",
-          "5": "extensionTricep",
-          "6": "planchas"
-        }}, 
-
-        
-        {
-          "Día 1 - Tren Superior": {
-            "1": "pressBanca",
-            "2": "pressMilitar",
-            "3": "aperturas",
-            "4": "dominadas",
-            "5": "curlBiceps",
-            "6": "extensionTricep"
-          }
-        , 
-        
-        
-          "Día 2 - Tren Inferior": {
-            "1": "sentadillas",
-            "2": "pesoMuerto",
-            "3": "prensa",
-            "4": "elevacionTalones",
-            "5": "zancadas",
-            "6": ""
-          }
-        }, 
-    
-        {
-            "Lunes - Push": 
-            {
-                "1": {"ejercicio": "Press de banca con barra", "series": "3", "repeticiones": "6-8"},
-                "2": {"ejercicio": "Press de hombro con mancuernas", "series": "3", "repeticiones": "5-7"},
-                "3": {"ejercicio": "Press de banca inclinado con mancuernas", "series": "3", "repeticiones": "7-9"},
-                "4": {"ejercicio": "Elevaciones laterales con mancuernas", "series": "3", "repeticiones": "10"},
-                "5": {"ejercicio": "Press francés para tríceps", "series": "2", "repeticiones": "10"},
-                "6": {"ejercicio": "Elevaciones frontales con mancuernas", "series": 2, "repeticiones": 20}
-            },
-            "Martes - Pull": 
-            {
-                "1": {"ejercicio": "Remo al pecho en máquina", "series": "3", "repeticiones": "7"},
-                "2": {"ejercicio": "Dominadas estrictas", "series": "3", "repeticiones": "10-12"},
-                "3": {"ejercicio": "Remo con mancuerna en banco", "series": "3", "repeticiones": "10"},
-                "4": {"ejercicio": "Face pulls", "series": "2", "repeticiones": "12"},
-                "5": {"ejercicio": "Curl de bíceps en banco Scott con barra Z", "series": "3", "repeticiones": "8"},
-                "6": {"ejercicio": "Curl de bíceps alterno con mancuernas", "series": "3", "repeticiones": "20"}
-            },
-            "Miercoles - Legs":
-             {
-                "1": {"ejercicio": "Sentadillas", "series": "3", "repeticiones": "8"},
-                "2": {"ejercicio": "Peso muerto", "series": "3", "repeticiones": "8"},
-                "3": {"ejercicio": "Cuádriceps en máquina", "series": "2", "repeticiones": "20"},
-                "4": {"ejercicio": "Curl de femoral en máquina", "series": 3, "repeticiones": 12},
-                "5": {"ejercicio": "Gemelo en máquina", "series": "3", "repeticiones": "12"},
-                "6": {"ejercicio": "Prensa o zancadas", "series": "3", "repeticiones": "10"}
-            }, 
-
-            "Viernes - Pecho espalda" : 
-            {
-            "1": {"ejercicio": "Press de banca con barra", "series": "3", "repeticiones": "6-8"},
-                "2": {"ejercicio": "Press de hombro con mancuernas", "series": "3", "repeticiones": "5-7"},
-                "3": {"ejercicio": "Remo al pecho en máquina", "series": "3", "repeticiones": "7"},
-                "4": {"ejercicio": "Dominadas estrictas", "series": "3", "repeticiones": "10-12"}
-
-            }
+    },
+    {
+         "Full body" : {
+            "ejercicio1": {"ejercicio": "sentadillas", "series": "3", "repeticiones": "8"},
+            "ejercicio2": {"ejercicio": "pressBanca", "series": "3", "repeticiones": "6-8"},
+            "ejercicio3": {"ejercicio": "dominadas", "series": "3", "repeticiones": "6-8"},
+            "ejercicio4": {"ejercicio": "curlBiceps", "series": "3", "repeticiones": "8"},
+            "ejercicio5": {"ejercicio": "extensionTricep", "series": "2", "repeticiones": "10"},
+            "ejercicio6": {"ejercicio": "planchas", "series": "3", "repeticiones": "30 segundos"}
         }
-        
-    ]
+    },
+    {
+        "Día 1 - Tren Superior": {
+            "ejercicio1": {"ejercicio": "pressBanca", "series": "3", "repeticiones": "6-8"},
+            "ejercicio2": {"ejercicio": "pressMilitar", "series": "3", "repeticiones": "6-8"},
+            "ejercicio3": {"ejercicio": "aperturas", "series": "3", "repeticiones": "10"},
+            "ejercicio4": {"ejercicio": "dominadas", "series": "3", "repeticiones": "6-8"},
+            "ejercicio5": {"ejercicio": "curlBiceps", "series": "3", "repeticiones": "8"},
+            "ejercicio6": {"ejercicio": "extensionTricep", "series": "2", "repeticiones": "10"}
+        },
+        "Día 2 - Tren Inferior": {
+            "ejercicio1": {"ejercicio": "sentadillas", "series": "3", "repeticiones": "8"},
+            "ejercicio2": {"ejercicio": "peso Muerto", "series": "3", "repeticiones": "8"},
+            "ejercicio3": {"ejercicio": "prensa", "series": "3", "repeticiones": "10"},
+            "ejercicio4": {"ejercicio": "elevacionTalones", "series": "3", "repeticiones": "12"},
+            "ejercicio5": {"ejercicio": "zancadas", "series": "3", "repeticiones": "10"},
+            "ejercicio6": {"ejercicio": "", "series": "", "repeticiones": ""}
+        }
+    },
+    {
+        "Lunes - Push": {
+            "ejercicio1": {"ejercicio": "Press de banca con barra", "series": "3", "repeticiones": "6-8"},
+            "ejercicio2": {"ejercicio": "Press de hombro con mancuernas", "series": "3", "repeticiones": "5-7"},
+            "ejercicio3": {"ejercicio": "Press de banca inclinado con mancuernas", "series": "3", "repeticiones": "7-9"},
+            "ejercicio4": {"ejercicio": "Elevaciones laterales con mancuernas", "series": "3", "repeticiones": "10"},
+            "ejercicio5": {"ejercicio": "Press francés para tríceps", "series": "2", "repeticiones": "10"},
+            "ejercicio6": {"ejercicio": "Elevaciones frontales con mancuernas", "series": "2", "repeticiones": "20"}
+        },
+        "Martes - Pull": {
+            "ejercicio1": {"ejercicio": "Remo al pecho en máquina", "series": "3", "repeticiones": "7"},
+            "ejercicio2": {"ejercicio": "Dominadas estrictas", "series": "3", "repeticiones": "10-12"},
+            "ejercicio3": {"ejercicio": "Remo con mancuerna en banco", "series": "3", "repeticiones": "10"},
+            "ejercicio4": {"ejercicio": "Face pulls", "series": "2", "repeticiones": "12"},
+            "ejercicio5": {"ejercicio": "Curl de bíceps en banco Scott con barra Z", "series": "3", "repeticiones": "8"},
+            "ejercicio6": {"ejercicio": "Curl de bíceps alterno con mancuernas", "series": "3", "repeticiones": "20"}
+        },
+        "Miercoles - Legs": {
+            "ejercicio1": {"ejercicio": "Sentadillas", "series": "3", "repeticiones": "8"},
+            "ejercicio2": {"ejercicio": "Peso muerto", "series": "3", "repeticiones": "8"},
+            "ejercicio3": {"ejercicio": "Cuádriceps en máquina", "series": "2", "repeticiones": "12"},
+            "ejercicio4": {"ejercicio": "Curl de femoral en máquina", "series": "3", "repeticiones": "12"},
+            "ejercicio5": {"ejercicio": "Gemelo en máquina", "series": "3", "repeticiones": "12"},
+            "ejercicio6": {"ejercicio": "Prensa o zancadas", "series": "3", "repeticiones": "10"}
+        },
+        "Viernes - Pecho espalda": {
+            "ejercicio1": {"ejercicio": "Press de banca con barra", "series": "3", "repeticiones": "6-8"},
+            "ejercicio2": {"ejercicio": "Press de hombro con mancuernas", "series": "3", "repeticiones": "5-7"},
+            "ejercicio3": {"ejercicio": "Remo al pecho en máquina", "series": "3", "repeticiones": "7"},
+            "ejercicio4": {"ejercicio": "Dominadas estrictas", "series": "3", "repeticiones": "10-12"}
+        }
+    }
+  ]
