@@ -230,7 +230,7 @@ def menu_secundario():
         os.system('cls')
 
         print("1. Información personal")
-        print("2. Calendario")
+        print("2. Rutinas")
         print("3. Inventario")
         print("4. Cerrar sesion")
 
@@ -242,7 +242,7 @@ def menu_secundario():
                 definir_objetivo()
                 input()
             elif op==2:
-                mostrar_calendario()
+                mostrar_titulo_calendario()
                 try:
                     n = int(input("Elija 1 para elegir una rutina hecha, o 2 para hacer tu propia rutina"))
                     if n ==1:
@@ -253,6 +253,7 @@ def menu_secundario():
                         print("Error, elija el numero 1 o 2.")
                 except:
                     print("Error, Opción no válida")
+                mostrar_calendario()
                 input()
             elif op==3:
                 mostrar_inventario()
@@ -266,8 +267,6 @@ def menu_secundario():
         except:
             print("Error")
             input()
-    
-
 
 #FUNCIONES INGRESO DATOS
 def datos_usuario():
@@ -315,7 +314,6 @@ def cargar_datos():
     with open(ruta_archivo_json, 'w') as f:
         json.dump(usuarios, f, indent=4)
 
-
 def cargar_info_personal():
     os.system('cls')
     print("Necesitamos que cargues los siguientes datos para calcular tus calorias de mantenimiento.")
@@ -341,7 +339,6 @@ def cargar_info_personal():
     g.cantidad_ejercicio = int(input("Ingrese la cantidad de ejercicio que haga durante la semana; si no hace ejercicio ponga 1, si hace 1-3 veces a la semana ingrese 2, si hace 3-5 veces a la semana ingrese 3, si hace 6-7 veces a la semana ingrese 4, si hace 2 veces al dia o mas ingrese 5: "))
     g.usuario_existente=True
     return g.altura, g.peso, g.edad, g.sexo, g.cantidad_ejercicio
-
 
 def calcular_calorias (altura, peso, edad, sexo, cantidad_ejercicio):
     if sexo == "H":
@@ -394,7 +391,6 @@ def calcular_calorias (altura, peso, edad, sexo, cantidad_ejercicio):
                 print("")
 
     return calorias
-
 
 def definir_objetivo() :
     os.system('cls')
@@ -449,10 +445,9 @@ def definir_objetivo() :
     return objetivo
 
 
+# FUNCIONES Rutinas
 
-# FUNCIONES CALENDARIO
-
-def mostrar_calendario():
+def mostrar_titulo_calendario():
     os.system ('cls')
 
     init(autoreset=True)
@@ -469,28 +464,6 @@ def mostrar_calendario():
     # Imprime el texto
     print(texto)
     input()
-
-                                                  
-def mostrar_inventario():
-    os.system ('cls')
-
-    init(autoreset=True)
-
-    texto = f"""
-    {Fore.BLUE}  _____                      _             _       
-    {Fore.BLUE}  \_   \_ ____   _____ _ __ | |_ __ _ _ __(_) ___  
-    {Fore.BLUE}   / /\/ '_ \ \ / / _ \ '_ \| __/ _` | '__| |/ _ \ 
-    {Fore.BLUE}/\/ /_ | | | \ V /  __/ | | | || (_| | |  | | (_) |
-    {Fore.BLUE}\____/ |_| |_|\_/ \___|_| |_|\__\__,_|_|  |_|\___/ 
-                                                   
-                                                            
-    """
-
-    # Imprime el texto
-    print(texto)
-    input()
-
-                                                  
 
 #RUTINAS
 def solicitar_dias_entrenamiento():
@@ -538,7 +511,7 @@ def elegir_Rutina():
             print(f"**{clave}**:")  # Imprime el nombre de la categoría
             for ejercicio, detalles in valor.items():  # Itera sobre los ejercicios en cada categoría
                 if detalles["ejercicio"]:  # Verifica que el ejercicio no esté vacío
-                    print(f"  {ejercicio}: {detalles['ejercicio']} - Series: {detalles['series']}, Repeticiones: {detalles['repeticiones']}")
+                    print(f"  {ejercicio:<20}: {detalles['ejercicio']:<30} - Series: {detalles['series']:<5} Repeticiones: {detalles['repeticiones']:<5}")
             print()
 
 def cargar_ejercicios():
@@ -553,9 +526,7 @@ def cargar_ejercicios():
 
 def hacer_Rutina():
 
-
     ejercicios = cargar_ejercicios()
-
 
     print("Ejercicios disponibles por grupo muscular:")
     for grupo in ejercicios.keys():
@@ -570,7 +541,6 @@ def hacer_Rutina():
         "Ejercicio5" : {},  
         "Ejercicio6" : {},
         "Ejercicio7" : {}, 
-
 
     }
 
@@ -589,7 +559,7 @@ def hacer_Rutina():
             for ejercicio in ejercicios_grupo:
                 print(ejercicio)
             print()  # Nueva línea después de listar los ejercicios
-            ejercicio = input("Escriba un ejercicio de igual manera a como esta mostrado para agrgarlo a su rutina: ")
+            ejercicio = input("Escriba un ejercicio de igual manera a como esta mostrado para agregarlo a su rutina: ")
 
             if ejercicio in ejercicios_grupo:
                 try:
@@ -618,7 +588,112 @@ def hacer_Rutina():
 
     g.datos_de_usuario["miRutina"] = g.miRutina
 
+#CALENDARIO
+def es_bisiesto(año):
+    return año % 4 == 0 and (año % 100 != 0 or año % 400 == 0)
+
+def dias_en_mes(mes, año):
+    if mes in [1, 3, 5, 7, 8, 10, 12]:
+        return 31
+    elif mes in [4, 6, 9, 11]:
+        return 30
+    elif mes == 2:
+        return 29 if es_bisiesto(año) else 28
+    return 0
+
+# Algoritmo de Zeller para calcular el día de la semana
+def primer_dia_del_mes(año, mes):
+    if mes < 3:
+        mes += 12
+        año -= 1
+    k = año % 100
+    j = año // 100
+    dia = (1 + 13 * (mes + 1) // 5 + k + k // 4 + j // 4 - 2 * j) % 7
+    return (dia + 6) % 7 
+
+def generar_calendario(mes, año):
+    dias = ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"]
+    print(f"\nCalendario: {mes}/{año}")
+    print(f"{' '.join(dias)}")
+   
+    primer_dia = primer_dia_del_mes(año, mes)
+    num_dias = dias_en_mes(mes, año)
+
+    calendario = ["    "] * primer_dia
+    
+    for dia in range(1, num_dias + 1):
+        calendario.append(f"{dia: >3} ")
+
+    for i in range(0, len(calendario), 7):
+        print("".join(calendario[i:i+7]))
+
+def mostrar_calendario():
+
+    visualizar= int(input("Si desea visualizar su plan de entrenamiento en el calendario seleccione 1."))
+    if visualizar == 1:
+        try:
+            mes = int(input("Ingrese el mes (1-12): "))
+            año = int(input("Ingrese el año: "))
+
+            if 1 <= mes <= 12:
+                generar_calendario(mes, año)
+            else:
+                print("Por favor, ingrese un mes válido (1-12).")
+        except ValueError:
+            print("Por favor, ingrese valores numéricos válidos.")
+    
+    rutina = g.rutinaSeleccionada
+    mirutina = g.miRutina
+    ejercicios= g.cantidad_ejercicio
+
+    if len(mirutina)==0:
+        if ejercicios == 3:
+            print("Rutina Full Body 3 veces por semana.")
+            print("")
+            print("Lunes: Full Body")
+            print("Miércoles: Full Body")
+            print("Viernes: Full Body")
+        elif ejercicios == 4:
+            print("Rutina Tren superior y Tren inferior dos veces por semana.")
+        elif ejercicios == 5:
+            print('''
+                  "Lunes - Push"
+           "Martes - Pull"
+           
+        "Miercoles - Legs": {
+           
+        "Viernes - Pecho espalda" ''')
+        elif ejercicios == 6:
+            print('''
+                  Legs
+                  Pull
+                  push ''')
+ 
+
+
+
 # FUNCIONES INVENTARIO/RECETAS
+
+def mostrar_inventario():
+    os.system ('cls')
+
+    init(autoreset=True)
+
+    texto = f"""
+    {Fore.BLUE}  _____                      _             _       
+    {Fore.BLUE}  \_   \_ ____   _____ _ __ | |_ __ _ _ __(_) ___  
+    {Fore.BLUE}   / /\/ '_ \ \ / / _ \ '_ \| __/ _` | '__| |/ _ \ 
+    {Fore.BLUE}/\/ /_ | | | \ V /  __/ | | | || (_| | |  | | (_) |
+    {Fore.BLUE}\____/ |_| |_|\_/ \___|_| |_|\__\__,_|_|  |_|\___/ 
+                                                   
+                                                            
+    """
+
+    # Imprime el texto
+    print(texto)
+    input()
+
+
 def inventario():
     
     print("""Esta función nos permite almacenar las comidas que tengas a disponibilidad, para esto
