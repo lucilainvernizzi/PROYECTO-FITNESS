@@ -364,56 +364,34 @@ def calcular_calorias (altura, peso, edad, sexo, cantidad_ejercicio):
     if sexo == "H":
         calorias = (10 * peso) + (6.25 * altura) - (5 * edad) + 5
         
-        bandera=True
-        while bandera==True:
-            if cantidad_ejercicio == 1:
-                calorias = calorias * 1.2
-                bandera=False
-            elif cantidad_ejercicio == 2:
-                calorias = calorias * 1.375
-                bandera=False
-            elif cantidad_ejercicio == 3:
-                calorias = calorias * 1.55
-                bandera=False
-            elif cantidad_ejercicio == 4:
-                calorias = calorias * 1.725
-                bandera=False
-            elif cantidad_ejercicio == 5:
-                calorias = calorias * 1.9
-                bandera=False
-            else:
-                print("")
-                cantidad_ejercicio = int(input("Por favor ingrese solo un numero del 1 al 5: "))
-                print("")
     else:
         calorias = (10 * peso) + (6.25 * altura) - (5 * edad) - 161
 
-        bandera=True
-        while bandera==True:
-            if cantidad_ejercicio == 1:
-                calorias = calorias * 1.2
-                bandera=False
-            elif cantidad_ejercicio == 2:
-                calorias = calorias * 1.375
-                bandera=False
-            elif cantidad_ejercicio == 3:
-                calorias = calorias * 1.55
-                bandera=False
-            elif cantidad_ejercicio == 4:
-                calorias = calorias * 1.725
-                bandera=False
-            elif cantidad_ejercicio == 5:
-                calorias = calorias * 1.9
-                bandera=False
-            else:
-                print("")
-                cantidad_ejercicio = int(input("Por favor ingrese solo un numero del 1 al 5: "))
-                print("")
+    if cantidad_ejercicio == 1:
+            calorias = calorias * 1.2
+               
+    elif cantidad_ejercicio == 2:
+            calorias = calorias * 1.375
+                
+    elif cantidad_ejercicio == 3:
+            calorias = calorias * 1.55
+               
+    elif cantidad_ejercicio == 4:
+            calorias = calorias * 1.725
+                
+    elif cantidad_ejercicio == 5:
+            calorias = calorias * 1.9
+                
 
     return calorias
 
+
 def definir_objetivo() :
     os.system('cls')
+    texto_quemar_grasa = """|2_ Una dieta de definición se centra en reducir el porcentaje de grasa corporal mientras se mantiene la masa muscular. Es una dieta de pérdida de peso, pero con un enfoque especial en preservar el músculo."""
+    texto_aumento_musculo= """|1_ Para aumentar el volumen muscular, es fundamental seguir una dieta hipercalórica que puede variar su riqueza en proteínas, carbohidratos y grasas saludables, junto con un entrenamiento adecuado."""
+    texto_mantenimiento= """|3_ Ya sabiendo nuestras calorias de mantenimiento, podemos con esto mantener nuestro peso."""
+
     print("¿Cual es tu objetivo? ")
     print("")
     print("1. Ganar musculo")
@@ -724,17 +702,79 @@ def inventario():
     with open('Base_de_datos/comidas.json','r') as f:
         comidas = json.load(f)
     
-    for comida in comidas:
-        print(comida)
+    #Imprimir grupos
+    for clave in comidas.keys():
+        print(clave)
+        print("--")
 
-    
+    #Seleccionar grupo
+    g.miHeladera = {}
+
+    bandera = True
+    while bandera:
+        grupo = input("Selecciona un grupo de comidas (o escriba -1 para terminar): ")
+
+        if grupo== "-1":
+            bandera = False
+
+        elif grupo in comidas:
+            comidas_grupo = comidas[grupo]
+            print(f"Comidas disponibles para {grupo}: ")
+
+            for comida in comidas_grupo:
+                print(comida)
+            print() 
+            comida = input("Escriba una comida de igual manera a como esta mostrada para agregarlo a su heladera: ")
+
+            if comida in comidas_grupo:
+                
+                
+                g.miHeladera[f"{comida}"] = comidas_grupo[comida]
+
+                print(f"La comida '{comida}' agregada a la heladera.")
+
+            else:
+                print("Comida no encontrada. Intenta de nuevo.")
+        else:
+            print("Grupo de comida no encontrado. Intenta de nuevo.")
+
+    print(g.miHeladera)
     input()
+    miDieta()
+
+def miDieta():
+    g.miDieta = {}
+
+    print(f"Con las calorias que usted necesita consumir,{g.calorias} ,elija ingredientes o comidas de su heladera para llegar a sus calorias deseadas.")
+
+    bandera = True
+    while bandera:
+        for comida in g.miHeladera:
+            print(comida)
+            print("--")
+
+        comida = input("Selecciona una comida para agregar a tu dieta (o escriba -1 para terminar): ")
+
+        if comida== "-1":
+            bandera = False
+
+        elif comida in g.miHeladera:
+            print(f"Comidas de tu heladera: ")
+
+            g.miDieta[f"{comida}"] = g.miHeladera[comida]
+
+            print(f"La comida '{comida}' agregada a la heladera.")
+
+        else:
+            print("Comida no encontrada. Intenta de nuevo.")
+    
+    print(g.miDieta)
 
 
 
-texto_quemar_grasa = """|2_ Una dieta de definición se centra en reducir el porcentaje de grasa corporal mientras se mantiene la masa muscular. Es una dieta de pérdida de peso, pero con un enfoque especial en preservar el músculo."""
-texto_aumento_musculo= """|1_ Para aumentar el volumen muscular, es fundamental seguir una dieta hipercalórica que puede variar su riqueza en proteínas, carbohidratos y grasas saludables, junto con un entrenamiento adecuado."""
-texto_mantenimiento= """|3_ Ya sabiendo nuestras calorias de mantenimiento, podemos con esto mantener nuestro peso."""
+
+'''
+
 
 
 
@@ -746,5 +786,7 @@ def busqueda_secuencial(lista, dato):
         return i
     else:
         return -1
-    
+        
+        
+'''
 
