@@ -1,108 +1,108 @@
 {
-  "frutas": {
-      "aguacate": {"Calorias": "160 kcal", "Gramos": "100 gr"},
-      "arándano": {"Calorias": "46 kcal", "Gramos": "100 gr"},
-      "ciruela": {"Calorias": "46 kcal", "Gramos": "100 gr"},
-      "fresa": {"Calorias": "32 kcal", "Gramos": "100 gr"},
-      "frambuesa": {"Calorias": "32 kcal", "Gramos": "100 gr"},
-      "mango": {"Calorias": "51 kcal", "Gramos": "100 gr"},
-      "manzana": {"Calorias": "52 kcal", "Gramos": "100 gr"},
-      "naranja": {"Calorias": "47 kcal", "Gramos": "100 gr"},
-      "pera": {"Calorias": "57 kcal", "Gramos": "100 gr"},
-      "piña": {"Calorias": "51 kcal", "Gramos": "100 gr"},
-      "sandia": {"Calorias": "30 kcal", "Gramos": "100 gr"},
-      "plátano": {"Calorias": "105 kcal", "Gramos": "100 gr"},
-      "kiwi": {"Calorias": "61 kcal", "Gramos": "100 gr"},
-      "papaya": {"Calorias": "43 kcal", "Gramos": "100 gr"},
-      "cereza": {"Calorias": "50 kcal", "Gramos": "100 gr"},
-      "granada": {"Calorias": "83 kcal", "Gramos": "100 gr"}
-  },
-
-  "vegetales": {
-      "ajo": {"Calorias": "45 kcal", "Gramos": "100 gr"},
-      "berenjena": {"Calorias": "25 kcal", "Gramos": "60 gr"},
-      "brócoli": {"Calorias": "55 kcal", "Gramos": "100 gr"},
-      "calabacín": {"Calorias": "25 kcal", "Gramos": "60 gr"},
-      "cebolla": {"Calorias": "45 kcal", "Gramos": "100 gr"},
-      "espinacas": {"Calorias": "20 kcal", "Gramos": "20 gr"},
-      "lechuga": {"Calorias": "10 kcal", "Gramos": "20 gr"},
-      "pepino": {"Calorias": "15 kcal", "Gramos": "40 gr"},
-      "pimiento rojo": {"Calorias": "45 kcal", "Gramos": "100 gr"},
-      "zanahoria": {"Calorias": "45 kcal", "Gramos": "80 gr"},
-      "col rizada": {"Calorias": "35 kcal", "Gramos": "100 gr"},
-      "coliflor": {"Calorias": "25 kcal", "Gramos": "100 gr"},
-      "apio": {"Calorias": "16 kcal", "Gramos": "100 gr"},
-      "berro": {"Calorias": "11 kcal", "Gramos": "100 gr"},
-      "rúcula": {"Calorias": "25 kcal", "Gramos": "100 gr"}
-  },
-
-  "carnes": {
-      "atún enlatado": {"Calorias": "144 kcal", "Gramos": "100 gr"},
-      "pollo": {"Calorias": "239 kcal", "Gramos": "100 gr"},
-      "pavo": {"Calorias": "140 kcal", "Gramos": "100 gr"},
-      "salmon": {"Calorias": "180 kcal", "Gramos": "120 gr"},
-      "camaron": {"Calorias": "120 kcal", "Gramos": "100 gr"},
-      "mejillones": {"Calorias": "120 kcal", "Gramos": "100 gr"},
-      "carne de vaca": {"Calorias": "250 kcal", "Gramos": "120 gr"},
-      "cerdo": {"Calorias": "242 kcal", "Gramos": "100 gr"},
-      "cordero": {"Calorias": "294 kcal", "Gramos": "100 gr"},
-      "hígado de res": {"Calorias": "175 kcal", "Gramos": "100 gr"},
-      "pescado blanco": {"Calorias": "120 kcal", "Gramos": "100 gr"},
-      "salchicha": {"Calorias": "300 kcal", "Gramos": "100 gr"},
-      "bacon": {"Calorias": "541 kcal", "Gramos": "100 gr"},
-      "pato": {"Calorias": "337 kcal", "Gramos": "100 gr"},
-      "pescado azul": {"Calorias": "200 kcal", "Gramos": "100 gr"}
-  },
-
-  "frutos secos": {
-      "almend ras": {"Calorias": "575 kcal", "Gramos": "100 gr"},
-      "avellanas": {"Calorias": "654 kcal", "Gramos": "100 gr"},
-      "nueces": {"Calorias": "654 kcal", "Gramos": "100 gr"},
-      "cacahuates": {"Calorias": "575 kcal", "Gramos": "100 gr"},
-      "castañas": {"Calorias": "161 kcal", "Gramos": "100 gr"},
-      "pistachos": {"Calorias": "562 kcal", "Gramos": "100 gr"},
-      "nuez de macadamia": {"Calorias": "718 kcal", "Gramos": "100 gr"},
-      "nuez de Brasil": {"Calorias": "659 kcal", "Gramos": "100 gr"},
-      "semillas de girasol": {"Calorias": "584 kcal", "Gramos": "100 gr"},
-      "semillas de calabaza": {"Calorias": "559 kcal", "Gramos": "100 gr"}
-  },
-
-  "lacteos": {
-      "leche": {"Calorias": "50 kcal", "Gramos": "100 gr"},
-      "queso": {"Calorias": "160 kcal", "Gramos": "50 gr"},
-      "queso feta": {"Calorias": "264 kcal", "Gramos": "100 gr"},
-      "yogur": {"Calorias": "59 kcal", "Gramos": "100 gr"},
-      "crema agria": {"Calorias": "198 kcal", "Gramos": "100 gr"},
-      "leche condensada": {"Calorias": "321 kcal", "Gramos": "100 gr"},
-      "queso ricotta": {"Calorias": "174 kcal", "Gramos": "100 gr"},
-      "queso cottage": {"Calorias": "98 kcal", "Gramos": "100 gr"},
-      "helado": {"Calorias": "207 kcal", "Gramos": "100 gr"},
-      "mantequilla": {"Calorias": "717 kcal", "Gramos": "100 gr"}
-  },
-
-  "cereales": {
-      "arroz": {"Calorias": "110 kcal", "Gramos": "100 gr"},
-      "pan": {"Calorias": "120 kcal", "Gramos": "50 gr"},
-      "lentejas": {"Calorias": "230 kcal", "Gramos": "180 gr"},
-      "frijoles": {"Calorias": "225 kcal", "Gramos": "150 gr"},
-      "garbanzos": {"Calorias": "160 kcal", "Gramos": "100 gr"},
-      "avena": {"Calorias": "389 kcal", "Gramos": "100 gr"},
-      "quinoa": {"Calorias": "120 kcal", "Gramos": "100 gr"},
-      "maíz": {"Calorias": "96 kcal", "Gramos": "100 gr"},
-      "cuscús": {"Calorias": "112 kcal", "Gramos": "100 gr"},
-      "mijo": {"Calorias": "119 kcal", "Gramos": "100 gr"}
-  },
-
-  "dulces": {
-      "chocolate": {"Calorias": "535 kcal", "Gramos": "100 gr"},
-      "chocolate con leche": {"Calorias": "535 kcal", "Gramos": "100 gr"},
-      "chocolate negro": {"Calorias": "535 kcal", "Gramos": "100 gr"},
-      "gominolas": {"Calorias": "318 kcal", "Gramos": "100 gr"},
-      "caramelos": {"Calorias": "387 kcal", "Gramos": "100 gr"},
-      "pastel": {"Calorias": "350 kcal", "Gramos": "100 gr"},
-      "donas": {"Calorias": "452 kcal", "Gramos": "100 gr"},
-      "galletas": {"Calorias": "502 kcal", "Gramos": "100 gr"},
-      "helado de vainilla": {"Calorias": "207 kcal", "Gramos": "100 gr"},
-      "merengue": {"Calorias": "318 kcal", "Gramos": "100 gr"}
+    "frutas": {
+        "aguacate": {"Calorias": "160 kcal", "Gramos": "100 gr", "Proteínas": "2 gr", "Carbohidratos": "9 gr", "Grasas": "15 gr"},
+        "arándano": {"Calorias": "46 kcal", "Gramos": "100 gr", "Proteínas": "0.7 gr", "Carbohidratos": "12 gr", "Grasas": "0.3 gr"},
+        "ciruela": {"Calorias": "46 kcal", "Gramos": "100 gr", "Proteínas": "0.7 gr", "Carbohidratos": "11 gr", "Grasas": "0.3 gr"},
+        "fresa": {"Calorias": "32 kcal", "Gramos": "100 gr", "Proteínas": "0.7 gr", "Carbohidratos": "7.7 gr", "Grasas": "0.3 gr"},
+        "frambuesa": {"Calorias": "32 kcal", "Gramos": "100 gr", "Proteínas": "1.2 gr", "Carbohidratos": "7 gr", "Grasas": "0.3 gr"},
+        "mango": {"Calorias": "51 kcal", "Gramos": "100 gr", "Proteínas": "0.8 gr", "Carbohidratos": "14 gr", "Grasas": "0.4 gr"},
+        "manzana": {"Calorias": "52 kcal", "Gramos": "100 gr", "Proteínas": "0.3 gr", "Carbohidratos": "14 gr", "Grasas": "0.2 gr"},
+        "naranja": {"Calorias": "47 kcal", "Gramos": "100 gr", "Proteínas": "0.9 gr", "Carbohidratos": "12 gr", "Grasas": "0.1 gr"},
+        "pera": {"Calorias": "57 kcal", "Gramos": "100 gr", "Proteínas": "0.4 gr", "Carbohidratos": "15 gr", "Grasas": "0.1 gr"},
+        "piña": {"Calorias": "51 kcal", "Gramos": "100 gr", "Proteínas": "0.5 gr", "Carbohidratos": "13 gr", "Grasas": "0.1 gr"},
+        "sandia": {"Calorias": "30 kcal", "Gramos": "100 gr", "Proteínas": "0.6 gr", "Carbohidratos": "8 gr", "Grasas": "0.2 gr"},
+        "plátano": {"Calorias": "105 kcal", "Gramos": "100 gr", "Proteínas": "1.3 gr", "Carbohidratos": "27 gr", "Grasas": "0.3 gr"},
+        "kiwi": {"Calorias": "61 kcal", "Gramos": "100 gr", "Proteínas": "1.1 gr", "Carbohidratos": "15 gr", "Grasas": "0.5 gr"},
+        "papaya": {"Calorias": "43 kcal", "Gramos": "100 gr", "Proteínas": "0.5 gr", "Carbohidratos": "11 gr", "Grasas": "0.1 gr"},
+        "cereza": {"Calorias": "50 kcal", "Gramos": "100 gr", "Proteínas": "1 gr", "Carbohidratos": "12 gr", "Grasas": "0.2 gr"},
+        "granada": {"Calorias": "83 kcal", "Gramos": "100 gr", "Proteínas": "1.7 gr", "Carbohidratos": "19 gr", "Grasas": "1.2 gr"}
+    },
+  
+    "vegetales": {
+        "ajo": {"Calorias": "45 kcal", "Gramos": "100 gr", "Proteínas": "6.4 gr", "Carbohidratos": "33 gr", "Grasas": "0.1 gr"},
+        "berenjena": {"Calorias": "25 kcal", "Gramos": "60 gr", "Proteínas": "1 gr", "Carbohidratos": "5.9 gr", "Grasas": "0.2 gr"},
+        "brócoli": {"Calorias": "55 kcal", "Gramos": "100 gr", "Proteínas": "4.2 gr", "Carbohidratos": "11 gr", "Grasas": "0 .6 gr"},
+        "calabacín": {"Calorias": "25 kcal", "Gramos": "60 gr", "Proteínas": "1 gr", "Carbohidratos": "4.5 gr", "Grasas": "0.2 gr"},
+        "cebolla": {"Calorias": "45 kcal", "Gramos": "100 gr", "Proteínas": "1.1 gr", "Carbohidratos": "10 gr", "Grasas": "0.1 gr"},
+        "espinacas": {"Calorias": "20 kcal", "Gramos": "20 gr", "Proteínas": "2.9 gr", "Carbohidratos": "3.6 gr", "Grasas": "0.4 gr"},
+        "lechuga": {"Calorias": "10 kcal", "Gramos": "20 gr", "Proteínas": "0.5 gr", "Carbohidratos": "1.5 gr", "Grasas": "0.1 gr"},
+        "pepino": {"Calorias": "15 kcal", "Gramos": "40 gr", "Proteínas": "0.7 gr", "Carbohidratos": "3.6 gr", "Grasas": "0.1 gr"},
+        "pimiento rojo": {"Calorias": "45 kcal", "Gramos": "100 gr", "Proteínas": "1.3 gr", "Carbohidratos": "9 gr", "Grasas": "0.2 gr"},
+        "zanahoria": {"Calorias": "45 kcal", "Gramos": "80 gr", "Proteínas": "0.9 gr", "Carbohidratos": "10 gr", "Grasas": "0.2 gr"},
+        "col rizada": {"Calorias": "35 kcal", "Gramos": "100 gr", "Proteínas": "2.9 gr", "Carbohidratos": "7 gr", "Grasas": "0.5 gr"},
+        "coliflor": {"Calorias": "25 kcal", "Gramos": "100 gr", "Proteínas": "1.9 gr", "Carbohidratos": "5 gr", "Grasas": "0.3 gr"},
+        "apio": {"Calorias": "16 kcal", "Gramos": "100 gr", "Proteínas": "0.7 gr", "Carbohidratos": "3 gr", "Grasas": "0.2 gr"},
+        "berro": {"Calorias": "11 kcal", "Gramos": "100 gr", "Proteínas": "2.3 gr", "Carbohidratos": "1.6 gr", "Grasas": "0.1 gr"},
+        "rúcula": {"Calorias": "25 kcal", "Gramos": "100 gr", "Proteínas": "2.6 gr", "Carbohidratos": "3.7 gr", "Grasas": "0.7 gr"}
+    },
+  
+    "carnes": {
+        "atún enlatado": {"Calorias": "144 kcal", "Gramos": "100 gr", "Proteínas": "25 gr", "Carbohidratos": "0 gr", "Grasas": "5 gr"},
+        "pollo": {"Calorias": "239 kcal", "Gramos": "100 gr", "Proteínas": "27 gr", "Carbohidratos": "0 gr", "Grasas": "14 gr"},
+        "pavo": {"Calorias": "140 kcal", "Gramos": "100 gr", "Proteínas": "29 gr", "Carbohidratos": "0 gr", "Grasas": "1 gr"},
+        "salmon": {"Calorias": "180 kcal", "Gramos": "120 gr", "Proteínas": "25 gr", "Carbohidratos": "0 gr", "Grasas": "10 gr"},
+        "camaron": {"Calorias": "120 kcal", "Gramos": "100 gr", "Proteínas": "24 gr", "Carbohidratos": "0 gr", "Grasas": "1 gr"},
+        "mejillones": {"Calorias": "120 kcal", "Gramos": "100 gr", "Proteínas": "20 gr", "Carbohidratos": "7 gr", "Grasas": "2 gr"},
+        "carne de vaca": {"Calorias": "250 kcal", "Gramos": "120 gr", "Proteínas": "26 gr", "Carbohidratos": "0 gr", "Grasas": "17 gr"},
+        "cerdo": {"Calorias": "242 kcal", "Gramos": "100 gr", "Proteínas": "27 gr", "Carbohidratos": "0 gr", "Grasas": "16 gr"},
+        "cordero": {"Calorias": "294 kcal", "Gramos": "100 gr", "Proteínas": "25 gr", "Carbohidratos": "0 gr", "Grasas": "21 gr"},
+        "hígado de res": {"Calorias": "175 kcal", "Gramos": "100 gr", "Proteínas": "26 gr", "Carbohidratos": "5 gr", "Grasas": "5 gr"},
+        "pescado blanco": {"Calorias": "120 kcal", "Gramos": "100 gr", "Proteínas": "20 gr", "Carbohidratos": "0 gr", "Grasas": "2 gr"},
+        "salchicha": {"Calorias": "300 kcal", "Gramos": "100 gr", "Proteínas": "12 gr", "Carbohidratos": "2 gr", "Grasas": "27 gr"},
+        "bacon": {"Calorias": "541 kcal", "Gramos": "100 gr", "Proteínas": "37 gr", "Carbohidratos": "1 gr", "Grasas": "42 gr"},
+        "pato": {"Calorias": "337 kcal", "Gramos": "100 gr", "Proteínas": "19 gr", "Carbohidratos": "0 gr", "Grasas": "28 gr"},
+        "pescado azul": {"Calorias": "200 kcal", "Gramos": "100 gr", "Proteínas": "20 gr", "Carbohidratos": "0 gr", "Grasas": "13 gr"}
+    },
+  
+    "frutos secos": {
+        "almend ras": {"Calorias": "575 kcal", "Gramos": "100 gr", "Proteínas": "21 gr", "Carbohidratos": "22 gr", "Grasas": "49 gr"},
+        "avellanas": {"Calorias": "654 kcal", "Gramos": "100 gr", "Proteínas": "15 gr", "Carbohidratos": "17 gr", "Grasas": "65 gr"},
+        "nueces": {"Calorias": "654 kcal", "Gramos": "100 gr", "Proteínas": "15 gr", "Carbohidratos": "14 gr", "Grasas": "65 gr"},
+        "cacahuates": {"Calorias": "575 kcal", "Gramos": "100 gr", "Proteínas": "25 gr", "Carbohidratos": "16 gr", "Grasas": "49 gr"},
+        "castañas": {"Calorias": "161 kcal", "Gramos": "100 gr", "Proteínas": "2 gr", "Carbohidratos": "34 gr", "Grasas": "1 gr"},
+        "pistachos": {"Calorias": "562 kcal", "Gramos": "100 gr", "Proteínas": "20 gr", "Carbohidratos": "28 gr", "Grasas": "45 gr"},
+        "nuez de macadamia": {"Calorias": "718 kcal", "Gramos": "100 gr", "Proteínas": "8 gr", "Carbohidratos": "14 gr", "Grasas": "76 gr"},
+        "nuez de Brasil": {"Calorias": "659 kcal", "Gramos": "100 gr", "Proteínas": "14 gr", "Carbohidratos": "12 gr", "Grasas": "66 gr"},
+        "semillas de girasol": {"Calorias": "584 kcal", "Gramos": "100 gr", "Proteínas": "21 gr", "Carbohidratos": "20 gr", "Grasas": "51 gr"},
+        "semillas de calabaza": {"Calorias": "559 kcal", "Gramos": "100 gr", "Proteínas": "30 gr", "Carbohidratos": "10 gr", "Grasas": "49 gr"}
+    },
+  
+    "lacteos": {
+        "leche": {"Calorias": "50 kcal", "Gramos": "100 gr", "Proteínas": "3.4 gr", "Carbohidratos": "5 gr", "Grasas": "1 gr"},
+        "queso": {"Calorias": "160 kcal", "Gramos": "50 gr", "Proteínas": "10 gr", "Carbohidratos": "1 gr", "Grasas": "13 gr"},
+        "queso feta": {"Calorias": "264 kcal", "Gramos": "100 gr", "Proteínas": "14 gr", "Carbohidratos": "4 gr", "Grasas": "21 gr"},
+        "yogur": {"Calorias": "59 kcal", "Gramos": "100 gr", "Proteínas": "3.5 gr", "Carbohidratos": "4.7 gr", "Grasas": "1.5 gr"},
+        "crema agria": {"Calorias": "198 kcal", "Gramos": "100 gr", "Proteínas": "2.1 gr", "Carbohidratos": "4.6 gr", "Grasas": "20 gr"},
+        "leche condensada": {"Calorias": "321 kcal", "Gramos": "100 gr", "Proteínas": "7.5 gr", "Carbohidratos": "55 gr", "Grasas": "9 gr"},
+        "queso ricotta": {"Calorias": "174 kcal", "Gramos": "100 gr", "Proteínas": "11 gr", "Carbohidratos": "3 gr", "Grasas": "13 gr"},
+        "queso cottage": {"Calorias": "98 kcal", "Gramos": "100 gr", "Proteínas": "11 gr", "Carbohidratos": "3.4 gr", "Grasas": "4.3 gr"},
+        "helado": {"Calorias": "207 kcal", "Gramos": "100 gr", "Proteínas": "3.5 gr", "Carbohidratos": "23 gr", "Grasas": "11 gr"},
+        "mantequilla": {"Calorias": "717 kcal", "Gramos": "100 gr", "Proteínas": "0.9 gr", "Carbohidratos": "0.1 gr", "Grasas": "81 gr"}
+    },
+  
+    "cereales": {
+        "arroz": {"Calorias": "110 kcal", "Gramos": "100 gr", "Proteínas": "2.7 gr", "Carbohidratos": "25 gr", "Grasas": "0.3 gr"},
+        "pan": {"Calorias": "120 kcal", "Gramos": "50 gr", "Proteínas": "4 gr", "Carbohidratos": "22 gr", "Grasas": "1.5 gr"},
+        "lentejas": {"Calorias": "230 kcal", "Gramos": "180 gr", "Proteínas": "18 gr", "Carbohidratos": "40 gr", "Grasas": "0.8 gr"},
+        "frijoles": {"Calorias": "225 kcal", "Gramos": "150 gr", "Proteínas": "15 gr", "Carbohidratos": "40 gr", "Grasas": "0.9 gr"},
+        "garbanzos": {"Calorias": "160 kcal", "Gramos": "100 gr", "Proteínas": "8.9 gr", "Carbohidratos": "27 gr", "Grasas": "2.6 gr"},
+        "avena": {"Calorias": "389 kcal", "Gramos": "100 gr", "Proteínas": "16.9 gr", "Carbohidratos": "66 gr", "Grasas": "6.9 gr"},
+        "quinoa": {"Calorias": "120 kcal", "Gramos": "100 gr", "Proteínas": "4.1 gr", "Carbohidratos": "21 gr", "Grasas": "1.9 gr"},
+        "maíz": {"Calorias": "96 kcal", "Gramos": "100 gr", "Proteínas": "3.4 gr", "Carbohidratos": "21 gr", "Grasas": "1.5 gr"},
+        "cuscús": {"Calorias": "112 kcal", "Gramos": "100 gr", "Proteínas": "3.8 gr", "Carbohidratos": "23 gr", "Grasas": "0.2 gr"},
+        "mijo": {"Calorias": "119 kcal", "Gramos": "100 gr", "Proteínas": "3.5 gr", "Carbohidratos": "23 gr", "Grasas": "1.0 gr"}
+    },
+  
+    "dulces": {
+        "chocolate": {"Calorias": "535 kcal", "Gramos": "100 gr", "Proteínas": "7.6 gr", "Carbohidratos": "61 gr", "Grasas": "30 gr"},
+        "chocolate con leche": {"Calorias": "535 kcal", "Gramos": "100 gr", "Proteínas": "7.5 gr", "Carbohidratos": "59 gr", "Grasas": "32 gr"},
+        "chocolate negro": {"Calorias": "535 kcal", "Gramos": "100 gr", "Proteínas": "7.6 gr", "Carbohidratos": "61 gr", "Grasas": "30 gr"},
+        "gominolas": {"Calorias": "318 kcal", "Gramos": "100 gr", "Proteínas": "2 gr", "Carbohidratos": "78 gr", "Grasas": "0.1 gr"},
+        "caramelos": {"Calorias": "387 kcal", "Gramos": "100 gr", "Proteínas": "0.1 gr", "Carbohidratos": "97 gr", "Grasas": "0.1 gr"},
+        "pastel": {"Calorias": "350 kcal", "Gramos": "100 gr", "Proteínas": "3.5 gr", "Carbohidratos": "50 gr", "Grasas": "15 gr"},
+        "donas": {"Calorias": "452 kcal", "Gramos": "100 gr", "Proteínas": "4.5 gr", "Carbohidratos": "51 gr", "Grasas": "25 gr"},
+        "galletas": {"Calorias": "502 kcal", "Gramos": "100 gr", "Proteínas": "6 gr", "Carbohidratos": "66 gr", "Grasas": "24 gr"},
+        "helado de vainilla": {"Calorias": "207 kcal", "Gramos": "100 gr", "Proteínas": "3.5 gr", "Carbohidratos": "23 gr", "Grasas": "11 gr"},
+        "merengue": {"Calorias": "318 kcal", "Gramos": "100 gr", "Proteínas": "0.5 gr", "Carbohidratos": "79 gr", "Grasas": "0.1 gr"}
+    }
   }
-}
