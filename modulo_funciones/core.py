@@ -30,7 +30,7 @@ def menu_principal():
         print("\033[4;15HBienvenidos a la App Fitness")
         print("\033[5;15HProgramacion I")
         print("\033[0;37m")
-        
+
         print("1. Equipo")
         print("2. Instrucciones del programa")
         print("3. Ejecutar")
@@ -66,6 +66,9 @@ def menu_principal():
 
 def mostrar_equipo():
     os.system('cls')
+    print("\033[0;36m")
+    print("\033[4;15HEquipo de desarrollo")
+    print("\033[0;37m")
     print("")
     print("Bienvenido! Esta App fue creada por el equipo de:")
     print("")
@@ -79,24 +82,25 @@ def mostrar_equipo():
 
 def mostrar_inst():
     os.system('cls')
+
+    print("\033[0;36m")
+    print("\033[4;15HInstrucciones")
+    print("\033[0;37m")
+    
     print("""Este programa te permitira encontrar el mejor plan de alimentacion y entrenamiento.""")
     print("")
-    print("Con la carga de datos personales del usuario, sera evaluada la mejor ruta para alcanzar sus metas.")
+    print("Carga datos personales del usuario para calcular tu metabolismo basal y encontrar la mejor ruta para alcanzar sus metas.")
     print("Un nuevo estilo de vida saludable esta ahora en tus manos! Para utilizar el programa, solo debes seguir las siguientes instrucciones: ")
     print("")
-    print("""1. Registro e Ingreso de datos personales. Deberas crear una cuenta con tu nombre de usuario y contrasena. Luego se solictara que ingreses datos personales como tu altura, peso, edad, genero y nivel de actividad fisica""")
+    print("1. Registro e Ingreso de datos personales. ")
     print("")
-    print("2. Determinar tus objetivos. ")
-    print("Determinar tus objetivos nutricionales, como bajar de peso o ganar masa mucualar.")
+    print("2. Determinar tus objetivos nutricionales, como bajar de peso o ganar masa muscular.")
     print("")
-    print("3. Recibir tu plan de alimentacion y entrenamiento personalizado.")
-    print("El programa ")
+    print("3. Recibe tu plan de alimentacion y entrenamiento personalizado.")
     print("")
-    print("""4. Comenzar tu plan!. La constancia y disciplina son elementos clave para que tus objetivos se vuelvan realidad. Podras visualizar los pasos que debes seguir en nuestra ventana de calendario. """)
+    print("""4. Comenza tu plan!. La constancia y disciplina son elementos clave. """)
     print("")
-    print("5. !")
-    print("Dentro de la App podras encontrar un inventario digital de tu propio hogar que nos permitira crear recetas en base a los alimentos con los que cuentas. ")
-
+    
 def ejecutar():
     os.system('cls')
     ingresar_cuenta()
@@ -107,6 +111,11 @@ def ingresar_cuenta():
     menu= True
     while menu:
         os.system('cls')
+
+        print("\033[0;36m")
+        print("\033[4;15HInicio de sesion")
+        print("\033[0;37m")
+        print("")
         print("1. Registrarse")
         print("2. Iniciar sesión")
         print("3. Salir")
@@ -229,6 +238,11 @@ def menu_secundario():
     while repetir:
         os.system('cls')
 
+        print("\033[0;36m")
+        print("\033[4;15HMenu")
+        print("\033[5;15HFit App")
+        print("\033[0;37m")
+
         print("1. Información personal")
         print("2. Rutinas")
         print("3. Inventario")
@@ -244,7 +258,7 @@ def menu_secundario():
             elif op==2:
                 mostrar_titulo_calendario()
                 try:
-                    n = int(input("Elija 1 para elegir una rutina hecha, o 2 para hacer tu propia rutina"))
+                    n = int(input("Elija 1 para elegir una rutina hecha, o 2 para hacer tu propia rutina."))
                     if n ==1:
                         elegir_Rutina()
                     elif n ==2:
@@ -281,6 +295,7 @@ def datos_usuario():
 
         actualizar= input("Desea actualizar sus datos? (si/no)")
         if actualizar=="si":
+            os.system('cls')
             cargar_datos()
             print("Listo! Ya se han actualizado sus datos") 
         else:
@@ -316,6 +331,11 @@ def cargar_datos():
 
 def cargar_info_personal():
     os.system('cls')
+
+    print("\033[0;36m")
+    print("\033[4;15HDatos del usuario")
+    print("\033[0;37m")
+
     print("Necesitamos que cargues los siguientes datos para calcular tus calorias de mantenimiento.")
     
     g.altura= int(input("Por favor, ingrese su altura en cm: "))
@@ -709,8 +729,6 @@ def inventario():
 
     
     input()
-
-
 
 
 
