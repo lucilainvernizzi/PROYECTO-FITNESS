@@ -36,15 +36,9 @@ def menu_principal():
         print("3. Ejecutar")
         print("4. Salir")
 
-        opcion_valida = False  
-        while not opcion_valida:  
-            try:
-                op = int(input("Ingrese un valor del menu: "))
-                opcion_valida = True 
-            
-            except ValueError:
-                print("Por favor, ingrese un número válido.")
-            
+
+        op = errorEntero()    
+
         if op==1:
             mostrar_equipo()
             input()
@@ -61,7 +55,8 @@ def menu_principal():
             print("El programa ha finalizado.")
             repetir= False
         else:
-            print("error")
+            os.system("cls")
+            print("error, elija un numero del 1 al 4")
             input()
 
 def mostrar_equipo():
@@ -105,6 +100,14 @@ def ejecutar():
     os.system('cls')
     ingresar_cuenta()
 
+
+def errorEntero():
+
+    try:
+        opcion = int(input("Seleccione una opción del menu: "))
+        return opcion
+    except:
+        print("Error, ingrese un numero del 1 al 3.")
 #FUNCIONES LOGIN
 
 def ingresar_cuenta():
@@ -120,8 +123,9 @@ def ingresar_cuenta():
         print("2. Iniciar sesión")
         print("3. Salir")
 
-        opcion = int(input("Seleccione una opción del menu: "))
 
+        opcion = errorEntero()
+        
         if opcion == 1:
             crear_usuario()
             input()
@@ -132,8 +136,7 @@ def ingresar_cuenta():
             menu = False
         else:
             print("Opción no válida. Inténtelo de nuevo.")
-            opcion = input("Seleccione una opción del menu: ")
-
+        
 def verificar_o_crear_archivo_json():
     ruta_proyecto = os.path.join(os.path.dirname(__file__), '..') 
     ruta_carpeta = os.path.join(ruta_proyecto, 'base_de_datos') 
@@ -156,7 +159,7 @@ def verificar_datos(nombre_usu):
 
     if nombre_usu in usuarios:
         usuario_existente =  True 
-        return usuario_existente, usuarios.get(nombre_usu)
+        return usuario_existente, usuarios[nombre_usu]
     else:
         usuario_existente = False
         return usuario_existente, {}
@@ -165,12 +168,13 @@ def crear_usuario():
     os.system('cls')
     print("Registro de nuevo usuario")
     print("")
+
     g.nombre = input("Ingrese su nombre de usuario: ")
     g.contraseña = input("Ingrese su contraseña: ")
 
     g.usuario_existente, g.datos_de_usuario = verificar_datos(g.nombre)
     
-    while g.usuario_existente:  # Cambié g.usuario a g.usuario_existente
+    while g.usuario_existente:  
         try:
             opcion = int(input("El nombre de usuario ya existe. Intente con otro nombre de usuario (1) o inicie sesión (2)."))
             if opcion == 1:
@@ -190,7 +194,7 @@ def crear_usuario():
     with open(verificar_o_crear_archivo_json(), 'r+') as f:
         usuarios = json.load(f)
         usuarios[g.nombre] = nuevo_usuario  # Agregar el nuevo usuario al diccionario
-        f.seek(0)  # Mover el cursor al inicio del archivo
+        f.seek(0)  
         json.dump(usuarios, f, indent=4)  # Guardar el diccionario actualizado
     
     input()
@@ -223,13 +227,13 @@ def iniciar_sesion():
         input()
         menu_secundario()
         return True
-    
-    os.system('cls')
-    print("Nombre de usuario o contraseña incorrectos.")
-    print("")
-    registrarse = input("¿Desea registrarse? (si/no): ")
-    if registrarse.lower() == 'si':
-        crear_usuario()
+    else:
+        os.system('cls')
+        print("Nombre de usuario o contraseña incorrectos.")
+        print("")
+        registrarse = input("¿Desea registrarse? (si/no): ")
+        if registrarse.lower() == 'si':
+            crear_usuario()
     return False
 
 #FUNCION MENU SECUNDARIO
@@ -249,45 +253,44 @@ def menu_secundario():
         print("3. Inventario")
         print("4. Cerrar sesion")
 
-        try:
-            op= int(input("Ingrese un valor del menu."))
+        op= errorEntero()
 
-            if op==1:
+        if op==1:
                 datos_usuario()
                 definir_objetivo()
                 input()
-            elif op==2:
-                mostrar_titulo_rutinas()
-                try:
-                    os.system('cls')
-                    n = int(input("Seleccione 1 para elegir una rutina preestablecida o 2 para personalizar tu propia rutina."))
-                    if n ==1:
-                        elegir_Rutina()
-                    elif n ==2:
-                        hacer_Rutina()
-                    else:
-                        print("Error, elija el numero 1 o 2.")
-                except:
-                    print("Error, Opción no válida")
-                mostrar_calendario()
-                input()
-            elif op==3:
-                mostrar_inventario()
-                inventario()
-                input()
-            elif op==4:
-                print("Cerrando sesion.")
-                repetir= False
-            else:
-                print("Error")
-        except:
-            print("Error")
+        elif op==2:
+            mostrar_titulo_rutinas()
+            try:
+                os.system('cls')
+                n = int(input("Seleccione 1 para elegir una rutina preestablecida o 2 para personalizar tu propia rutina."))
+                if n ==1:
+                    elegir_Rutina()
+                elif n ==2:
+                    hacer_Rutina()
+                else:
+                    print("Error, elija el numero 1 o 2.")
+            except:
+                print("Error, Opción no válida")
+            mostrar_calendario()
             input()
+        elif op==3:
+            mostrar_inventario()
+            inventario()
+            input()
+
+        elif op==4:
+            print("Cerrando sesion.")
+            repetir= False
+        else:
+            print("Error!, elija un numero del 1 al 4")
+            input()
+        
 
 #FUNCIONES INGRESO DATOS
 def datos_usuario():
     os.system('cls')
-    if g.usuario_existente:
+    if len(g.datos_de_usuario) > 1:
         print("El usuario ya existe.")
         print("")
         print("Bienvenido", g.nombre ,"! A continuacion puede visualizar sus datos cargados.")
@@ -296,16 +299,19 @@ def datos_usuario():
         for clave, valor in g.datos_de_usuario.items():
             print(f"{clave}: {valor}")
 
-        actualizar= input("Desea actualizar sus datos? (si/no)")
-        if actualizar=="si":
-            os.system('cls')
-            cargar_datos()
-            print("Listo! Ya se han actualizado sus datos") 
-        else:
-            print("Puede continuar utilizando el programa con normalidad ... ")  
+        try:
+            actualizar= input("Desea actualizar sus datos? (si/no)")
+            if actualizar=="si":
+                os.system('cls')
+                cargar_datos()
+                print("Listo! Ya se han actualizado sus datos") 
+            else:
+                print("Puede continuar utilizando el programa con normalidad ... ")  
+        except:
+            print("Error, ingresar si o no")
     else:
         cargar_datos()
-    return
+    
 
 def cargar_datos():
     altura_usuario, peso_usuario, edad_usuario, sexo_usuario, cantidad_ejercicio = cargar_info_personal()
@@ -328,7 +334,8 @@ def cargar_datos():
         "heladera" : ''
         }
     usuarios[g.nombre].update(agregar_datos)
-
+    g.datos_de_usuario = usuarios[g.nombre]
+  
     with open(ruta_archivo_json, 'w') as f:
         json.dump(usuarios, f, indent=4)
 
@@ -822,7 +829,7 @@ def inventario():
 def miDieta():
     g.miDieta = {}
 
-    print(f"Con las calorias que usted necesita consumir,{g.calorias} ,elija ingredientes o comidas de su heladera para llegar a sus calorias deseadas.")
+    print(f"Con las calorias que usted necesita consumir, kcal: '{g.calorias}', elija ingredientes o comidas de su heladera para llegar a sus calorias deseadas.")
 
     bandera = True
     while bandera:
