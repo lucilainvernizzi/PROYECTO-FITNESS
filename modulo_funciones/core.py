@@ -289,7 +289,7 @@ def menu_secundario():
 #FUNCIONES INGRESO DATOS
 def datos_usuario():
     os.system('cls')
-    if g.usuario_existente:
+    if len(g.datos_de_usuario) > 1:
         print("El usuario ya existe.")
         print("")
         print("Bienvenido", g.nombre ,"! A continuacion puede visualizar sus datos cargados.")
@@ -298,13 +298,16 @@ def datos_usuario():
         for clave, valor in g.datos_de_usuario.items():
             print(f"{clave}: {valor}")
 
-        actualizar= input("Desea actualizar sus datos? (si/no)")
-        if actualizar=="si":
-            os.system('cls')
-            cargar_datos()
-            print("Listo! Ya se han actualizado sus datos") 
-        else:
-            print("Puede continuar utilizando el programa con normalidad ... ")  
+        try:
+            actualizar= input("Desea actualizar sus datos? (si/no)")
+            if actualizar=="si":
+                os.system('cls')
+                cargar_datos()
+                print("Listo! Ya se han actualizado sus datos") 
+            else:
+                print("Puede continuar utilizando el programa con normalidad ... ")  
+        except:
+            print("Error, ingresar si o no")
     else:
         cargar_datos()
     
@@ -330,7 +333,8 @@ def cargar_datos():
         "heladera" : ''
         }
     usuarios[g.nombre].update(agregar_datos)
-
+    g.datos_de_usuario = usuarios[g.nombre]
+  
     with open(ruta_archivo_json, 'w') as f:
         json.dump(usuarios, f, indent=4)
 
@@ -352,6 +356,7 @@ def cargar_info_personal():
         else:
             bandera = False
     
+    bandera = True
     while bandera:
         g.peso = int(input("Ingrese su peso en KG: "))
         if g.peso <= 0:
@@ -359,6 +364,7 @@ def cargar_info_personal():
         else:
             bandera = False
 
+    bandera = True
     while bandera:
         g.edad = int(input("Ingrese su edad: "))
         if g.edad<=0 or g.edad>100:
@@ -366,6 +372,7 @@ def cargar_info_personal():
         else:
             bandera = False
 
+    bandera = True
     while bandera:
         g.sexo = input("¿Cuál es su sexo? (H/M): ")
         if g.sexo.upper() == "H":
