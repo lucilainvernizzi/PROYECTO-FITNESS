@@ -203,6 +203,7 @@ def iniciar_sesion():
     os.system('cls')
     print("Inicio de sesión")
     print("")
+
     g.nombre = input("Ingrese su nombre de usuario: ")
     g.contraseña = input("Ingrese su contraseña: ")
 
@@ -226,8 +227,8 @@ def iniciar_sesion():
     os.system('cls')
     print("Nombre de usuario o contraseña incorrectos.")
     print("")
-    registrarse = input("¿Desea registrarse? (s/n): ")
-    if registrarse.lower() == 's':
+    registrarse = input("¿Desea registrarse? (si/no): ")
+    if registrarse.lower() == 'si':
         crear_usuario()
     return False
 
@@ -349,6 +350,7 @@ def cargar_info_personal():
         else:
             bandera = False
     
+    bandera = True
     while bandera:
         g.peso = int(input("Ingrese su peso en KG: "))
         if g.peso <= 0:
@@ -356,6 +358,7 @@ def cargar_info_personal():
         else:
             bandera = False
 
+    bandera = True
     while bandera:
         g.edad = int(input("Ingrese su edad: "))
         if g.edad<=0 or g.edad>100:
@@ -363,6 +366,7 @@ def cargar_info_personal():
         else:
             bandera = False
 
+    bandera = True
     while bandera:
         g.sexo = input("¿Cuál es su sexo? (H/M): ")
         if g.sexo.upper() == "H":
@@ -693,25 +697,6 @@ def fechas_por_dia_semana(mes, año):
         print("Sabado --- Legs")
         print("Domingo- Descanso")
 
-        ''''
-        print(f"{"Lunes"}: {', '.join(map(str, lista))}")
-        print("Martes")
-        print(f"{'Martes'}: {', '.join(map(str, lista))}")
-        print("Miércoles")
-        print(f"{'Miércoles'}: {', '.join(map(str, lista))}")
-        print("Jueves")
-        print(f"{'Jueves'}: {', '.join(map(str, lista))}")
-        print("Viernes")
-        print(f"{'Viernes'}: {', '.join(map(str, lista))}")
-        print("Sábado")
-        print(f"{'Sábado'}: {', '.join(map(str, lista))}")
-        print("Domingo")
-        print(f"{'Domingo'}: {', '.join(map(str, lista))}")
-        
-        for dia, lista in fechas.items():
-            print(f"{dia}: {', '.join(map(str, lista))}")
-            '''
-
     elif g.dias_entrenamiento_plan == 4:
         print(f"Entrenamientos de {g.dias_entrenamiento_plan} días")
         print("Lunes --- Tren Inferior")
@@ -741,6 +726,9 @@ def fechas_por_dia_semana(mes, año):
         print("Viernes --- Full Body")
         print("Sabado --- Descanso")
         print("Domingo --- Descanso")
+
+    for dia, lista, mes in fechas.items():
+            print(f"{dia}: {'/{mes}, '.join(map(str, lista))}")
     
 def mostrar_calendario():
     visualizar= int(input("Si desea visualizar su plan de entrenamiento en el calendario seleccione 1."))
