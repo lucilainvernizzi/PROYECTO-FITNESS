@@ -23,3 +23,5 @@ miRutina = {}
 miHeladera = {}
 
 miDieta = {}
+
+dias_entrenamiento_plan= ""
