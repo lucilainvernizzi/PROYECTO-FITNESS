@@ -786,7 +786,7 @@ def inventario():
     print("""Esta función nos permite almacenar las comidas que tengas a disponibilidad, para esto
            vas a tener que buscarlas dentro de nuestro diccionario de comidas y luego escribir si alguna
           de las comidas mostradas a continuacion esta a tu alcance""")
-    print("Comidas disponibles:")
+    print("Grupos de comidas disponibles:")
 
     with open('Base_de_datos/comidas.json','r') as f:
         comidas = json.load(f)
@@ -826,7 +826,7 @@ def inventario():
                 print("Comida no encontrada. Intenta de nuevo.")
         else:
             print("Grupo de comida no encontrado. Intenta de nuevo.")
-
+    print("Su heladera es: ")
     print(g.miHeladera)
     input()
     miDieta()
@@ -852,10 +852,11 @@ def miDieta():
 
             g.miDieta[f"{comida}"] = g.miHeladera[comida]
 
-            print(f"La comida '{comida}' agregada a la heladera.")
+            print(f"La comida '{comida}' fue agregada a la heladera.")
 
         else:
             print("Comida no encontrada. Intenta de nuevo.")
+    print("Su dieta para hoy es: ")
     
     print(g.miDieta)
 

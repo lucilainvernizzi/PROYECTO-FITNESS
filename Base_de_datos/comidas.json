@@ -1,7 +1,7 @@
 {
     "frutas": {
         "aguacate": {"Calorias": "160 kcal", "Gramos": "100 gr", "Proteínas": "2 gr", "Carbohidratos": "9 gr", "Grasas": "15 gr"},
-        "arándano": {"Calorias": "46 kcal", "Gramos": "100 gr", "Proteínas": "0.7 gr", "Carbohidratos": "12 gr", "Grasas": "0.3 gr"},
+        "arandano": {"Calorias": "46 kcal", "Gramos": "100 gr", "Proteínas": "0.7 gr", "Carbohidratos": "12 gr", "Grasas": "0.3 gr"},
         "ciruela": {"Calorias": "46 kcal", "Gramos": "100 gr", "Proteínas": "0.7 gr", "Carbohidratos": "11 gr", "Grasas": "0.3 gr"},
         "fresa": {"Calorias": "32 kcal", "Gramos": "100 gr", "Proteínas": "0.7 gr", "Carbohidratos": "7.7 gr", "Grasas": "0.3 gr"},
         "frambuesa": {"Calorias": "32 kcal", "Gramos": "100 gr", "Proteínas": "1.2 gr", "Carbohidratos": "7 gr", "Grasas": "0.3 gr"},
@@ -11,7 +11,7 @@
         "pera": {"Calorias": "57 kcal", "Gramos": "100 gr", "Proteínas": "0.4 gr", "Carbohidratos": "15 gr", "Grasas": "0.1 gr"},
         "piña": {"Calorias": "51 kcal", "Gramos": "100 gr", "Proteínas": "0.5 gr", "Carbohidratos": "13 gr", "Grasas": "0.1 gr"},
         "sandia": {"Calorias": "30 kcal", "Gramos": "100 gr", "Proteínas": "0.6 gr", "Carbohidratos": "8 gr", "Grasas": "0.2 gr"},
-        "plátano": {"Calorias": "105 kcal", "Gramos": "100 gr", "Proteínas": "1.3 gr", "Carbohidratos": "27 gr", "Grasas": "0.3 gr"},
+        "platano": {"Calorias": "105 kcal", "Gramos": "100 gr", "Proteínas": "1.3 gr", "Carbohidratos": "27 gr", "Grasas": "0.3 gr"},
         "kiwi": {"Calorias": "61 kcal", "Gramos": "100 gr", "Proteínas": "1.1 gr", "Carbohidratos": "15 gr", "Grasas": "0.5 gr"},
         "papaya": {"Calorias": "43 kcal", "Gramos": "100 gr", "Proteínas": "0.5 gr", "Carbohidratos": "11 gr", "Grasas": "0.1 gr"},
         "cereza": {"Calorias": "50 kcal", "Gramos": "100 gr", "Proteínas": "1 gr", "Carbohidratos": "12 gr", "Grasas": "0.2 gr"},
@@ -21,7 +21,7 @@
     "vegetales": {
         "ajo": {"Calorias": "45 kcal", "Gramos": "100 gr", "Proteínas": "6.4 gr", "Carbohidratos": "33 gr", "Grasas": "0.1 gr"},
         "berenjena": {"Calorias": "25 kcal", "Gramos": "60 gr", "Proteínas": "1 gr", "Carbohidratos": "5.9 gr", "Grasas": "0.2 gr"},
-        "brócoli": {"Calorias": "55 kcal", "Gramos": "100 gr", "Proteínas": "4.2 gr", "Carbohidratos": "11 gr", "Grasas": "0 .6 gr"},
+        "brocoli": {"Calorias": "55 kcal", "Gramos": "100 gr", "Proteínas": "4.2 gr", "Carbohidratos": "11 gr", "Grasas": "0 .6 gr"},
         "calabacín": {"Calorias": "25 kcal", "Gramos": "60 gr", "Proteínas": "1 gr", "Carbohidratos": "4.5 gr", "Grasas": "0.2 gr"},
         "cebolla": {"Calorias": "45 kcal", "Gramos": "100 gr", "Proteínas": "1.1 gr", "Carbohidratos": "10 gr", "Grasas": "0.1 gr"},
         "espinacas": {"Calorias": "20 kcal", "Gramos": "20 gr", "Proteínas": "2.9 gr", "Carbohidratos": "3.6 gr", "Grasas": "0.4 gr"},
@@ -37,7 +37,7 @@
     },
   
     "carnes": {
-        "atún enlatado": {"Calorias": "144 kcal", "Gramos": "100 gr", "Proteínas": "25 gr", "Carbohidratos": "0 gr", "Grasas": "5 gr"},
+        "atun enlatado": {"Calorias": "144 kcal", "Gramos": "100 gr", "Proteínas": "25 gr", "Carbohidratos": "0 gr", "Grasas": "5 gr"},
         "pollo": {"Calorias": "239 kcal", "Gramos": "100 gr", "Proteínas": "27 gr", "Carbohidratos": "0 gr", "Grasas": "14 gr"},
         "pavo": {"Calorias": "140 kcal", "Gramos": "100 gr", "Proteínas": "29 gr", "Carbohidratos": "0 gr", "Grasas": "1 gr"},
         "salmon": {"Calorias": "180 kcal", "Gramos": "120 gr", "Proteínas": "25 gr", "Carbohidratos": "0 gr", "Grasas": "10 gr"},
@@ -46,7 +46,7 @@
         "carne de vaca": {"Calorias": "250 kcal", "Gramos": "120 gr", "Proteínas": "26 gr", "Carbohidratos": "0 gr", "Grasas": "17 gr"},
         "cerdo": {"Calorias": "242 kcal", "Gramos": "100 gr", "Proteínas": "27 gr", "Carbohidratos": "0 gr", "Grasas": "16 gr"},
         "cordero": {"Calorias": "294 kcal", "Gramos": "100 gr", "Proteínas": "25 gr", "Carbohidratos": "0 gr", "Grasas": "21 gr"},
-        "hígado de res": {"Calorias": "175 kcal", "Gramos": "100 gr", "Proteínas": "26 gr", "Carbohidratos": "5 gr", "Grasas": "5 gr"},
+        "higado de res": {"Calorias": "175 kcal", "Gramos": "100 gr", "Proteínas": "26 gr", "Carbohidratos": "5 gr", "Grasas": "5 gr"},
         "pescado blanco": {"Calorias": "120 kcal", "Gramos": "100 gr", "Proteínas": "20 gr", "Carbohidratos": "0 gr", "Grasas": "2 gr"},
         "salchicha": {"Calorias": "300 kcal", "Gramos": "100 gr", "Proteínas": "12 gr", "Carbohidratos": "2 gr", "Grasas": "27 gr"},
         "bacon": {"Calorias": "541 kcal", "Gramos": "100 gr", "Proteínas": "37 gr", "Carbohidratos": "1 gr", "Grasas": "42 gr"},
