@@ -258,6 +258,7 @@ def menu_secundario():
             elif op==2:
                 mostrar_titulo_rutinas()
                 try:
+                    os.system('cls')
                     n = int(input("Seleccione 1 para elegir una rutina preestablecida o 2 para personalizar tu propia rutina."))
                     if n ==1:
                         elegir_Rutina()
@@ -684,10 +685,15 @@ def fechas_por_dia_semana(mes, año):
 
     if g.dias_entrenamiento_plan == 6:
         print(f"Entrenamientos de {g.dias_entrenamiento_plan} días")
-        print("Pull")
-        print("Push")
-        print("Legs")
-        print("descanso")
+        print("Lunes --- Pull")
+        print("Martes --- Push")
+        print("Miercoles --- Legs")
+        print("Jueves --- Pull")
+        print("Viernes --- Push")
+        print("Sabado --- Legs")
+        print("Domingo- Descanso")
+
+        ''''
         print(f"{"Lunes"}: {', '.join(map(str, lista))}")
         print("Martes")
         print(f"{'Martes'}: {', '.join(map(str, lista))}")
@@ -704,16 +710,38 @@ def fechas_por_dia_semana(mes, año):
         
         for dia, lista in fechas.items():
             print(f"{dia}: {', '.join(map(str, lista))}")
+            '''
 
     elif g.dias_entrenamiento_plan == 4:
-        pass    
+        print(f"Entrenamientos de {g.dias_entrenamiento_plan} días")
+        print("Lunes --- Tren Inferior")
+        print("Martes --- Tren Superior")
+        print("Miercoles --- Descanso")
+        print("Jueves --- Tren Inferior")
+        print("Viernes --- Tren Superior")
+        print("Sabado --- Descanso")
+        print("Domingo --- Descanso") 
+
     elif g.dias_entrenamiento_plan == 5:
-        pass 
+        print(f"Entrenamientos de {g.dias_entrenamiento_plan} días")
+        print("Lunes --- Pull")
+        print("Martes --- Push")
+        print("Miercoles --- Legs")
+        print("Jueves --- Descanso")
+        print("Viernes --- Pecho y Espalda")
+        print("Sabado --- Legs")
+        print("Domingo- Descanso")
+
     elif g.dias_entrenamiento_plan == 3:
-        pass
-
+        print(f"Entrenamientos de {g.dias_entrenamiento_plan} días")
+        print("Lunes --- Full Body")
+        print("Martes --- Descanso")
+        print("Miercoles --- Full Body")
+        print("Jueves --- Descanso")
+        print("Viernes --- Full Body")
+        print("Sabado --- Descanso")
+        print("Domingo --- Descanso")
     
-
 def mostrar_calendario():
     visualizar= int(input("Si desea visualizar su plan de entrenamiento en el calendario seleccione 1."))
     if visualizar == 1:
@@ -731,8 +759,7 @@ def mostrar_calendario():
                 print("Por favor, ingrese un mes válido (1-12).")
         except ValueError:
             print("Por favor, ingrese valores numéricos válidos.")
-    
-    
+      
 # FUNCIONES INVENTARIO/RECETAS
 
 def mostrar_inventario():
