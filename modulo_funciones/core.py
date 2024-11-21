@@ -178,6 +178,7 @@ def crear_usuario():
         try:
             opcion = int(input("El nombre de usuario ya existe. Intente con otro nombre de usuario (1) o inicie sesión (2)."))
             if opcion == 1:
+                os.system('cls')
                 g.nombre = input("Ingrese su nombre de usuario: ")
                 g.contraseña = input("Ingrese su contraseña: ")
                 g.usuario_existente, g.datos_de_usuario = verificar_datos(g.nombre)
@@ -273,7 +274,6 @@ def menu_secundario():
                     print("Error, elija el numero 1 o 2.")
             except:
                 print("Error, Opción no válida")
-            mostrar_calendario()
             input()
         elif op==3:
             mostrar_inventario()
@@ -287,12 +287,11 @@ def menu_secundario():
             print("Error!, elija un numero del 1 al 4")
             input()
         
-
 #FUNCIONES INGRESO DATOS
+
 def datos_usuario():
     os.system('cls')
     if len(g.datos_de_usuario) > 1:
-        print("El usuario ya existe.")
         print("")
         print("Bienvenido", g.nombre ,"! A continuacion puede visualizar sus datos cargados.")
         print("")
@@ -301,13 +300,16 @@ def datos_usuario():
             print(f"{clave}: {valor}")
 
         try:
+            print("")
             actualizar= input("Desea actualizar sus datos? (si/no)")
             if actualizar=="si":
                 os.system('cls')
                 cargar_datos()
                 definir_objetivo()
+                os.system('cls')
                 print("Listo! Ya se han actualizado sus datos") 
             else:
+                os.system('cls')
                 print("Puede continuar utilizando el programa con normalidad ... ")  
         except:
             print("Error, ingresar si o no")
@@ -315,7 +317,6 @@ def datos_usuario():
         cargar_datos()
         definir_objetivo()
     
-
 def cargar_datos():
     altura_usuario, peso_usuario, edad_usuario, sexo_usuario, cantidad_ejercicio = cargar_info_personal()
     calculo_calorias = calcular_calorias(altura_usuario, peso_usuario, edad_usuario, sexo_usuario, cantidad_ejercicio)
@@ -405,12 +406,13 @@ def cargar_info_personal():
     
     os.system('cls')        
     try:
-        g.cantidad_ejercicio = int(input('''Ingrese la cantidad de ejercicio que realiza usualmente durante la semana; 
-                                        1. Si no realiza ejercicio
-                                        2. Si ejercita 1-3 veces a la semana ingrese 2
-                                        3. Si hace 3-5 veces a la semana
-                                        4. Si hace 6-7 veces a la semana
-                                        5. Si hace 2 veces al dia o mas. '''))
+        g.cantidad_ejercicio = int(input('''Ingrese la cantidad de ejercicio que realiza usualmente durante la semana: 
+                                         
+                                1. Si no realiza ejercicio
+                                2. Si ejercita 1-3 veces a la semana ingrese 2
+                                3. Si hace 3-5 veces a la semana
+                                4. Si hace 6-7 veces a la semana
+                                5. Si hace 2 veces al dia o mas. '''))
     except:
         print("ERROR, Ingrese un numero")
 
@@ -444,8 +446,10 @@ def calcular_calorias (altura, peso, edad, sexo, cantidad_ejercicio):
 
 def definir_objetivo() :
     os.system('cls')
-    texto_aumento_musculo= """|1_ Para aumentar el volumen muscular, es fundamental seguir una dieta hipercalórica que puede variar su riqueza en proteínas, carbohidratos y grasas saludables, junto con un entrenamiento adecuado."""
-    texto_quemar_grasa = """|2_ Una dieta de definición se centra en reducir el porcentaje de grasa corporal mientras se mantiene la masa muscular. Es una dieta de pérdida de peso, pero con un enfoque especial en preservar el músculo."""
+    texto_aumento_musculo= """|1_ Para aumentar el volumen muscular, es fundamental seguir una dieta hipercalórica que puede variar su riqueza en proteínas, 
+                                carbohidratos y grasas saludables, junto con un entrenamiento adecuado."""
+    texto_quemar_grasa = """|2_ Una dieta de definición se centra en reducir el porcentaje de grasa corporal mientras se mantiene la masa muscular. 
+                            Es una dieta de pérdida de peso, pero con un enfoque especial en preservar el músculo."""
     texto_mantenimiento= """|3_ Ya sabiendo nuestras calorias de mantenimiento, podemos con esto mantener nuestro peso."""
 
     print("\033[0;36m")
@@ -458,16 +462,9 @@ def definir_objetivo() :
     print("2. Quemar grasa")
     print("3. Mantenimiento")
     print("")
-    print(texto_aumento_musculo)
-    print("")
-    print(texto_quemar_grasa)
-    print("")
-    print(texto_mantenimiento)
-    print("")
     
     bandera=True
     while bandera:
-        
         objetivo =errorEntero()
         os.system('cls')
         if objetivo == 1:
@@ -495,7 +492,8 @@ def definir_objetivo() :
 
         else: 
             print("El valor ingresado es inválido, por favor intentelo de nuevo")
-            input()    
+            input()
+        input()       
     return objetivo
 
 # FUNCIONES Rutinas
@@ -590,11 +588,13 @@ def elegir_Rutina():
     print("\033[0;37m")
 
     for clave, valor in g.rutinaSeleccionada.items():
-            print(f"**{clave}**:")  # Imprime el nombre de la categoría
+            print(f"--- {clave} :")  # Imprime el nombre de la categoría
             for ejercicio, detalles in valor.items():  # Itera sobre los ejercicios en cada categoría
                 if detalles["ejercicio"]:  # Verifica que el ejercicio no esté vacío
                     print(f"  {ejercicio:<20} {detalles['ejercicio']:<30} - Series: {detalles['series']:<5} - Repeticiones: {detalles['repeticiones']:<5}")
             print()
+    mostrar_calendario()
+    input()
 
 def cargar_ejercicios():
     try:
@@ -640,23 +640,27 @@ def hacer_Rutina():
         grupo = input("Selecciona un grupo muscular (o escriba -1 para terminar): ")
 
         if grupo== "-1":
+            os.system('cls')
             bandera = False
 
         elif grupo in ejercicios:
+            os.system('cls')
             ejercicios_grupo = ejercicios[grupo]
             print(f"Ejercicios disponibles para {grupo}: ")
 
             for ejercicio in ejercicios_grupo:
                 print(ejercicio)
-            print()  # Nueva línea después de listar los ejercicios
+            print()  
             ejercicio = input("Escriba un ejercicio de igual manera a como esta mostrado para agregarlo a su rutina: ")
 
             if ejercicio in ejercicios_grupo:
                 try:
+                    os.system('cls')
                     series = int(input("Ingrese el número de series: "))
                     repeticiones = int(input("Ingrese el número de repeticiones: "))
                 except:
-                    print("Porfavor elija un numero")
+                    print("Por favor elija un numero")
+                    input()
 
                 ejercicio_info = {
                     "ejercicio": ejercicio,
@@ -670,11 +674,15 @@ def hacer_Rutina():
 
             else:
                 print("Ejercicio no encontrado. Intenta de nuevo.")
+                input()
         else:
             print("Grupo muscular no encontrado. Intenta de nuevo.")
+            input()
         i += 1
-
-    print(g.miRutina)
+        input()
+        print("Su rutina personalizada para el dia de hoy: ")
+        print("")
+        print(g.miRutina)
 
     g.datos_de_usuario["miRutina"] = g.miRutina
 
@@ -718,26 +726,23 @@ def generar_calendario(mes, año):
         print("".join(calendario[i:i+7]))
 
 def fechas_por_dia_semana(mes, año):
-    dias = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"]
-    dias_especificos = ["Lunes", "Miércoles", "Viernes"]
-    fechas = {dia: [] for dia in dias}
-    num_dias = dias_en_mes(mes, año)
-    
-    for dia in range(1, num_dias + 1):
-        dia_semana = calcular_dia_semana(año, mes, dia)
-        fechas[dias[dia_semana]].append(dia)
+    n= input("Desea ver que fecha tendra que hacer cada ejercicio? si/no: ")
+    if n == "si":
+        os.system('cls')
+        dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
+        fechas = {dia: [] for dia in dias}
+        num_dias = dias_en_mes(mes, año)
+        
+        for dia in range(1, num_dias + 1):
+            dia_semana = calcular_dia_semana(año, mes, dia)
+            fechas[dias[dia_semana]].append(dia)
 
-    for dia in range(1, num_dias + 1):
-        dia_semana = calcular_dia_semana(año, mes, dia)
-        dia_nombre = dias[dia_semana]
-        if dia_nombre in dias_especificos:
-            fechas[dia_nombre].append(dia)
-    
-    for dia, lista, mes in fechas.items():
-        print(f"{dia}: {'/{mes}, '.join(map(str, lista))}")
+        for dia, lista in fechas.items():
+            print(f"{dia}: {', '.join(map(str, lista))}")
+    else:
+        return
 
-    # Imprimir las fechas clasificadas
-
+def grupo_muscular_por_dia():    
     if g.dias_entrenamiento_plan == 6:
         print(f"Entrenamientos de {g.dias_entrenamiento_plan} días")
         print("Lunes --- Pull")
@@ -777,10 +782,11 @@ def fechas_por_dia_semana(mes, año):
         print("Viernes --- Full Body")
         print("Sabado --- Descanso")
         print("Domingo --- Descanso")
-
     
 def mostrar_calendario():
-    visualizar= int(input("Si desea visualizar su plan de entrenamiento en el calendario seleccione 1."))
+    input()
+    os.system('cls')
+    visualizar= int(input("""Seleccione 1 si desea visualizar su plan de entrenamiento en el calendario o -1 si desea regresar al menu."""))
     if visualizar == 1:
         os.system('cls')
         mostrar_titulo_calendario()
@@ -791,11 +797,20 @@ def mostrar_calendario():
             if 1 <= mes <= 12:
                 generar_calendario(mes, año)
                 print("\nSu plan de entrenamiento este mes:")
+                grupo_muscular_por_dia()
+                print("")
                 fechas_por_dia_semana(mes, año)
             else:
                 print("Por favor, ingrese un mes válido (1-12).")
+                input()
         except ValueError:
             print("Por favor, ingrese valores numéricos válidos.")
+            input()
+    elif visualizar ==- 1:
+        return              
+    else:
+        print("Error, elija el numero 1 para ver el calendario o -1 para regresar al menu.")
+        input()
       
 # FUNCIONES INVENTARIO/RECETAS
 
@@ -821,19 +836,21 @@ def mostrar_inventario():
 def inventario():
     
     print("""Esta función nos permite almacenar las comidas que tengas a disponibilidad, para esto
-           vas a tener que buscarlas dentro de nuestro diccionario de comidas y luego escribir si alguna
-          de las comidas mostradas a continuacion esta a tu alcance""")
+    vas a tener que buscarlas dentro de nuestro diccionario de comidas y luego escribir si alguna
+    de las comidas mostradas a continuacion esta a tu alcance""")
+    print("")
+    input()
+    os.system('cls')
     print("Grupos de comidas disponibles:")
 
     with open('Base_de_datos/comidas.json','r') as f:
         comidas = json.load(f)
     
-    #Imprimir grupos
+    
     for clave in comidas.keys():
-        print(clave)
-        print("--")
+        print("-", clave)
+        print("-----------------------------------")
 
-    #Seleccionar grupo
     g.miHeladera = {}
 
     bandera = True
@@ -844,31 +861,36 @@ def inventario():
             bandera = False
 
         elif grupo in comidas:
+            os.system('cls')
             comidas_grupo = comidas[grupo]
             print(f"Comidas disponibles para {grupo}: ")
 
             for comida in comidas_grupo:
-                print(comida)
+                print("-", comida)
             print() 
             comida = input("Escriba una comida de igual manera a como esta mostrada para agregarlo a su heladera: ")
 
             if comida in comidas_grupo:
                 
-                
                 g.miHeladera[f"{comida}"] = comidas_grupo[comida]
 
-                print(f"La comida '{comida}' agregada a la heladera.")
+                print(f"La comida '{comida}' fue agregada a la heladera.")
 
             else:
                 print("Comida no encontrada. Intenta de nuevo.")
+                input()
         else:
             print("Grupo de comida no encontrado. Intenta de nuevo.")
+            input()
+
+    os.system('cls')
     print("Su heladera es: ")
     print(g.miHeladera)
     input()
     miDieta()
 
 def miDieta():
+    os.system('cls')
     g.miDieta = {}
 
     print(f"Con las calorias que usted necesita consumir, kcal: '{g.calorias}', elija ingredientes o comidas de su heladera para llegar a sus calorias deseadas.")
@@ -885,6 +907,7 @@ def miDieta():
             bandera = False
 
         elif comida in g.miHeladera:
+            os.system('cls')
             print(f"Comidas de tu heladera: ")
 
             g.miDieta[f"{comida}"] = g.miHeladera[comida]
@@ -893,27 +916,9 @@ def miDieta():
 
         else:
             print("Comida no encontrada. Intenta de nuevo.")
+            input()
+
     print("Su dieta para hoy es: ")
-    
     print(g.miDieta)
-
-
-
-
-'''
-
-
-
-
-def busqueda_secuencial(lista, dato):
-    i = 0
-    while i < len(lista) and lista[i] != dato:
-        i+=1
-    if i < len(lista):
-        return i
-    else:
-        return -1
-        
-        
-'''
+    input()
 
