@@ -100,14 +100,14 @@ def ejecutar():
     os.system('cls')
     ingresar_cuenta()
 
-
 def errorEntero():
-
     try:
         opcion = int(input("Seleccione una opción del menu: "))
         return opcion
     except:
         print("Error, ingrese un numero del 1 al 3.")
+
+
 #FUNCIONES LOGIN
 
 def ingresar_cuenta():
@@ -483,7 +483,24 @@ def definir_objetivo() :
 
 # FUNCIONES Rutinas
 def mostrar_titulo_rutinas():
-    pass
+    os.system ('cls')
+
+    init(autoreset=True)
+
+    texto = f"""
+    {Fore.BLUE}   __       _   _                 
+    {Fore.BLUE}  /__\_   _| |_(_)_ __   __ _ ___ 
+    {Fore.BLUE} / \// | | | __| | '_ \ / _` / __|
+    {Fore.BLUE}/ _  \ |_| | |_| | | | | (_| \__ \
+    {Fore.BLUE}\/ \_/\__,_|\__|_|_| |_|\__,_|___/
+                                  
+
+                                                            
+    """
+
+    # Imprime el texto
+    print(texto)
+    input()
 
 def mostrar_titulo_calendario():
     os.system ('cls')
@@ -685,13 +702,23 @@ def generar_calendario(mes, año):
 
 def fechas_por_dia_semana(mes, año):
     dias = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"]
+    dias_especificos = ["Lunes", "Miércoles", "Viernes"]
     fechas = {dia: [] for dia in dias}
     num_dias = dias_en_mes(mes, año)
     
     for dia in range(1, num_dias + 1):
         dia_semana = calcular_dia_semana(año, mes, dia)
         fechas[dias[dia_semana]].append(dia)
+
+    for dia in range(1, num_dias + 1):
+        dia_semana = calcular_dia_semana(año, mes, dia)
+        dia_nombre = dias[dia_semana]
+        if dia_nombre in dias_especificos:
+            fechas[dia_nombre].append(dia)
     
+    for dia, lista, mes in fechas.items():
+        print(f"{dia}: {'/{mes}, '.join(map(str, lista))}")
+        
     # Imprimir las fechas clasificadas
 
     if g.dias_entrenamiento_plan == 6:
@@ -734,8 +761,6 @@ def fechas_por_dia_semana(mes, año):
         print("Sabado --- Descanso")
         print("Domingo --- Descanso")
 
-    for dia, lista, mes in fechas.items():
-            print(f"{dia}: {'/{mes}, '.join(map(str, lista))}")
     
 def mostrar_calendario():
     visualizar= int(input("Si desea visualizar su plan de entrenamiento en el calendario seleccione 1."))
