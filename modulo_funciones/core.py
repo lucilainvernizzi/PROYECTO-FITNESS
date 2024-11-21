@@ -339,8 +339,8 @@ def cargar_datos():
         "heladera" : '',
         "miDieta" : "",
         "Rutina elejida" : "", 
-        "miRutina" : "", 
-        
+        "miRutina" : ""
+
         }
     usuarios[g.nombre].update(agregar_datos)
     g.datos_de_usuario = usuarios[g.nombre]
