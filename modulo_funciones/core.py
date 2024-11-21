@@ -69,8 +69,8 @@ def mostrar_equipo():
     print("")
     print("Lucila Invernizzi, LU: 1201347")
     print("Juan Ignacio Fernández Noceda, LU: ")
-    print("Mateo Castellanos, LU:")
-    print("Matías Scoccia, LU: ")
+    print("Mateo Castellanos, LU: 1194293")
+    print("Matías Scoccia, LU: 1195751 ")
     print("")
     print("Somos estudiantes de la materia Programacion I, de la carrera Ingeniería Informática en UADE.")
     print("")
@@ -296,6 +296,8 @@ def datos_usuario():
         print("Bienvenido", g.nombre ,"! A continuacion puede visualizar sus datos cargados.")
         print("")
 
+        
+
         for clave, valor in g.datos_de_usuario.items():
             print(f"{clave}: {valor}")
 
@@ -327,7 +329,7 @@ def cargar_datos():
       
     with open(ruta_archivo_json, 'r') as f:
         usuarios = json.load(f)
-             
+  
     agregar_datos = {
         "altura" : altura_usuario, 
         "peso" : peso_usuario,
@@ -335,7 +337,11 @@ def cargar_datos():
         "sexo" : sexo_usuario, 
         "calorias" : calculo_calorias,
         "cantidad_ejercicio" : cantidad_ejercicio,
-        "heladera" : ''
+        "heladera" : '',
+        "miDieta" : "",
+        "Rutina elejida" : "", 
+        "miRutina" : ""
+
         }
     usuarios[g.nombre].update(agregar_datos)
     g.datos_de_usuario = usuarios[g.nombre]
@@ -506,7 +512,7 @@ def mostrar_titulo_rutinas():
     {Fore.BLUE}   __       _   _                 
     {Fore.BLUE}  /__\_   _| |_(_)_ __   __ _ ___ 
     {Fore.BLUE} / \// | | | __| | '_ \ / _` / __|
-    {Fore.BLUE}/ _  \ |_| | |_| | | | | (_| \__ \
+    {Fore.BLUE}/ _  \ |_| | |_| | | | | (_| \__ |
     {Fore.BLUE}\/ \_/\__,_|\__|_|_| |_|\__,_|___/
                                   
 
@@ -563,11 +569,16 @@ def cargar_rutinas():
 
 def elegir_Rutina():
 
+    ruta_archivo_json = verificar_o_crear_archivo_json()
+    with open(ruta_archivo_json, 'r') as f:
+        usuarios = json.load(f)
+
     print("\033[0;36m")
     print("\033[4;15HRutinas")
     print("\033[0;37m")
 
     rutinas = cargar_rutinas()
+
     g.dias_entrenamiento_plan = solicitar_dias_entrenamiento()
     
     if g.dias_entrenamiento_plan == 6:
@@ -581,6 +592,9 @@ def elegir_Rutina():
         
     elif g.dias_entrenamiento_plan == 3:
         g.rutinaSeleccionada = rutinas[1] 
+
+    g.datos_de_usuario["Rutina elejida"] = g.rutinaSeleccionada
+    usuarios[g.nombre]["Rutina elejida"] = g.rutinaSeleccionada
 
     os.system("cls")
     print("\033[0;36m")
@@ -611,6 +625,12 @@ def hacer_Rutina():
     print("Genial! Aqui podras armar tu propia rutina de entrenamiento!")
     input()
     
+    ruta_archivo_json = verificar_o_crear_archivo_json()
+
+      
+    with open(ruta_archivo_json, 'r') as f:
+        usuarios = json.load(f)
+
     os.system('cls')
     print("\033[0;36m")
     print("\033[4;15HPersonalizar rutina")
@@ -679,12 +699,12 @@ def hacer_Rutina():
             print("Grupo muscular no encontrado. Intenta de nuevo.")
             input()
         i += 1
-        input()
-        print("Su rutina personalizada para el dia de hoy: ")
-        print("")
-        print(g.miRutina)
-
+    print("Su rutina personalizada para el dia de hoy: ")
+    print("")
+    print(g.miRutina)
+    usuarios[g.nombre]["miRutina"] = g.miRutina
     g.datos_de_usuario["miRutina"] = g.miRutina
+    input()
 
 #CALENDARIO
 def es_bisiesto(año):
@@ -786,7 +806,11 @@ def grupo_muscular_por_dia():
 def mostrar_calendario():
     input()
     os.system('cls')
-    visualizar= int(input("""Seleccione 1 si desea visualizar su plan de entrenamiento en el calendario o -1 si desea regresar al menu."""))
+    try:
+        visualizar= int(input("""Seleccione 1 si desea visualizar su plan de entrenamiento en el calendario o -1 si desea regresar al menu."""))
+    except:
+        print("Error")
+        
     if visualizar == 1:
         os.system('cls')
         mostrar_titulo_calendario()
@@ -846,7 +870,11 @@ def inventario():
     with open('Base_de_datos/comidas.json','r') as f:
         comidas = json.load(f)
     
-    
+    ruta_archivo_json = verificar_o_crear_archivo_json()
+    with open(ruta_archivo_json, 'r') as f:
+        usuarios = json.load(f)
+
+    #Imprimir grupos
     for clave in comidas.keys():
         print("-", clave)
         print("-----------------------------------")
@@ -886,12 +914,18 @@ def inventario():
     os.system('cls')
     print("Su heladera es: ")
     print(g.miHeladera)
+    g.datos_de_usuario['heladera'] = g.miHeladera
+    usuarios[g.nombre]["heladera"] = g.miHeladera
+
     input()
     miDieta()
 
 def miDieta():
     os.system('cls')
     g.miDieta = {}
+    ruta_archivo_json = verificar_o_crear_archivo_json()
+    with open(ruta_archivo_json, 'r') as f:
+        usuarios = json.load(f)
 
     print(f"Con las calorias que usted necesita consumir, kcal: '{g.calorias}', elija ingredientes o comidas de su heladera para llegar a sus calorias deseadas.")
 
@@ -919,6 +953,12 @@ def miDieta():
             input()
 
     print("Su dieta para hoy es: ")
-    print(g.miDieta)
+    print("")
+    g.datos_de_usuario['miDieta'] = g.miDieta
+    usuarios[g.nombre]["miDieta"] = g.miDieta
     input()
+
+
+
+
 
