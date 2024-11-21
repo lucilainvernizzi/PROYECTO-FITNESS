@@ -257,13 +257,14 @@ def menu_secundario():
 
         if op==1:
                 datos_usuario()
-                definir_objetivo()
                 input()
         elif op==2:
             mostrar_titulo_rutinas()
             try:
                 os.system('cls')
+            
                 n = int(input("Seleccione 1 para elegir una rutina preestablecida o 2 para personalizar tu propia rutina."))
+                
                 if n ==1:
                     elegir_Rutina()
                 elif n ==2:
@@ -304,6 +305,7 @@ def datos_usuario():
             if actualizar=="si":
                 os.system('cls')
                 cargar_datos()
+                definir_objetivo()
                 print("Listo! Ya se han actualizado sus datos") 
             else:
                 print("Puede continuar utilizando el programa con normalidad ... ")  
@@ -311,6 +313,7 @@ def datos_usuario():
             print("Error, ingresar si o no")
     else:
         cargar_datos()
+        definir_objetivo()
     
 
 def cargar_datos():
@@ -351,7 +354,10 @@ def cargar_info_personal():
 
     bandera = True
     while bandera:
-        g.altura= int(input("Por favor, ingrese su altura en cm: "))
+        try:
+            g.altura= int(input("Por favor, ingrese su altura en cm: "))
+        except:
+            print("Ingrese un numero")
         if g.altura <= 0:
             print("La edad no es válida. Por favor, intentelo de nuevo.")
         else:
@@ -359,7 +365,11 @@ def cargar_info_personal():
     
     bandera = True
     while bandera:
-        g.peso = int(input("Ingrese su peso en KG: "))
+        try:
+            g.peso = int(input("Ingrese su peso en KG: "))
+        except:
+            print("Ingrese un numero")
+    
         if g.peso <= 0:
             print("El peso no es válido. Por favor, intentelo de nuevo.")
         else:
@@ -367,7 +377,10 @@ def cargar_info_personal():
 
     bandera = True
     while bandera:
-        g.edad = int(input("Ingrese su edad: "))
+        try:
+            g.edad = int(input("Ingrese su edad: "))
+        except:
+            print("Ingrese un numero")
         if g.edad<=0 or g.edad>100:
             print("La edad no es válida. Por favor, intentelo de nuevo.")
         else:
@@ -375,7 +388,11 @@ def cargar_info_personal():
 
     bandera = True
     while bandera:
-        g.sexo = input("¿Cuál es su sexo? (H/M): ")
+        try:
+            g.sexo = input("¿Cuál es su sexo? (H/M): ")
+        except:
+            print(" ERROR, Ingrese H o M")
+
         if g.sexo.upper() == "H":
             g.sexo= "H"
             bandera = False
@@ -387,12 +404,16 @@ def cargar_info_personal():
     input()
     
     os.system('cls')        
-    g.cantidad_ejercicio = int(input('''Ingrese la cantidad de ejercicio que realiza usualmente durante la semana; 
-                                     1. Si no realiza ejercicio
-                                     2. Si ejercita 1-3 veces a la semana ingrese 2
-                                     3. Si hace 3-5 veces a la semana
-                                     4. Si hace 6-7 veces a la semana
-                                     5. Si hace 2 veces al dia o mas. '''))
+    try:
+        g.cantidad_ejercicio = int(input('''Ingrese la cantidad de ejercicio que realiza usualmente durante la semana; 
+                                        1. Si no realiza ejercicio
+                                        2. Si ejercita 1-3 veces a la semana ingrese 2
+                                        3. Si hace 3-5 veces a la semana
+                                        4. Si hace 6-7 veces a la semana
+                                        5. Si hace 2 veces al dia o mas. '''))
+    except:
+        print("ERROR, Ingrese un numero")
+
     g.usuario_existente=True
     return g.altura, g.peso, g.edad, g.sexo, g.cantidad_ejercicio
 
@@ -446,38 +467,34 @@ def definir_objetivo() :
     
     bandera=True
     while bandera:
-        try:
-            objetivo = int(input("Seleccione del menu: "))
-            os.system('cls')
-            if objetivo == 1:
-                print (texto_aumento_musculo)
-                if g.sexo == "H":
-                    g.calorias += 500
-                elif g.sexo == "M":
-                    g.calorias += 250
-                print("Estas son tu calorias para tu volumen: ", g.calorias)
-                bandera=False
+        
+        objetivo =errorEntero()
+        os.system('cls')
+        if objetivo == 1:
+            print (texto_aumento_musculo)
+            if g.sexo == "H":
+                g.calorias += 500
+            elif g.sexo == "M":
+                g.calorias += 250
+            print("Estas son tu calorias para tu volumen: ", g.calorias)
+            bandera=False
 
-            elif objetivo == 2:
-                print(texto_quemar_grasa)  
-                if g.sexo == "H":
-                    g.calorias -= 800
-                elif g.sexo == "M":
-                    g.calorias -= 400
-                print("Estas son tus calorias para tu definicion: ", g.calorias)
-                bandera=False
+        elif objetivo == 2:
+            print(texto_quemar_grasa)  
+            if g.sexo == "H":
+                g.calorias -= 800
+            elif g.sexo == "M":
+                g.calorias -= 400
+            print("Estas son tus calorias para tu definicion: ", g.calorias)
+            bandera=False
             
-            elif objetivo == 3:
-                print(texto_mantenimiento)
-                print("Para mantener tu peso debes seguir comiendo las mismas calorias de mantenimiento: ", g.calorias)
-                bandera=False
+        elif objetivo == 3:
+            print(texto_mantenimiento)
+            print("Para mantener tu peso debes seguir comiendo las mismas calorias de mantenimiento: ", g.calorias)
+            bandera=False
 
-            else: 
-                print("El valor ingresado es inválido, por favor intentelo de nuevo")
-                objetivo = int(input("Seleccione del menu"))
-
-        except: 
-            print("Error")
+        else: 
+            print("El valor ingresado es inválido, por favor intentelo de nuevo")
             input()    
     return objetivo
 
@@ -718,7 +735,7 @@ def fechas_por_dia_semana(mes, año):
     
     for dia, lista, mes in fechas.items():
         print(f"{dia}: {'/{mes}, '.join(map(str, lista))}")
-        
+
     # Imprimir las fechas clasificadas
 
     if g.dias_entrenamiento_plan == 6:
