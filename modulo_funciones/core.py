@@ -2,7 +2,6 @@ import os
 import json
 from colorama import init, Fore, Back, Style
 import modulo_funciones.GLOBAL as g
-
 '''
 #FUNCIONES MENU PRINCIPAL
 '''
@@ -598,6 +597,7 @@ def elegir_Rutina():
 
     g.datos_de_usuario["Rutina elejida"] = g.rutinaSeleccionada
     usuarios[g.nombre]["Rutina elejida"] = g.rutinaSeleccionada
+    input()
 
     os.system("cls")
     print("\033[0;36m")
@@ -605,9 +605,9 @@ def elegir_Rutina():
     print("\033[0;37m")
 
     for clave, valor in g.rutinaSeleccionada.items():
-            print(f"--- {clave} :")  # Imprime el nombre de la categoría
-            for ejercicio, detalles in valor.items():  # Itera sobre los ejercicios en cada categoría
-                if detalles["ejercicio"]:  # Verifica que el ejercicio no esté vacío
+            print(f"--- {clave} :") 
+            for ejercicio, detalles in valor.items():  
+                if detalles["ejercicio"]:  
                     print(f"  {ejercicio:<20} {detalles['ejercicio']:<30} - Series: {detalles['series']:<5} - Repeticiones: {detalles['repeticiones']:<5}")
             print()
     mostrar_calendario()
@@ -641,17 +641,7 @@ def hacer_Rutina():
 
     ejercicios = cargar_ejercicios()
 
-   
-    bandera = True
-    i = 1
-    while bandera:
-        os.system('cls')
-        print("Ejercicios disponibles por grupo muscular:")
-        for grupo in ejercicios.keys():
-            print(grupo)
-            print("--")
-
-        g.miRutina = {
+    g.miRutina = {
             "Ejercicio1" : {},
             "Ejercicio2" : {}, 
             "Ejercicio3" : {},
@@ -660,7 +650,19 @@ def hacer_Rutina():
             "Ejercicio6" : {},
             "Ejercicio7" : {}, 
 
+
         }
+    
+
+    bandera = True
+    i = 1
+    while bandera:
+
+        print("Ejercicios disponibles por grupo muscular:")
+        for grupo in ejercicios.keys():
+            print(grupo)
+            print("--")
+
 
         grupo = input("Selecciona un grupo muscular (o escriba -1 para terminar): ")
 
@@ -669,7 +671,7 @@ def hacer_Rutina():
             bandera = False
 
         elif grupo in ejercicios:
-            os.system('cls')
+            
             ejercicios_grupo = ejercicios[grupo]
             print(f"Ejercicios disponibles para {grupo}: ")
 
@@ -696,6 +698,8 @@ def hacer_Rutina():
                 g.miRutina[f"Ejercicio{i}"] = ejercicio_info
 
                 print(f"Ejercicio '{ejercicio}' agregado a la rutina.")
+                input()
+                os.system('cls')
 
             else:
                 print("Ejercicio no encontrado. Intenta de nuevo.")
@@ -894,7 +898,7 @@ def inventario():
         if grupo== "-1":
             bandera = False
         elif grupo in comidas:
-            os.system('cls')
+            
             comidas_grupo = comidas[grupo]
             print(f"Comidas disponibles para {grupo}: ")
 
@@ -936,6 +940,7 @@ def miDieta():
 
     bandera = True
     while bandera:
+        os.system("cls")
         for comida in g.miHeladera:
             print(comida)
             print("--")
@@ -946,19 +951,17 @@ def miDieta():
             bandera = False
 
         elif comida in g.miHeladera:
-            os.system('cls')
-            print(f"Comidas de tu heladera: ")
 
             g.miDieta[f"{comida}"] = g.miHeladera[comida]
 
-            print(f"La comida '{comida}' fue agregada a la heladera.")
-
+            print(f"La comida '{comida}' fue agregada a tu dieta.")
+            input()
         else:
             print("Comida no encontrada. Intenta de nuevo.")
             input()
 
     print("Su dieta para hoy es: ")
-    print("")
+    print(g.miDieta)
     g.datos_de_usuario['miDieta'] = g.miDieta
     usuarios[g.nombre]["miDieta"] = g.miDieta
     input()
