@@ -514,7 +514,7 @@ def mostrar_titulo_rutinas():
     {Fore.BLUE}   __       _   _                 
     {Fore.BLUE}  /__\_   _| |_(_)_ __   __ _ ___ 
     {Fore.BLUE} / \// | | | __| | '_ \ / _` / __|
-    {Fore.BLUE}/ _  \ |_| | |_| | | | | (_| \__ \
+    {Fore.BLUE}/ _  \ |_| | |_| | | | | (_| \__ |
     {Fore.BLUE}\/ \_/\__,_|\__|_|_| |_|\__,_|___/
                                   
 
@@ -800,7 +800,12 @@ def fechas_por_dia_semana(mes, año):
 
     
 def mostrar_calendario():
-    visualizar= int(input("Si desea visualizar su plan de entrenamiento en el calendario seleccione 1."))
+    try:
+        visualizar= int(input("Si desea visualizar su plan de entrenamiento en el calendario seleccione 1."))
+    except:
+        print("Error")
+
+
     if visualizar == 1:
         os.system('cls')
         mostrar_titulo_calendario()
@@ -932,21 +937,4 @@ def miDieta():
 
 
 
-
-'''
-
-
-
-
-def busqueda_secuencial(lista, dato):
-    i = 0
-    while i < len(lista) and lista[i] != dato:
-        i+=1
-    if i < len(lista):
-        return i
-    else:
-        return -1
-        
-        
-'''
 
