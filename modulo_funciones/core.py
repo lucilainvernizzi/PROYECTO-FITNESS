@@ -3,8 +3,10 @@ import json
 from colorama import init, Fore, Back, Style
 import modulo_funciones.GLOBAL as g
 
-
+'''
 #FUNCIONES MENU PRINCIPAL
+'''
+
 def intro():
 
     init(autoreset=True)
@@ -37,7 +39,7 @@ def menu_principal():
         print("4. Salir")
 
 
-        op = errorEntero()    
+        op = errorEntero(4)    
 
         if op==1:
             mostrar_equipo()
@@ -100,12 +102,12 @@ def ejecutar():
     os.system('cls')
     ingresar_cuenta()
 
-def errorEntero():
+def errorEntero(numero):
     try:
         opcion = int(input("Seleccione una opción del menu: "))
         return opcion
     except:
-        print("Error, ingrese un numero del 1 al 3.")
+        print("Error, ingrese un numero del 1 al ", numero, ".")
 
 
 #FUNCIONES LOGIN
@@ -124,7 +126,7 @@ def ingresar_cuenta():
         print("3. Salir")
 
 
-        opcion = errorEntero()
+        opcion = errorEntero(3)
         
         if opcion == 1:
             crear_usuario()
@@ -237,7 +239,9 @@ def iniciar_sesion():
             crear_usuario()
     return False
 
-#FUNCION MENU SECUNDARIO
+'''
+FUNCION MENU SECUNDARIO
+'''
 
 def menu_secundario():
     repetir = True
@@ -254,7 +258,7 @@ def menu_secundario():
         print("3. Inventario")
         print("4. Cerrar sesion")
 
-        op= errorEntero()
+        op= errorEntero(4)
 
         if op==1:
                 datos_usuario()
@@ -322,7 +326,6 @@ def datos_usuario():
 def cargar_datos():
     altura_usuario, peso_usuario, edad_usuario, sexo_usuario, cantidad_ejercicio = cargar_info_personal()
     calculo_calorias = calcular_calorias(altura_usuario, peso_usuario, edad_usuario, sexo_usuario, cantidad_ejercicio)
-    #objetivo_usuario= definir_objetivo()
 
     ruta_archivo_json = verificar_o_crear_archivo_json()
     g.calorias = calculo_calorias
@@ -638,25 +641,27 @@ def hacer_Rutina():
 
     ejercicios = cargar_ejercicios()
 
-    print("Ejercicios disponibles por grupo muscular:")
-    for grupo in ejercicios.keys():
-        print(grupo)
-        print("--")
-
-    g.miRutina = {
-        "Ejercicio1" : {},
-        "Ejercicio2" : {}, 
-        "Ejercicio3" : {},
-        "Ejercicio4" : {}, 
-        "Ejercicio5" : {},  
-        "Ejercicio6" : {},
-        "Ejercicio7" : {}, 
-
-    }
-
+   
     bandera = True
     i = 1
     while bandera:
+        os.system('cls')
+        print("Ejercicios disponibles por grupo muscular:")
+        for grupo in ejercicios.keys():
+            print(grupo)
+            print("--")
+
+        g.miRutina = {
+            "Ejercicio1" : {},
+            "Ejercicio2" : {}, 
+            "Ejercicio3" : {},
+            "Ejercicio4" : {}, 
+            "Ejercicio5" : {},  
+            "Ejercicio6" : {},
+            "Ejercicio7" : {}, 
+
+        }
+
         grupo = input("Selecciona un grupo muscular (o escriba -1 para terminar): ")
 
         if grupo== "-1":
@@ -865,7 +870,6 @@ def inventario():
     print("")
     input()
     os.system('cls')
-    print("Grupos de comidas disponibles:")
 
     with open('Base_de_datos/comidas.json','r') as f:
         comidas = json.load(f)
@@ -874,20 +878,21 @@ def inventario():
     with open(ruta_archivo_json, 'r') as f:
         usuarios = json.load(f)
 
-    #Imprimir grupos
-    for clave in comidas.keys():
-        print("-", clave)
-        print("-----------------------------------")
-
     g.miHeladera = {}
 
     bandera = True
     while bandera:
+        print("Grupos de comidas disponibles:")
+        i=1
+        for clave in comidas.keys():
+            print(i, "-", clave)
+            print("-----------------------------------")
+            i+=1
+        print ("")
         grupo = input("Selecciona un grupo de comidas (o escriba -1 para terminar): ")
 
         if grupo== "-1":
             bandera = False
-
         elif grupo in comidas:
             os.system('cls')
             comidas_grupo = comidas[grupo]
@@ -957,8 +962,4 @@ def miDieta():
     g.datos_de_usuario['miDieta'] = g.miDieta
     usuarios[g.nombre]["miDieta"] = g.miDieta
     input()
-
-
-
-
 
