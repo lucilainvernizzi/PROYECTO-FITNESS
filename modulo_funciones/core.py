@@ -2,8 +2,9 @@ import os
 import json
 from colorama import init, Fore, Back, Style
 import modulo_funciones.GLOBAL as g
+
 '''
-#FUNCIONES MENU PRINCIPAL
+FUNCIONES MENU PRINCIPAL
 '''
 
 def intro():
@@ -94,7 +95,7 @@ def mostrar_inst():
     print("")
     print("3. Recibe tu plan de alimentacion y entrenamiento personalizado.")
     print("")
-    print("""4. Comenza tu plan!. La constancia y disciplina son elementos clave. """)
+    print("""4. Comenza tu plan! La constancia y disciplina son elementos clave. """)
     print("")
     
 def ejecutar():
@@ -108,8 +109,9 @@ def errorEntero(numero):
     except:
         print("Error, ingrese un numero del 1 al ", numero, ".")
 
-
-#FUNCIONES LOGIN
+'''
+FUNCIONES LOGIN
+'''
 
 def ingresar_cuenta():
     menu= True
@@ -142,7 +144,6 @@ def verificar_o_crear_archivo_json():
     ruta_proyecto = os.path.join(os.path.dirname(__file__), '..') 
     ruta_carpeta = os.path.join(ruta_proyecto, 'base_de_datos') 
 
-    # Ruta completa al archivo usuarios.json
     ruta_archivo_json = os.path.join(ruta_carpeta, 'usuarios.json')
 
     if not os.path.exists(ruta_archivo_json):
@@ -190,14 +191,13 @@ def crear_usuario():
         except:
             print("Error")
 
-    # Agregar al archivo json un diccionario de datos como valor de la clave con el nombre del usuario
     nuevo_usuario = {'contraseña': g.contraseña}  
    
     with open(verificar_o_crear_archivo_json(), 'r+') as f:
         usuarios = json.load(f)
-        usuarios[g.nombre] = nuevo_usuario  # Agregar el nuevo usuario al diccionario
+        usuarios[g.nombre] = nuevo_usuario  
         f.seek(0)  
-        json.dump(usuarios, f, indent=4)  # Guardar el diccionario actualizado
+        json.dump(usuarios, f, indent=4)  
     
     input()
     os.system('cls') 
@@ -290,7 +290,9 @@ def menu_secundario():
             print("Error!, elija un numero del 1 al 4")
             input()
         
-#FUNCIONES INGRESO DATOS
+'''
+FUNCIONES INGRESO DATOS
+'''
 
 def datos_usuario():
     os.system('cls')
@@ -299,14 +301,12 @@ def datos_usuario():
         print("Bienvenido", g.nombre ,"! A continuacion puede visualizar sus datos cargados.")
         print("")
 
-        
-
         for clave, valor in g.datos_de_usuario.items():
             print(f"{clave}: {valor}")
 
         try:
             print("")
-            actualizar= input("Desea actualizar sus datos? (si/no)")
+            actualizar= input("Desea actualizar sus datos? (si/no): ")
             if actualizar=="si":
                 os.system('cls')
                 cargar_datos()
@@ -400,7 +400,7 @@ def cargar_info_personal():
         try:
             g.sexo = input("¿Cuál es su sexo? (H/M): ")
         except:
-            print(" ERROR, Ingrese H o M")
+            print("ERROR, Ingrese H o M")
 
         if g.sexo.upper() == "H":
             g.sexo= "H"
@@ -473,38 +473,44 @@ def definir_objetivo() :
     
     bandera=True
     while bandera:
-        objetivo =errorEntero()
-        os.system('cls')
-        if objetivo == 1:
-            print (texto_aumento_musculo)
-            if g.sexo == "H":
-                g.calorias += 500
-            elif g.sexo == "M":
-                g.calorias += 250
-            print("Estas son tu calorias para tu volumen: ", g.calorias)
-            bandera=False
+        try:
+            objetivo =errorEntero(3)
+            os.system('cls')
+            if objetivo == 1:
+                print (texto_aumento_musculo)
+                if g.sexo == "H":
+                    g.calorias += 500
+                elif g.sexo == "M":
+                    g.calorias += 250
+                print("Estas son tu calorias para tu volumen: ", g.calorias)
+                bandera=False
 
-        elif objetivo == 2:
-            print(texto_quemar_grasa)  
-            if g.sexo == "H":
-                g.calorias -= 800
-            elif g.sexo == "M":
-                g.calorias -= 400
-            print("Estas son tus calorias para tu definicion: ", g.calorias)
-            bandera=False
-            
-        elif objetivo == 3:
-            print(texto_mantenimiento)
-            print("Para mantener tu peso debes seguir comiendo las mismas calorias de mantenimiento: ", g.calorias)
-            bandera=False
+            elif objetivo == 2:
+                print(texto_quemar_grasa)  
+                if g.sexo == "H":
+                    g.calorias -= 800
+                elif g.sexo == "M":
+                    g.calorias -= 400
+                print("Estas son tus calorias para tu definicion: ", g.calorias)
+                bandera=False
+                
+            elif objetivo == 3:
+                print(texto_mantenimiento)
+                print("Para mantener tu peso debes seguir comiendo las mismas calorias de mantenimiento: ", g.calorias)
+                bandera=False
 
-        else: 
+            else: 
+                print("El valor ingresado es inválido, por favor intentelo de nuevo")
+                input()
+        except:
             print("El valor ingresado es inválido, por favor intentelo de nuevo")
-            input()
         input()       
     return objetivo
 
-# FUNCIONES Rutinas
+'''
+FUNCIONES Rutinas
+'''
+
 def mostrar_titulo_rutinas():
     os.system ('cls')
 
@@ -521,7 +527,6 @@ def mostrar_titulo_rutinas():
                                                             
     """
 
-    # Imprime el texto
     print(texto)
     input()
 
@@ -539,11 +544,12 @@ def mostrar_titulo_calendario():
                                                             
     """
 
-    # Imprime el texto
     print(texto)
     input()
 
-#RUTINAS
+'''
+RUTINAS
+'''
 def solicitar_dias_entrenamiento():
     os.system("cls")
 
@@ -597,7 +603,6 @@ def elegir_Rutina():
 
     g.datos_de_usuario["Rutina elejida"] = g.rutinaSeleccionada
     usuarios[g.nombre]["Rutina elejida"] = g.rutinaSeleccionada
-    input()
 
     os.system("cls")
     print("\033[0;36m")
@@ -605,9 +610,9 @@ def elegir_Rutina():
     print("\033[0;37m")
 
     for clave, valor in g.rutinaSeleccionada.items():
-            print(f"--- {clave} :") 
-            for ejercicio, detalles in valor.items():  
-                if detalles["ejercicio"]:  
+            print(f"--- {clave} :")  # Imprime el nombre de la categoría
+            for ejercicio, detalles in valor.items():  # Itera sobre los ejercicios en cada categoría
+                if detalles["ejercicio"]:  # Verifica que el ejercicio no esté vacío
                     print(f"  {ejercicio:<20} {detalles['ejercicio']:<30} - Series: {detalles['series']:<5} - Repeticiones: {detalles['repeticiones']:<5}")
             print()
     mostrar_calendario()
@@ -641,7 +646,17 @@ def hacer_Rutina():
 
     ejercicios = cargar_ejercicios()
 
-    g.miRutina = {
+   
+    bandera = True
+    i = 1
+    while bandera:
+        os.system('cls')
+        print("Ejercicios disponibles por grupo muscular:")
+        for grupo in ejercicios.keys():
+            print(grupo)
+            print("--")
+
+        g.miRutina = {
             "Ejercicio1" : {},
             "Ejercicio2" : {}, 
             "Ejercicio3" : {},
@@ -650,19 +665,7 @@ def hacer_Rutina():
             "Ejercicio6" : {},
             "Ejercicio7" : {}, 
 
-
         }
-    
-
-    bandera = True
-    i = 1
-    while bandera:
-
-        print("Ejercicios disponibles por grupo muscular:")
-        for grupo in ejercicios.keys():
-            print(grupo)
-            print("--")
-
 
         grupo = input("Selecciona un grupo muscular (o escriba -1 para terminar): ")
 
@@ -671,7 +674,7 @@ def hacer_Rutina():
             bandera = False
 
         elif grupo in ejercicios:
-            
+            os.system('cls')
             ejercicios_grupo = ejercicios[grupo]
             print(f"Ejercicios disponibles para {grupo}: ")
 
@@ -698,8 +701,6 @@ def hacer_Rutina():
                 g.miRutina[f"Ejercicio{i}"] = ejercicio_info
 
                 print(f"Ejercicio '{ejercicio}' agregado a la rutina.")
-                input()
-                os.system('cls')
 
             else:
                 print("Ejercicio no encontrado. Intenta de nuevo.")
@@ -715,7 +716,9 @@ def hacer_Rutina():
     g.datos_de_usuario["miRutina"] = g.miRutina
     input()
 
-#CALENDARIO
+'''
+CALENDARIO
+'''
 def es_bisiesto(año):
     return año % 4 == 0 and (año % 100 != 0 or año % 400 == 0)
 
@@ -728,7 +731,6 @@ def dias_en_mes(mes, año):
         return 29 if es_bisiesto(año) else 28
     return 0
 
-# Algoritmo de Zeller para calcular el día de la semana
 def calcular_dia_semana(año, mes, dia):
     if mes < 3:
         mes += 12
@@ -845,7 +847,9 @@ def mostrar_calendario():
         print("Error, elija el numero 1 para ver el calendario o -1 para regresar al menu.")
         input()
       
-# FUNCIONES INVENTARIO/RECETAS
+'''
+FUNCIONES INVENTARIO/RECETAS
+'''
 
 def mostrar_inventario():
     os.system ('cls')
@@ -862,15 +866,12 @@ def mostrar_inventario():
                                                             
     """
 
-    # Imprime el texto
     print(texto)
     input()
 
 def inventario():
     
-    print("""Esta función nos permite almacenar las comidas que tengas a disponibilidad, para esto
-    vas a tener que buscarlas dentro de nuestro diccionario de comidas y luego escribir si alguna
-    de las comidas mostradas a continuacion esta a tu alcance""")
+    print("""Esta función nos permite almacenar las comidas que tengas a disponibilidad, para esto vas a tener que buscarlas dentro de nuestro diccionario de comidas y luego escribir si alguna de las comidas mostradas a continuacion esta a tu alcance""")
     print("")
     input()
     os.system('cls')
@@ -886,6 +887,7 @@ def inventario():
 
     bandera = True
     while bandera:
+        os.system('cls')
         print("Grupos de comidas disponibles:")
         i=1
         for clave in comidas.keys():
@@ -898,7 +900,7 @@ def inventario():
         if grupo== "-1":
             bandera = False
         elif grupo in comidas:
-            
+            os.system('cls')
             comidas_grupo = comidas[grupo]
             print(f"Comidas disponibles para {grupo}: ")
 
@@ -940,7 +942,7 @@ def miDieta():
 
     bandera = True
     while bandera:
-        os.system("cls")
+        os.systems('cls')
         for comida in g.miHeladera:
             print(comida)
             print("--")
@@ -951,17 +953,19 @@ def miDieta():
             bandera = False
 
         elif comida in g.miHeladera:
+            os.system('cls')
+            print(f"Comidas de tu heladera: ")
 
             g.miDieta[f"{comida}"] = g.miHeladera[comida]
 
-            print(f"La comida '{comida}' fue agregada a tu dieta.")
-            input()
+            print(f"La comida '{comida}' fue agregada a la heladera.")
+
         else:
             print("Comida no encontrada. Intenta de nuevo.")
             input()
 
     print("Su dieta para hoy es: ")
-    print(g.miDieta)
+    print("")
     g.datos_de_usuario['miDieta'] = g.miDieta
     usuarios[g.nombre]["miDieta"] = g.miDieta
     input()
