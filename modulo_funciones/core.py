@@ -610,9 +610,9 @@ def elegir_Rutina():
     print("\033[0;37m")
 
     for clave, valor in g.rutinaSeleccionada.items():
-            print(f"--- {clave} :")  # Imprime el nombre de la categoría
-            for ejercicio, detalles in valor.items():  # Itera sobre los ejercicios en cada categoría
-                if detalles["ejercicio"]:  # Verifica que el ejercicio no esté vacío
+            print(f"--- {clave} :")  
+            for ejercicio, detalles in valor.items():  
+                if detalles["ejercicio"]:  
                     print(f"  {ejercicio:<20} {detalles['ejercicio']:<30} - Series: {detalles['series']:<5} - Repeticiones: {detalles['repeticiones']:<5}")
             print()
     mostrar_calendario()
