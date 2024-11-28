@@ -958,7 +958,7 @@ def miDieta():
 
             g.miDieta[f"{comida}"] = g.miHeladera[comida]
 
-            print(f"La comida '{comida}' fue agregada a la heladera.")
+            print(f"La comida '{comida}' fue agregada a la dieta.")
 
         else:
             print("Comida no encontrada. Intenta de nuevo.")
