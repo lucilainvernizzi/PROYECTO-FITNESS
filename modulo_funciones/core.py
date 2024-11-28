@@ -70,7 +70,7 @@ def mostrar_equipo():
     print("Bienvenido! Esta App fue creada por el equipo de:")
     print("")
     print("Lucila Invernizzi, LU: 1201347")
-    print("Juan Ignacio Fernández Noceda, LU: ")
+    print("Juan Ignacio Fernández Noceda, LU: 1193301")
     print("Mateo Castellanos, LU: 1194293")
     print("Matías Scoccia, LU: 1195751 ")
     print("")
